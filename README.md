@@ -1,7 +1,8 @@
-# Cruellas-De-Vil
-Сайт догситтеров
+# DogSitterFinder
+## Сайт догситтеров
 --------------------------
-### Фичи для MVP
+### Макеты: [Figma](https://www.figma.com/file/XxffsVfQXzZAovWFR1LKky/SberHubProject?type=design&node-id=0%3A1&mode=design&t=wKPq5bK26bBrxTas-1)
+### Фичи для MVP1
 * Форма регистрации/авторизации (Биксон Алиса)
   * регистрация и авторизация;
   * разделение ролей (хозяин собаки, догситтер);
