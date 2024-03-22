@@ -1,0 +1,158 @@
+body {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.login-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px black;
+}
+
+.login-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login-header a {
+    text-decoration: none;
+    background-color: #dc2f55;
+    border-radius: 8px;
+    border: 0;
+    box-sizing: border-box;
+    color: #eee;
+    cursor: pointer;
+    font-size: 16px;
+    height: 30px;
+    padding: 5px;
+    text-align: center;
+}
+
+.login-logo {
+    height:48px;
+}
+
+.login-form {
+    align-items: center;
+}
+
+.input-group {
+    height: 40px;
+    position: relative;
+    width: 100%;
+}
+
+.ign {
+    margin-top: 20px;
+}
+
+.igp {
+    margin-top: 15px;
+}
+
+.input-login {
+    border-radius: 8px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    color: black;
+    font-size: 20px;
+    height: 100%;
+    padding: 4px 10px 0;
+    width: 100%;
+    transition: border-color 200ms;
+}
+
+.cut {
+    border-radius: 8px;
+    height: 20px;
+    left: 20px;
+    position: absolute;
+    top: -20px;
+    transform: translateY(0);
+    transition: transform 200ms;
+    width: 82px;
+}
+
+.cut-short {
+    width: 62px;
+}
+  
+.placeholder {
+    color: #C6C5C1;
+    left: 10px;
+    line-height: 24px;
+    pointer-events: none;
+    position: absolute;
+    transform-origin: 0 50%;
+    transition: transform 200ms, color 200ms;
+    top: 5px;
+}
+
+.input-login:focus ~ .cut,
+.input-login:not(:placeholder-shown) ~ .cut {
+    transform: translateY(14px);
+}
+  
+.input-login:focus ~ .placeholder,
+.input-login:not(:placeholder-shown) ~ .placeholder {
+    transform: translateY(-10px) translateX(0px) scale(0.75);
+}
+  
+.input-login:not(:placeholder-shown) ~ .placeholder {
+    color: #C6C5C1;
+}
+  
+.input-login:focus ~ .placeholder {
+    color: black;
+}
+
+.input-login:focus {
+    border: 2px solid #96A467;
+    outline: none;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 10px;
+}
+  
+.login-submit {
+    width: 20%;
+    background-color: #96A467;
+    color: white;
+    margin-top: 20px;
+}
+  
+.google-auth {
+    background-color: white;
+    border: 2px solid #816A58;
+    color: #816A58;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+    font-size: 14px;
+    outline: none;
+}
+
+.google-auth:hover {
+    box-shadow: 0 2px 6px black;
+}
+  
+.google-auth img {
+    margin-right: 10px;
+}
+
+.login-button,
+.google-auth-button {
+    display: flex;
+    justify-content: center;
+}

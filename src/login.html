@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <img class="login-logo" src="img/Logotype.png" alt="logo">
+            <a href="register.html">Регистрация</a>
+        </div>
+        <h1>Войдите в свой аккаунт</h1>
+        <form class="login-form">
+            <div class="input-group ign">
+                <input name="number-phone" id="number-phone" class="input-login" type="tel" placeholder=" " maxlength="13">
+                <div class="cut"></div>
+                <label for="number-phone" class="placeholder">Номер телефона</label>
+            </div>
+            <div class="input-group igp">
+                <input name="password" id="password" class="input-login" type="password" placeholder=" " maxlength="24">
+                <div class="cut"></div>
+                <label for="password" class="placeholder">Пароль</label>
+            </div>
+            <div class="login-button">
+                <button class="login-submit" type="submit">Войти</button>
+            </div>
+        </form>
+        <div class="google-auth-button">
+            <button class="google-auth">
+                <img src="img/icon-google.png" alt="Google" />
+                Продолжить с Google
+            </button>
+        </div>
+    </div>
+</body>
+</html>
