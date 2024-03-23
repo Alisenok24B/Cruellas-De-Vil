@@ -35,31 +35,23 @@
                 Найти догситтера
             </h1>
             <div class="search">
-                <ui class="param">
-                    <li>
-                        <h1>
-                            Где искать?
-                        </h1>
-                    </li>
-                    <li class="sort">
-                        <h1>
-                            Сортировка
-                        </h1>
-                    </li>
-                </ui>
-                <ui class="box">
-                    <li>
-                        <input type="text" class="inp" placeholder="Страна, регион, город">                                                   
-                    </li>
-                    <li>
-                        <select class="combobx">
-                            <option value="" disabled selected>Сортировать по:</option>
-                            <option value="option1">Возрастанию цены</option>
-                            <option value="option2">Убыванию цены</option>
-                            <option value="option3">Рейтингу догситтера</option>
-                        </select>                          
-                    </li>
-                </ui>
+                <div class="param">
+                    <h1 class="where">
+                        Где искать?
+                    </h1>
+                    <h1>
+                        Сортировка
+                    </h1>
+                </div>
+                <div class="box">
+                    <input type="text" class="inp" placeholder="Страна, регион, город">                                                   
+                    <select class="combobx">
+                        <option value="" disabled selected>Сортировать по:</option>
+                        <option value="option1">Возрастанию цены</option>
+                        <option value="option2">Убыванию цены</option>
+                        <option value="option3">Рейтингу догситтера</option>
+                    </select>                          
+                </div>
                 <a href="#">
                     <h1 class="reset">
                         Сбросить настройки
@@ -70,25 +62,27 @@
                 Найдено: 1 догситтер
             </p>
             <div class="preview-map">
-                <div class="previews">
-                    <ui class="preview">
-                        <li class="photo">
-                            <img src="img/user_photo.jpg" alt="Фото пользователя">
-                        </li>
-                        <li class="desc">
-                            <p class="fullname">
-                                1. Имя Фамилия
-                            </p>
-                            <div class="grade">
-                                <img src="img/star.png" alt="Фото пользователя">
-                                <p>5.0</p>
+                <ul class="previews">
+                    <li>
+                        <div class="preview">
+                            <div class="photo">
+                                <img src="img/user_photo.jpg" alt="Фото пользователя">
                             </div>
-                            <p class="fulldesc">
-                                Описание
-                            </p>
-                        </li>
-                    </ui>
-                </div>
+                            <div class="desc">
+                                <p class="fullname">
+                                    1. Имя Фамилия
+                                </p>
+                                <div class="grade">
+                                    <img src="img/star.png" alt="Фото пользователя">
+                                    <p>5.0</p>
+                                </div>
+                                <p class="fulldesc">
+                                    Описание
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
                 <div class="map">
                     <h1 class="temprorary">
                         Интеграция с картой
