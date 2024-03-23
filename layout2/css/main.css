@@ -81,13 +81,12 @@ ul, li {
     margin-left: 305px;
 }
 
-.param li {
+.param h1 {
     color: #FFFFFF;
-    margin-right: 450px;
 }
 
-.sort {
-    max-width: 10px;
+.where {
+    margin-right: 450px;
 }
 
 .box {
@@ -97,15 +96,12 @@ ul, li {
     margin-left: 167px;
 }
 
-.box li {
-    margin-right: 187px;
-}
-
 .inp {
     border-color: #C6C5C1;
     border: 50px;
     width: 413px;
     height: 60px;
+    margin-right: 187px;
 }
 
 .inp:active {
@@ -152,16 +148,13 @@ ul, li {
     background: #FFFFFF;
 }
 
-.preview li {
-    margin-right: 85px;
-}
-
 .photo {
     width: 165px; 
     height: 155px; 
     border-radius: 50%;
     overflow: hidden; 
     margin-left: 55px;
+    margin-right: 85px;
 }
 
 .photo img {
