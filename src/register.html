@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+    <link rel="stylesheet" href="css/style_register.css">
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-header">
+            <img class="register-logo" src="img/Logotype.png" alt="logo">
+            <a href="login.html">Вход</a>
+        </div>
+        <h1>Создайте аккаунт</h1>
+        <form class="register-form">
+            <div class="input-group igfn">
+                <input name="first-name" id="first-name" class="input-register" type="text" placeholder=" " maxlength="35">
+                <div class="cut"></div>
+                <label for="first-name" class="placeholder">Имя</label>
+            </div>
+            <div class="input-group igsn">
+                <input name="second-name" id="second-name" class="input-register" type="text" placeholder=" " maxlength="35">
+                <div class="cut"></div>
+                <label for="second-name" class="placeholder">Фамилия</label>
+            </div>
+            <div class="input-group ign">
+                <input name="number-phone" id="number-phone" class="input-register" type="tel" placeholder=" " maxlength="12">
+                <div class="cut"></div>
+                <label for="number-phone" class="placeholder">Номер телефона</label>
+            </div>
+            <div class="input-group igp">
+                <input name="password" id="password" class="input-register" type="password" placeholder=" " maxlength="24">
+                <div class="cut"></div>
+                <label for="password" class="placeholder">Пароль</label>
+            </div>
+            <div class="input-group igpс">
+                <input name="password-confirmation" id="password-confirmation" class="input-register" type="password" placeholder=" " maxlength="24">
+                <div class="cut"></div>
+                <label for="password-confirmation" class="placeholder">Подтвердите пароль</label>
+            </div>
+            <div class="checkboxes-container">
+                <div class="checkbox">
+                    <input name="host" type="checkbox" id="host" hidden />
+                    <label for="host" class="checkbox-label"></label>
+                    Я хозяин
+                </div>
+                <div class="checkbox">
+                    <input name="dogsitter" type="checkbox" id="dogsitter" hidden />
+                    <label for="dogsitter" class="checkbox-label"></label>
+                    Я догситер
+                </div>
+            </div>
+            <div class="register-button">
+                <button class="register-submit" type="submit">Регистрация</button>
+            </div>
+        </form>
+        <div class="google-auth-button">
+            <button class="google-auth">
+                <img src="img/icon-google.png" alt="Google" />
+                Продолжить с Google
+            </button>
+        </div>
+    </div>
+</body>
+</html>

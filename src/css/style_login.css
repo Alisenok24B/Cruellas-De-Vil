@@ -4,6 +4,7 @@ body {
     justify-content: center;
     margin: 0;
     min-height: 100vh;
+    background-color: #DDD3C7;
 }
 
 .login-container {
@@ -57,9 +58,9 @@ body {
 
 .input-login {
     border-radius: 8px;
-    border: 1px solid black;
+    border: 2px solid #C6C5C1;
     box-sizing: border-box;
-    color: black;
+    color: #C6C5C1;
     font-size: 20px;
     height: 100%;
     padding: 4px 10px 0;
@@ -76,10 +77,6 @@ body {
     transform: translateY(0);
     transition: transform 200ms;
     width: 82px;
-}
-
-.cut-short {
-    width: 62px;
 }
   
 .placeholder {

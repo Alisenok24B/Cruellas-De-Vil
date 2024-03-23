@@ -1,0 +1,203 @@
+body {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    min-height: 100vh;
+    background-color: #DDD3C7;
+}
+
+.register-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px black;
+}
+
+.register-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.register-header a {
+    text-decoration: none;
+    background-color: #C6C5C1;
+    border-radius: 8px;
+    border: 0;
+    box-sizing: border-box;
+    color: black;
+    cursor: pointer;
+    font-size: 16px;
+    height: 30px;
+    padding: 5px;
+    text-align: center;
+}
+
+.register-logo {
+    height:48px;
+}
+
+.register-form {
+    align-items: center;
+}
+
+.input-group {
+    height: 40px;
+    position: relative;
+    width: 100%;
+}
+
+.ign {
+    margin-top: 20px;
+}
+
+.igp,
+.igfn,
+.igsn,
+.igpс {
+    margin-top: 15px;
+}
+
+.input-register {
+    border-radius: 8px;
+    border: 2px solid #C6C5C1;
+    box-sizing: border-box;
+    color: #C6C5C1;
+    font-size: 20px;
+    height: 100%;
+    padding: 4px 10px 0;
+    width: 100%;
+    transition: border-color 200ms;
+}
+
+.cut {
+    border-radius: 8px;
+    height: 20px;
+    left: 20px;
+    position: absolute;
+    top: -20px;
+    transform: translateY(0);
+    transition: transform 200ms;
+    width: 82px;
+}
+
+.placeholder {
+    color: #C6C5C1;
+    left: 10px;
+    line-height: 24px;
+    pointer-events: none;
+    position: absolute;
+    transform-origin: 0 50%;
+    transition: transform 200ms, color 200ms;
+    top: 5px;
+}
+
+.input-register:focus ~ .cut,
+.input-register:not(:placeholder-shown) ~ .cut {
+    transform: translateY(14px);
+}
+  
+.input-register:focus ~ .placeholder,
+.input-register:not(:placeholder-shown) ~ .placeholder {
+    transform: translateY(-10px) translateX(0px) scale(0.75);
+}
+  
+.input-register:not(:placeholder-shown) ~ .placeholder {
+    color: #C6C5C1;
+}
+  
+.input-register:focus ~ .placeholder {
+    color: black;
+}
+
+.input-register:focus {
+    border: 2px solid #96A467;
+    outline: none;
+}
+
+.checkboxes-container {
+    display: flex;
+    justify-content: row;
+    align-items: center;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    margin-right: 20px;
+}
+
+.checkbox-label {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    border: 2px solid #816A58;
+    border-radius: 4px;
+    background-color: #DDD3C7;
+    cursor: pointer;
+    position: relative;
+}
+
+input[type="checkbox"]:checked + .checkbox-label {
+    background-color: #816A58;
+    border-color: #816A58;
+}
+
+input[type="checkbox"]:checked + .checkbox-label::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    width: 6px;
+    height: 10px;
+    border: solid #DDD3C7;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-label {
+    font-size: 16;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 10px;
+}
+  
+.register-submit {
+    background-color: #96A467;
+    color: white;
+    margin-top: 20px;
+}
+  
+.google-auth {
+    background-color: white;
+    border: 2px solid #816A58;
+    color: #816A58;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+    font-size: 14px;
+    outline: none;
+}
+
+.register-submit:hover
+,.google-auth:hover {
+    box-shadow: 0 2px 6px black;
+}
+  
+.google-auth img {
+    margin-right: 10px;
+}
+
+.register-button,
+.google-auth-button {
+    display: flex;
+    justify-content: center;
+}
