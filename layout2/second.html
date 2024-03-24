@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DogSitterFinder Поиск</title>
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon_io/favicon.ico">
+<link rel="manifest" href="./img/favicon_io/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+
+    <style>* { margin: 0; padding: 0; }</style>
+</head>
+<body>
+    <header id="header" class="header">
+        <div class="container">
+            <!--nav>ul>(li>a[href="#0$"]{$$})*4  emmet (эммет)-->
+            <nav class="nav">
+                <img src="img/logosvg.svg" alt="Человек с собакой">
+                <ul class="menu">
+                    <li>
+                       <a href="#">
+                        <img src="img/map.png" alt="Картинка в виде карты">
+                       </a> 
+                    </li>
+                    <li>
+                        <a href="#" id="profile" class="show-profile">
+                         <img src="img/profile.png" alt="Картинка в виде человека">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Выход
+                        </a> 
+                     </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="container">
+            <h1 class="find">
+                Найти догситтера
+            </h1>
+            <div class="search">
+                <div class="boxes">
+                    <section class="place">
+                        <h1>
+                            Где искать?
+                        </h1>
+                        <input type="text" class="inp" placeholder="Страна, регион, город">
+                    </section>
+                    <section class="sort">
+                        <h1>
+                            Сортировка
+                        </h1>
+                        <select class="inp">
+                            <option value="" disabled selected>Сортировать по:</option>
+                            <option value="">Возрастанию цены</option>
+                            <option value="">Убыванию цены</option>
+                            <option value="">Рейтингу догситтера</option>
+                        </select>                          
+                    </section>
+                </div>
+                <a href="#">
+                    <h1 class="reset">
+                        Сбросить настройки
+                    </h1>
+                </a> 
+            </div>
+            <p class="finded">
+                Найдено: 1 догситтер
+            </p>
+            <div class="preview-map">
+                <ul class="previews">
+                    <li>
+                        <div class="photo">
+                            <img src="img/user_photo.jpg" alt="Фото пользователя">
+                        </div>
+                        <div class="desc">
+                            <p class="fullname">
+                                1. Имя Фамилия
+                            </p>
+                            <div class="grade">
+                                <img src="img/star.png" alt="Фото пользователя">
+                                <p>5.0</p>
+                            </div>
+                            <p class="fulldesc">
+                                Описание
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="photo">
+                            <img src="img/user_photo.jpg" alt="Фото пользователя">
+                        </div>
+                        <div class="desc">
+                            <p class="fullname">
+                                1. Имя Фамилия
+                            </p>
+                            <div class="grade">
+                                <img src="img/star.png" alt="Фото пользователя">
+                                <p>5.0</p>
+                            </div>
+                            <p class="fulldesc">
+                                Описание
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+                <div class="map">
+                    <h1 class="temprorary">
+                        Интеграция с картой
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="logo">
+                <img src="img/logosvg.svg" alt="Человек с собакой">
+                <p>DogsitterFinder - любовь и забота о вашей собаке</p>
+            </div>
+            <div class="contacts">
+                <p>Контактная информация</p>
+                <p>8 (800) 555 - 35 - 35</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
