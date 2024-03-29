@@ -110,7 +110,7 @@ ul, li {
     color: #FFFFFF;
     text-decoration: underline;
 
-    margin-top: 95px;
+    margin-top: 75px;
 
     display: flex;
     justify-content: center;
@@ -182,18 +182,9 @@ ul, li {
     object-fit: cover; /* Изображение заполняет всю доступную площадь */
 }
 
-.grade {
-    display: flex;
-    align-items: center;
-    margin-bottom: 25px;
-}
-
-.grade img, p {
-    margin-right: 15px;
-}
-
 .fulldesc {
     color: #816A58;
+    margin-top: 25px;
 }
 
 .map {
