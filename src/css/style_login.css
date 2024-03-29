@@ -5,19 +5,28 @@ body {
     margin: 0;
     min-height: 100vh;
     background-color: #DDD3C7;
+    font-family: "Roboto", sans-serif;
 }
 
 .login-container {
     background: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.400);
+    flex-wrap: wrap;
+    max-width: calc(100% - 32px);
 }
 
 .login-header {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.h1 {
+    color: rgba(0, 0, 0, 0.800);
 }
 
 .login-header a {
@@ -46,10 +55,6 @@ body {
     height: 40px;
     position: relative;
     width: 100%;
-}
-
-.ign {
-    margin-top: 20px;
 }
 
 .igp {
@@ -105,7 +110,7 @@ body {
 }
   
 .input-login:focus ~ .placeholder {
-    color: black;
+    color: rgba(0, 0, 0, 0.800);
 }
 
 .input-login:focus {
@@ -124,14 +129,15 @@ button {
     width: 20%;
     background-color: #96A467;
     color: white;
-    margin-top: 20px;
+    margin: 20px 0 10px 0;
+    font-size: 16;
 }
   
 .google-auth {
     background-color: white;
     border: 2px solid #816A58;
     color: #816A58;
-    margin-top: 20px;
+    margin: 10px 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -142,7 +148,7 @@ button {
 
 .login-submit:hover
 ,.google-auth:hover {
-    box-shadow: 0 2px 6px black;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.600);
 }
   
 .google-auth img {
@@ -153,4 +159,18 @@ button {
 .google-auth-button {
     display: flex;
     justify-content: center;
+}
+
+.link-to-registration a {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    color: #a7a7a2;
+    cursor: pointer;
+    font-size: 16px;
+    height: 30px;
+    padding: 5px;
+    text-align: center;
+    margin: 10px;
 }

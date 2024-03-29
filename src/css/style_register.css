@@ -5,33 +5,28 @@ body {
     margin: 0;
     min-height: 100vh;
     background-color: #DDD3C7;
+    font-family: "Roboto", sans-serif;
 }
 
 .register-container {
     background: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.400);
+    flex-wrap: wrap;
+    max-width: 100%;
 }
 
 .register-header {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
-.register-header a {
-    text-decoration: none;
-    background-color: #C6C5C1;
-    border-radius: 8px;
-    border: 0;
-    box-sizing: border-box;
-    color: black;
-    cursor: pointer;
-    font-size: 16px;
-    height: 30px;
-    padding: 5px;
-    text-align: center;
+.h1 {
+    color: rgba(0, 0, 0, 0.800);
 }
 
 .register-logo {
@@ -53,7 +48,6 @@ body {
 }
 
 .igp,
-.igfn,
 .igsn,
 .igpс {
     margin-top: 15px;
@@ -108,7 +102,7 @@ body {
 }
   
 .input-register:focus ~ .placeholder {
-    color: black;
+    color: rgba(0, 0, 0, 0.800);
 }
 
 .input-register:focus {
@@ -118,15 +112,15 @@ body {
 
 .checkboxes-container {
     display: flex;
-    justify-content: row;
     align-items: center;
+    justify-content: space-evenly;
+    margin: 5px 0;
 }
 
 .checkbox {
     display: flex;
     align-items: center;
     margin: 15px 0;
-    margin-right: 20px;
 }
 
 .checkbox-label {
@@ -171,14 +165,14 @@ button {
 .register-submit {
     background-color: #96A467;
     color: white;
-    margin-top: 20px;
+    font-size: 16;
 }
   
 .google-auth {
     background-color: white;
     border: 2px solid #816A58;
     color: #816A58;
-    margin-top: 20px;
+    margin-top: 17px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -189,7 +183,7 @@ button {
 
 .register-submit:hover
 ,.google-auth:hover {
-    box-shadow: 0 2px 6px black;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.600);
 }
   
 .google-auth img {
@@ -200,4 +194,19 @@ button {
 .google-auth-button {
     display: flex;
     justify-content: center;
+}
+
+
+.link-to-entrance a {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    color: #a7a7a2;
+    cursor: pointer;
+    font-size: 16px;
+    height: 30px;
+    padding: 5px;
+    text-align: center;
+    margin-top: 13px;
 }
