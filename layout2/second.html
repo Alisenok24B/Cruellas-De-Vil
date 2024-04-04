@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DogSitterFinder Поиск</title>
     
-    <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon_io/logo.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/for-tab.ico">
 <link rel="manifest" href="./img/favicon_io/site.webmanifest">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,12 +15,13 @@
 
     <style>* { margin: 0; padding: 0; }</style>
 </head>
+
 <body>
     <header id="header" class="header">
         <div class="container">
             <!--nav>ul>(li>a[href="#0$"]{$$})*4  emmet (эммет)-->
             <nav class="nav">
-                <img src="img/logosvg.svg" alt="Человек с собакой">
+                <img src="img/logo.svg" alt="Человек с собакой">
                 <ul class="menu">
                     <li>
                        <a href="#">
@@ -53,24 +54,30 @@
                         <h1>
                             Где искать?
                         </h1>
-                        <input type="text" class="inp" placeholder="Страна, регион, город">
+                        <div class="inp">
+                            <input name="where-find" class="input-find" placeholder=" ">
+                            <div class="cut"></div>
+                            <label for="where-find" class="placeholder">Страна, регион, город</label>
+                        </div>
                     </section>
                     <section class="sort">
                         <h1>
                             Сортировка
                         </h1>
-                        <select class="inp">
-                            <option value="" disabled selected>Сортировать по:</option>
-                            <option value="">Возрастанию цены</option>
-                            <option value="">Убыванию цены</option>
-                        </select>                          
+                        <div class="inp">
+                            <select class="input-find">
+                                <option value="" disabled selected>Сортировать по:</option>
+                                <option value="">Возрастанию цены</option>
+                                <option value="">Убыванию цены</option>
+                            </select> 
+                        </div>                         
                     </section>
                 </div>
                 <a href="#">
                     <h1 class="reset">
                         Сбросить настройки
                     </h1>
-                </a> 
+                </a>
             </div>
             <p class="finded">
                 Найдено: 2 догситтера
@@ -85,8 +92,11 @@
                             <p class="fullname">
                                 1. Имя Фамилия
                             </p>
+                            <p class="cost">
+                                Стоимость: <span class="cost-rh">1500 руб/час</span>
+                            </p>
                             <p class="fulldesc">
-                                Описание
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet consectetur adipisicing elit...
                             </p>
                         </div>
                     </li>
@@ -96,10 +106,13 @@
                         </div>
                         <div class="desc">
                             <p class="fullname">
-                                1. Имя Фамилия
+                                2. Имя Фамилия
+                            </p>
+                            <p class="cost">
+                                Стоимость: <span class="cost-rh">1500 руб/час</span>
                             </p>
                             <p class="fulldesc">
-                                Описание
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit...
                             </p>
                         </div>
                     </li>
@@ -116,12 +129,12 @@
     <footer id="footer" class="footer">
         <div class="container">
             <div class="logo">
-                <img src="img/logosvg.svg" alt="Человек с собакой">
-                <p>DogsitterFinder - любовь и забота о вашей собаке</p>
+                <img src="img/logo.svg" alt="Человек с собакой">
+                <p>DogsitterFinder — любовь и забота о вашей собаке</p>
             </div>
             <div class="contacts">
-                <p>Контактная информация</p>
-                <p>8 (800) 555 - 35 - 35</p>
+                <p>Контактная информация:</p>
+                <p>+7 (800) 555-35-35</p>
             </div>
         </div>
     </footer>
