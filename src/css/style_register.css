@@ -1,20 +1,30 @@
+:root {
+    --beige: #DDD3C7;
+    --white: white;
+    --black: rgba(0, 0, 0, 0.800);
+    --shadow-color: rgba(0, 0, 0, 0.300);
+    --grey: #C6C5C1;
+    --green: #96A467;
+    --brown: #816A58;
+}
+
 body {
     align-items: center;
     display: flex;
     justify-content: center;
-    margin: 0;
     min-height: 100vh;
-    background-color: #DDD3C7;
+    background-color: var(--beige);
     font-family: "Roboto", sans-serif;
 }
 
 .register-container {
-    background: white;
+    background: var(--white);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.400);
-    flex-wrap: wrap;
-    max-width: 100%;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    width: 400px;
+    max-width: calc(100% - 128px);
+    min-width: 180px;
 }
 
 .register-header {
@@ -26,11 +36,12 @@ body {
 }
 
 .h1 {
-    color: rgba(0, 0, 0, 0.800);
+    color: var(--black);
+    margin-top: auto;
 }
 
 .register-logo {
-    height:48px;
+    margin: 28px auto 0 auto;
 }
 
 .register-form {
@@ -55,9 +66,9 @@ body {
 
 .input-register {
     border-radius: 8px;
-    border: 2px solid #C6C5C1;
+    border: 2px solid var(--grey);
     box-sizing: border-box;
-    color: #C6C5C1;
+    color: var(--grey);
     font-size: 20px;
     height: 100%;
     padding: 4px 10px 0;
@@ -77,7 +88,7 @@ body {
 }
 
 .placeholder {
-    color: #C6C5C1;
+    color: var(--grey);
     left: 10px;
     line-height: 24px;
     pointer-events: none;
@@ -98,16 +109,17 @@ body {
 }
   
 .input-register:not(:placeholder-shown) ~ .placeholder {
-    color: #C6C5C1;
+    color: var(--grey);
 }
   
 .input-register:focus ~ .placeholder {
-    color: rgba(0, 0, 0, 0.800);
+    color: var(--black);
 }
 
 .input-register:focus {
-    border: 2px solid #96A467;
+    border: 3px solid var(--green);
     outline: none;
+    caret-color: var(--green);
 }
 
 .checkboxes-container {
@@ -115,6 +127,7 @@ body {
     align-items: center;
     justify-content: space-evenly;
     margin: 5px 0;
+    flex-wrap: wrap;
 }
 
 .checkbox {
@@ -128,16 +141,16 @@ body {
     width: 16px;
     height: 16px;
     margin-right: 10px;
-    border: 2px solid #816A58;
+    border: 2px solid var(--brown);
     border-radius: 4px;
-    background-color: #DDD3C7;
+    background-color: var(--beige);
     cursor: pointer;
     position: relative;
 }
 
 input[type="checkbox"]:checked + .checkbox-label {
-    background-color: #816A58;
-    border-color: #816A58;
+    background-color: var(--brown);
+    border-color: var(--brown);
 }
 
 input[type="checkbox"]:checked + .checkbox-label::after {
@@ -146,7 +159,7 @@ input[type="checkbox"]:checked + .checkbox-label::after {
     left: 4px;
     width: 6px;
     height: 10px;
-    border: solid #DDD3C7;
+    border: solid var(--beige);
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
 }
@@ -163,15 +176,15 @@ button {
 }
   
 .register-submit {
-    background-color: #96A467;
-    color: white;
+    background-color: var(--green);
+    color: var(--white);
     font-size: 16;
 }
   
 .google-auth {
-    background-color: white;
-    border: 2px solid #816A58;
-    color: #816A58;
+    background-color: var(--white);
+    border: 2px solid var(--brown);
+    color: var(--brown);
     margin-top: 17px;
     display: flex;
     align-items: center;
@@ -183,7 +196,7 @@ button {
 
 .register-submit:hover
 ,.google-auth:hover {
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.600);
+    box-shadow: 0 2px 6px var(--shadow-color);
 }
   
 .google-auth img {
@@ -202,11 +215,12 @@ button {
     display: flex;
     justify-content: center;
     box-sizing: border-box;
-    color: #a7a7a2;
+    color: var(--grey);
     cursor: pointer;
     font-size: 16px;
     height: 30px;
     padding: 5px;
     text-align: center;
     margin-top: 13px;
+    text-decoration: none;
 }

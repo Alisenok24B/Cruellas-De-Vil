@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
+    <title>Авторизация</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="./assets/favicon/site.webmanifest">
+    <link rel="stylesheet" href="../node_modules/normalize/normalize.css">
     <link rel="stylesheet" href="css/style_login.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +17,20 @@
 <body>
     <div class="login-container">
         <header class="login-header">
-            <img class="login-logo" src="img/Logotype.png" alt="logo">
+            <img class="login-logo"
+            width="60"
+            src="./assets/logo_4x.png" 
+            alt="Логотип. Собака лежит на абривиатуре DFS"
+            srcset="
+              ./assets/logo_1x.png 60w,
+              ./assets/logo_2x.png 120w,
+              ./assets/logo_4x.png 240w
+            "
+            sizes="
+              (max-width: 240px) 100px,
+              (min-width: 320px) 440px,
+              (min-width: 520px) 880px
+            ">
             <h1 class="h1">Войдите в свой аккаунт</h1>
         </header>
         <form class="login-form">
@@ -32,7 +50,7 @@
         </form>
         <div class="google-auth-button">
             <button class="google-auth">
-                <img src="img/icon-google.png" alt="Google" />
+                <img src="./assets/icon-google.png" alt="Google" />
                 Продолжить с Google
             </button>
         </div>

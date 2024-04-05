@@ -1,20 +1,30 @@
+:root {
+    --beige: #DDD3C7;
+    --white: white;
+    --black: rgba(0, 0, 0, 0.800);
+    --shadow-color: rgba(0, 0, 0, 0.300);
+    --grey: #C6C5C1;
+    --green: #96A467;
+    --brown: #816A58;
+}
+
 body {
     align-items: center;
     display: flex;
     justify-content: center;
-    margin: 0;
     min-height: 100vh;
-    background-color: #DDD3C7;
+    background-color: var(--beige);
     font-family: "Roboto", sans-serif;
 }
 
 .login-container {
-    background: white;
+    background: var(--white);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.400);
-    flex-wrap: wrap;
-    max-width: calc(100% - 32px);
+    box-shadow: 0 4px 8px var(--shadow-color);
+    width: 400px;
+    max-width: calc(100% - 128px);
+    min-width: 150px;
 }
 
 .login-header {
@@ -26,16 +36,17 @@ body {
 }
 
 .h1 {
-    color: rgba(0, 0, 0, 0.800);
+    color: var(--black);
+    margin-top: auto;
 }
 
 .login-header a {
     text-decoration: none;
-    background-color: #C6C5C1;
+    background-color: var(--grey);
     border-radius: 8px;
     border: 0;
     box-sizing: border-box;
-    color: black;
+    color: var(--black);
     cursor: pointer;
     font-size: 16px;
     height: 30px;
@@ -44,7 +55,7 @@ body {
 }
 
 .login-logo {
-    height:48px;
+    margin: 28px auto 0 auto;
 }
 
 .login-form {
@@ -63,9 +74,9 @@ body {
 
 .input-login {
     border-radius: 8px;
-    border: 2px solid #C6C5C1;
+    border: 2px solid var(--grey);
     box-sizing: border-box;
-    color: #C6C5C1;
+    color: var(--grey);
     font-size: 20px;
     height: 100%;
     padding: 4px 10px 0;
@@ -85,7 +96,7 @@ body {
 }
   
 .placeholder {
-    color: #C6C5C1;
+    color: var(--grey);
     left: 10px;
     line-height: 24px;
     pointer-events: none;
@@ -106,16 +117,17 @@ body {
 }
   
 .input-login:not(:placeholder-shown) ~ .placeholder {
-    color: #C6C5C1;
+    color: var(--grey);
 }
   
 .input-login:focus ~ .placeholder {
-    color: rgba(0, 0, 0, 0.800);
+    color: var(--black);
 }
 
 .input-login:focus {
-    border: 2px solid #96A467;
+    border: 3px solid var(--green);
     outline: none;
+    caret-color: var(--green);
 }
 
 button {
@@ -126,17 +138,16 @@ button {
 }
   
 .login-submit {
-    width: 20%;
-    background-color: #96A467;
-    color: white;
+    background-color: var(--green);
+    color: var(--white);
     margin: 20px 0 10px 0;
     font-size: 16;
 }
   
 .google-auth {
-    background-color: white;
-    border: 2px solid #816A58;
-    color: #816A58;
+    background-color: var(--white);
+    border: 2px solid var(--brown);
+    color: var(--brown);
     margin: 10px 0;
     display: flex;
     align-items: center;
@@ -148,7 +159,7 @@ button {
 
 .login-submit:hover
 ,.google-auth:hover {
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.600);
+    box-shadow: 0 2px 6px var(--shadow-color);
 }
   
 .google-auth img {
@@ -166,11 +177,12 @@ button {
     display: flex;
     justify-content: center;
     box-sizing: border-box;
-    color: #a7a7a2;
+    color: var(--grey);
     cursor: pointer;
     font-size: 16px;
     height: 30px;
     padding: 5px;
     text-align: center;
     margin: 10px;
+    text-decoration: none;
 }
