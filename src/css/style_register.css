@@ -24,7 +24,7 @@ body {
     box-shadow: 0 4px 8px var(--shadow-color);
     width: 400px;
     max-width: calc(100% - 128px);
-    min-width: 180px;
+    overflow: hidden;
 }
 
 .register-header {
@@ -52,6 +52,7 @@ body {
     height: 40px;
     position: relative;
     width: 100%;
+    overflow: hidden;
 }
 
 .ign {
