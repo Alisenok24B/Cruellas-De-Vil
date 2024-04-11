@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="./assets/favicon/site.webmanifest">
+    <link rel="stylesheet" href="../node_modules/normalize/normalize.css">
+    <link rel="stylesheet" href="css/style_login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="login-container">
+        <header class="login-header">
+            <img class="login-logo"
+            width="60"
+            src="./assets/logo_4x.png" 
+            alt="Логотип. Собака лежит на абривиатуре DFS"
+            srcset="
+              ./assets/logo_1x.png 60w,
+              ./assets/logo_2x.png 120w,
+              ./assets/logo_4x.png 240w
+            "
+            sizes="
+              (max-width: 240px) 100px,
+              (min-width: 320px) 440px,
+              (min-width: 520px) 880px
+            ">
+            <h1 class="h1">Войдите в свой аккаунт</h1>
+        </header>
+        <form class="login-form">
+            <div class="input-group ign">
+                <input name="number-phone" id="number-phone" class="input-login" type="tel" placeholder=" " maxlength="13">
+                <div class="cut"></div>
+                <label for="number-phone" class="placeholder">Номер телефона</label>
+            </div>
+            <div class="input-group igp">
+                <input name="password" id="password" class="input-login" type="password" placeholder=" " maxlength="24">
+                <div class="cut"></div>
+                <label for="password" class="placeholder">Пароль</label>
+            </div>
+            <div class="login-button">
+                <button class="login-submit" type="submit">Войти</button>
+            </div>
+        </form>
+        <div class="google-auth-button">
+            <button class="google-auth">
+                <img src="./assets/icon-google.png" alt="Google" />
+                Продолжить с Google
+            </button>
+        </div>
+        <div class="link-to-registration">
+            <a href="register.html">Создать аккаунт</a>
+        </div>
+    </div>
+</body>
+</html>
