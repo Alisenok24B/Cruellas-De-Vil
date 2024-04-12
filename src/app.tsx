@@ -1,10 +1,12 @@
 import React from 'react';
+import Login from '../layout1/src/conteiners/login/login';
+import Register from '../layout1/src/conteiners/register/register';
 
 const App = () => {
   return (
-    <h1>Hello world для проекта - cruellas-de-vil</h1>
+    <Login />
+    //<Register />
   );
 };
 
 export default App;
-
