@@ -1,8 +1,10 @@
 import React from 'react';
 
+import Search from './pages/search'
+
 const App = () => {
   return (
-    <h1>Hello world для проекта - cruellas-de-vil</h1>
+    <Search/>
   );
 };
 
