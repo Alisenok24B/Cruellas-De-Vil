@@ -1,0 +1,1 @@
+export { NameOfComponent } from './container'

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { NameOfComponent } from '../components/name_of_component/'  // !!!
+import { NameOfComponent } from '../components/container'  // !!!
 
 import './styles_for_search.css';
 
