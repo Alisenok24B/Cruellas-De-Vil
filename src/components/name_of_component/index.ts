@@ -1,0 +1,1 @@
+export { NameOfComponent } from './name_of component'

@@ -1,5 +1,7 @@
 import React from "react";
 
+import { NameOfComponent } from '../components/name_of_component/'  // !!!
+
 import './styles_for_search.css';
 
 import { logo } from '../assets/img'
@@ -11,6 +13,8 @@ const Search = () => {
   return (
     <>
       <header id="header" className="header">
+        {/* <NameOfComponent/>  !!! */}
+
         <div className="container">
             <nav className="nav">
                 <img src={logo} alt="Человек с собакой"/>
