@@ -4,7 +4,7 @@ module.exports = {
   apiPath: 'stubs/api',
   webpackConfig: {
     output: {
-      publicPath: `/static/${pkg.name}/${'main' || pkg.version}/`
+      publicPath: `/static/${pkg.name}/${process.env.VERSION || pkg.version}/`
     }
   },
   /* use https://kc.admin.inno-js.ru/ to create config, navigations and features */
