@@ -1,0 +1,18 @@
+.menu {
+    display: flex;
+    align-items: center;
+
+    margin-left: auto;
+}
+
+.menu li {
+    margin-right: 40px;
+}
+
+#profile {
+    display: none;
+}
+
+#profile.show-profile {
+    display: block;
+}

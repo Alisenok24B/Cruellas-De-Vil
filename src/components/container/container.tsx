@@ -1,9 +1,11 @@
 import React from "react"
 
-export function NameOfComponent  (props) {
-    return <div>
-        { props.children }
+export function Container (props) {
+    return (
+        <div className={`${props.className}`}>
+            { props.children }
         </div>
+    )
 }
 
 

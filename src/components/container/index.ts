@@ -1,1 +1,1 @@
-export { NameOfComponent } from './container'
+export { Container } from './container'
