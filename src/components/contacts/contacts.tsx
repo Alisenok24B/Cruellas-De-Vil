@@ -1,10 +1,12 @@
 import React from "react"
 
+import { StyledContacts } from "./contacts.styled"
+
 export function Contacts (props) {
     return (
-        <div className={`${props.className}`}>
+        <StyledContacts className={`${props.className}`}>
             <p>Контактная информация:</p>
             <p>{props.children}</p>
-        </div>
+        </StyledContacts>
     )
 }
