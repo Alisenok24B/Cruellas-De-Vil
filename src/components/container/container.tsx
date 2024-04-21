@@ -1,10 +1,12 @@
 import React from "react"
 
+import { StyledContainer } from "./container.styled"
+
 export function Container (props) {
     return (
-        <div className={`${props.className}`}>
+        <StyledContainer className={`${props.className}`}>
             { props.children }
-        </div>
+        </StyledContainer>
     )
 }
 
