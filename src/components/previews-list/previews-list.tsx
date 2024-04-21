@@ -1,20 +1,37 @@
-import React from "react";
+import React from "react"
+
 import { user_photo } from '../../assets/img'
+
+import { StyledPreviewsList } from "./previews-list.styled"
+import { StyledPLLi } from "./previews-list.styled"
+import { StyledPLPhoto } from "./previews-list.styled"
+import { StyledPLPhotoImg } from "./previews-list.styled"
+import { StyledPLDesc } from "./previews-list.styled"
+import { StyledPLFullDesc } from "./previews-list.styled"
+import { StyledPLFullNameCost } from "./previews-list.styled"
+import { StyledPLCostRH } from "./previews-list.styled"
 
 function Preview({ userPhoto, fullName, cost, fullDesc }) {
   return (
-    <li>
-      <div className="photo">
-        <img src={userPhoto} alt="Фото пользователя" />
-      </div>
-      <div className="desc">
-        <p className="fullname">{fullName}</p>
-        <p className="cost">
-          Стоимость: <span className="cost-rh">{cost}</span>
-        </p>
-        <p className="fulldesc">{fullDesc}</p>
-      </div>
-    </li>
+    <StyledPLLi>
+
+      <StyledPLPhoto className="photo">
+        <StyledPLPhotoImg src={userPhoto} alt="Фото пользователя" />
+      </StyledPLPhoto>
+
+      <StyledPLDesc className="desc">
+
+        <StyledPLFullNameCost className="fullname">{fullName}</StyledPLFullNameCost>
+
+        <StyledPLFullNameCost className="cost">
+          Стоимость: <StyledPLCostRH className="cost-rh">{cost}</StyledPLCostRH>
+        </StyledPLFullNameCost>
+
+        <StyledPLFullDesc className="fulldesc">{fullDesc}</StyledPLFullDesc>
+
+      </StyledPLDesc>
+
+    </StyledPLLi>
   );
 }
 
@@ -36,7 +53,7 @@ export function PreviewsList() {
   ];
 
   return (
-    <ul className="previews">
+    <StyledPreviewsList className="previews">
       {users.map((user, index) => (
         <Preview
           key={index}
@@ -46,6 +63,6 @@ export function PreviewsList() {
           fullDesc={user.fullDesc}
         />
       ))}
-    </ul>
+    </StyledPreviewsList>
   );
 }
