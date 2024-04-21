@@ -2,12 +2,12 @@ import React from "react";
 
 import './styles_for_search.css';
 
-import { Nav } from '../components/nav/nav'
+import { HeaderElements } from '../components/header-elements/header-elements'
 import { CustomSection } from "../components/custom-section"
 import { PreviewsList } from "../components/previews-list"
 import { Logo } from "../components/logo"
 import { Contacts } from "../components/contacts"
-import { Container } from '../components/container/container'
+import { Container } from '../components/container'
 
 import { logo } from '../assets/img'
 
@@ -16,7 +16,7 @@ const Search = () => {
     <>
       <header id="header" className="header">
         <Container className="container">
-            <Nav className="nav" src={logo} alt="Человек с собакой"/>
+            <HeaderElements className="nav" src={logo} alt="Человек с собакой"/>
         </Container>
     </header>
     <main id="main" className="main">
