@@ -1,10 +1,13 @@
-import React from "react";
+import React from "react"
+
+import { StyledLogo } from "./logo.styled"
+import { StyledLogoImg } from "./logo.styled"
 
 export function Logo(props) {
   return (
-    <div className={`${props.className}`}>
-        <img src={`${props.src}`} alt={`${props.alt}`}/>
-        <p>{`${props.title}`}</p>
-    </div>
+    <StyledLogo className={props.className}>
+        <StyledLogoImg src={props.src} alt={props.alt}/>
+        {props.title && <p>{props.title}</p>}
+    </StyledLogo>
   );
 }
