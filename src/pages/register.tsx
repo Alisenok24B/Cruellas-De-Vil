@@ -7,6 +7,8 @@ import { logo_2x } from '../assets/img'
 import { logo_1x } from '../assets/img'
 import { icon_google } from '../assets/img'
 
+import { Link } from '../components/link/link'
+
 const Register = () => {
   return (
     <div className="register-container">
@@ -76,9 +78,7 @@ const Register = () => {
                 Продолжить с Google
             </button>
         </div>
-        <div className="link-to-entrance">
-            <a href="login.html">Уже есть аккаунт? Войти</a>
-        </div>
+        <Link href="login.html">Уже есть аккаунт? Войти</Link>
     </div>
   );
 };
