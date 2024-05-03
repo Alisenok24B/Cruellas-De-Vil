@@ -1,4 +1,6 @@
-.link a {
+import styled from "@emotion/styled";
+
+export const StyledLink = styled.a`
     align-items: center;
     display: flex;
     justify-content: center;
@@ -11,4 +13,4 @@
     text-align: center;
     margin: 10px;
     text-decoration: none;
-}
+`;

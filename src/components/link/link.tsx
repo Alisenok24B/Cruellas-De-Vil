@@ -1,12 +1,10 @@
 import React from "react"
 
-import './style-link.css'
+import { StyledLink } from './link.styled'
 
 
 export function Link (props) {
     return (
-        <div className="link">
-            <a href={props.href}>{props.children}</a>
-        </div>
+        <StyledLink href={props.href}>{props.children}</StyledLink>
     )
 }
