@@ -41,7 +41,7 @@ export const StyledPLPhotoImg = styled.img`
     object-fit: cover;
 `
 
-export const StyledPLDesc = styled.img`
+export const StyledPLDesc = styled.div`
     margin-right: 15px;
     width: 75%;
 
@@ -65,8 +65,8 @@ export const StyledPLFullDesc = styled.p`
 `
 
 export const StyledPLFullNameCost = styled.p`
-@media only screen and (max-width: 715px) {
-    margin-left: 5px;
-    font-size: 20px;
-}
+    @media only screen and (max-width: 715px) {
+        margin-left: 5px;
+        font-size: 20px;
+    }
 `
