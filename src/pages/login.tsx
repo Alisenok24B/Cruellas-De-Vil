@@ -1,11 +1,13 @@
-import React from 'react';
+import React from 'react'
 
-import './css/style_login.css';
+import './css/style_login.css'
 
 import { logo_4x } from '../assets/img'
 import { logo_2x } from '../assets/img'
 import { logo_1x } from '../assets/img'
 import { icon_google } from '../assets/img'
+
+import { Link } from '../components/link/link'
 
 const Login = () => {
   return (
@@ -48,9 +50,7 @@ const Login = () => {
                 Продолжить с Google
             </button>
         </div>
-        <div className="link-to-registration">
-            <a href="register.html">Создать аккаунт</a>
-        </div>
+        <Link href="register.html">Создать аккаунт</Link>
     </div>
   );
 };
