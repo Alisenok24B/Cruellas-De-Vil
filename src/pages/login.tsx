@@ -1,18 +1,25 @@
 import React from 'react';
 
+import './css/style_login.css';
+
+import { logo_4x } from '../assets/img'
+import { logo_2x } from '../assets/img'
+import { logo_1x } from '../assets/img'
+import { icon_google } from '../assets/img'
+
 const Login = () => {
   return (
     <div className="login-container">
         <header className="login-header">
             <img className="login-logo"
             width="60"
-            src="./assets/logo_4x.png" 
+            src={logo_4x} 
             alt="Логотип. Собака лежит на абривиатуре DFS"
-            srcSet="
-              ./assets/logo_1x.png 60w,
-              ./assets/logo_2x.png 120w,
-              ./assets/logo_4x.png 240w
-            "
+            srcSet={`
+              ${logo_1x} 60w,
+              ${logo_2x} 120w,
+              ${logo_4x} 240w
+            `}
             sizes="
               (max-width: 240px) 100px,
               (min-width: 320px) 440px,
@@ -37,7 +44,7 @@ const Login = () => {
         </form>
         <div className="google-auth-button">
             <button className="google-auth">
-                <img src="./assets/icon-google.png" alt="Google" />
+                <img src={icon_google} alt="Google" />
                 Продолжить с Google
             </button>
         </div>
