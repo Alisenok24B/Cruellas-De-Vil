@@ -5,9 +5,9 @@ import Search from './pages/search';
 
 const App = () => {
   return (
-    <Search/>
+    //<Search/>
     //<Login />
-    //<Register />
+    <Register />
   );
 };
 
