@@ -8,6 +8,7 @@ import { logo_1x } from '../assets/img'
 import { icon_google } from '../assets/img'
 
 import { Link } from '../components/link/link'
+import { CheckBox } from '../components/check-box';
 
 const Register = () => {
   return (
@@ -57,16 +58,8 @@ const Register = () => {
                 <label htmlFor="password-confirmation" className="placeholder">Подтвердите пароль</label>
             </div>
             <div className="checkboxes-container">
-                <div className="checkbox">
-                    <input name="host" type="checkbox" id="host" hidden />
-                    <label htmlFor="host" className="checkbox-label"></label>
-                    Я хозяин
-                </div>
-                <div className="checkbox">
-                    <input name="dogsitter" type="checkbox" id="dogsitter" hidden />
-                    <label htmlFor="dogsitter" className="checkbox-label"></label>
-                    Я догситер
-                </div>
+                <CheckBox name="host">Я хозяин</CheckBox>
+                <CheckBox name="dogsitter">Я догситер</CheckBox>
             </div>
             <div className="register-button">
                 <button className="register-submit" type="submit">Зарегистрироваться</button>
