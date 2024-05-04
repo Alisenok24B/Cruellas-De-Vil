@@ -31,12 +31,12 @@ const Login = () => {
             <h1 className="h1">Войдите в свой аккаунт</h1>
         </header>
         <form className="login-htmlForm">
-            <div className="input-group ign">
+            <div className="input-group">
                 <input name="number-phone" id="number-phone" className="input-login" type="tel" placeholder=" " maxLength={13}/>
                 <div className="cut"></div>
                 <label htmlFor="number-phone" className="placeholder">Номер телефона</label>
             </div>
-            <div className="input-group igp">
+            <div className="input-group">
                 <input name="password" id="password" className="input-login" type="password" placeholder=" " maxLength={24}/>
                 <div className="cut"></div>
                 <label htmlFor="password" className="placeholder">Пароль</label>

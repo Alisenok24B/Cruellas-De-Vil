@@ -66,10 +66,7 @@ body {
     position: relative;
     width: 100%;
     overflow: hidden;
-}
-
-.igp {
-    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .input-login {

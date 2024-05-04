@@ -53,16 +53,7 @@ body {
     position: relative;
     width: 100%;
     overflow: hidden;
-}
-
-.ign {
-    margin-top: 20px;
-}
-
-.igp,
-.igsn,
-.igpс {
-    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .input-register {

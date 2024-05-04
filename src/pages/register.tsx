@@ -33,27 +33,27 @@ const Register = () => {
         </header>
         
         <form className="register-form">
-            <div className="input-group igfn">
+            <div className="input-group">
                 <input name="first-name" id="first-name" className="input-register" type="text" placeholder=" " maxLength={35}/>
                 <div className="cut"></div>
                 <label htmlFor="first-name" className="placeholder">Имя</label>
             </div>
-            <div className="input-group igsn">
+            <div className="input-group">
                 <input name="second-name" id="second-name" className="input-register" type="text" placeholder=" " maxLength={35}/>
                 <div className="cut"></div>
                 <label htmlFor="second-name" className="placeholder">Фамилия</label>
             </div>
-            <div className="input-group ign">
+            <div className="input-group">
                 <input name="number-phone" id="number-phone" className="input-register" type="tel" placeholder=" " maxLength={12}/>
                 <div className="cut"></div>
                 <label htmlFor="number-phone" className="placeholder">Номер телефона</label>
             </div>
-            <div className="input-group igp">
+            <div className="input-group">
                 <input name="password" id="password" className="input-register" type="password" placeholder=" " maxLength={24}/>
                 <div className="cut"></div>
                 <label htmlFor="password" className="placeholder">Пароль</label>
             </div>
-            <div className="input-group igpс">
+            <div className="input-group">
                 <input name="password-confirmation" id="password-confirmation" className="input-register" type="password" placeholder=" " maxLength={24}/>
                 <div className="cut"></div>
                 <label htmlFor="password-confirmation" className="placeholder">Подтвердите пароль</label>
