@@ -13,5 +13,7 @@ export const PageRoutes = () => (
         <Route path="/dog-sitters-finder/register" element={<Register/>}/>
         <Route path="/dog-sitters-finder/search" element={<Search/>}/>
         <Route path="/dog-sitters-finder/dogsitter-viewing" element={<ProfileView/>}/>
+
+        <Route path="*" element={<h1>Page not found</h1>}/>
     </Routes>
 )
