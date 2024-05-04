@@ -1,15 +1,13 @@
 import React from 'react';
-import Login from './pages/login';
-import Register from './pages/register';
-import Search from './pages/search';
-import ProfileView from './pages/dogsitter-viewing';
+
+import { BrowserRouter } from "react-router-dom";
+import { PageRoutes } from "./routes";
 
 const App = () => {
   return (
-    //<ProfileView />
-    //<Search/>
-    //<Login />
-    <Register />
+    <BrowserRouter>
+      <PageRoutes/>
+    </BrowserRouter>
   );
 };
 
