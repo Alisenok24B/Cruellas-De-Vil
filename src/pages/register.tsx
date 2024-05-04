@@ -7,6 +7,10 @@ import { logo_2x } from '../assets/img'
 import { logo_1x } from '../assets/img'
 import { icon_google } from '../assets/img'
 
+import { Link } from '../components/link/link'
+import { CheckBox } from '../components/check-box';
+import { Button } from '../components/button';
+
 const Register = () => {
   return (
     <div className="register-container">
@@ -55,30 +59,17 @@ const Register = () => {
                 <label htmlFor="password-confirmation" className="placeholder">Подтвердите пароль</label>
             </div>
             <div className="checkboxes-container">
-                <div className="checkbox">
-                    <input name="host" type="checkbox" id="host" hidden />
-                    <label htmlFor="host" className="checkbox-label"></label>
-                    Я хозяин
-                </div>
-                <div className="checkbox">
-                    <input name="dogsitter" type="checkbox" id="dogsitter" hidden />
-                    <label htmlFor="dogsitter" className="checkbox-label"></label>
-                    Я догситер
-                </div>
+                <CheckBox name="host" id="host">Я хозяин</CheckBox>
+                <CheckBox name="dogsitter" id="dogsitter">Я догситер</CheckBox>
             </div>
             <div className="register-button">
-                <button className="register-submit" type="submit">Зарегистрироваться</button>
+                <Button type="submit">Зарегистрироваться</Button>
             </div>
         </form>
         <div className="google-auth-button">
-            <button className="google-auth">
-                <img src={icon_google} alt="Google" />
-                Продолжить с Google
-            </button>
+            <Button isGoogle type="button" icon={icon_google}>Продолжить с Google</Button>
         </div>
-        <div className="link-to-entrance">
-            <a href="login.html">Уже есть аккаунт? Войти</a>
-        </div>
+        <Link href="login.html">Уже есть аккаунт? Войти</Link>
     </div>
   );
 };

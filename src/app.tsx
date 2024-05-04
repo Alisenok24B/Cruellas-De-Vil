@@ -1,13 +1,13 @@
 import React from 'react';
-
-import { BrowserRouter } from "react-router-dom";
-import { PageRoutes } from './routes';
+import Login from './pages/login';
+import Register from './pages/register';
+import Search from './pages/search';
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <PageRoutes/>
-    </BrowserRouter>
+    //<Search/>
+    //<Login />
+    <Register />
   );
 };
 

@@ -131,59 +131,8 @@ body {
     caret-color: var(--green);
 }
 
-button {
-    border: none;
-    cursor: pointer;
-    border-radius: 8px;
-    padding: 10px;
-}
-  
-.login-submit {
-    background-color: var(--green);
-    color: var(--white);
-    margin: 20px 0 10px 0;
-    font-size: 16;
-}
-  
-.google-auth {
-    background-color: var(--white);
-    border: 2px solid var(--brown);
-    color: var(--brown);
-    margin: 10px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 15px;
-    font-size: 14px;
-    outline: none;
-}
-
-.login-submit:hover
-,.google-auth:hover {
-    box-shadow: 0 2px 6px var(--shadow-color);
-}
-  
-.google-auth img {
-    margin-right: 10px;
-}
-
 .login-button,
 .google-auth-button {
     display: flex;
     justify-content: center;
-}
-
-.link-to-registration a {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    box-sizing: border-box;
-    color: var(--grey);
-    cursor: pointer;
-    font-size: 16px;
-    height: 30px;
-    padding: 5px;
-    text-align: center;
-    margin: 10px;
-    text-decoration: none;
 }
