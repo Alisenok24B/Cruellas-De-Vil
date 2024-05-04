@@ -8,7 +8,7 @@ import { StyledCheckboxInput } from "./check-box.styled"
 export function CheckBox (props) {
     return (
         <StyledCheckBox>
-            <StyledCheckboxInput name={props.name} type="checkbox" id={props.name} hidden />
+            <StyledCheckboxInput name={props.name} type="checkbox" id={props.id} hidden />
             <StyledCheckBoxLabel htmlFor={props.name} className="checkbox-label"></StyledCheckBoxLabel>
             {props.children}
         </StyledCheckBox>

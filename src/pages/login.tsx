@@ -8,6 +8,7 @@ import { logo_1x } from '../assets/img'
 import { icon_google } from '../assets/img'
 
 import { Link } from '../components/link/link'
+import { Button } from '../components/button';
 
 const Login = () => {
   return (
@@ -41,14 +42,11 @@ const Login = () => {
                 <label htmlFor="password" className="placeholder">Пароль</label>
             </div>
             <div className="login-button">
-                <button className="login-submit" type="submit">Войти</button>
+                <Button type="submit">Войти</Button>
             </div>
         </form>
         <div className="google-auth-button">
-            <button className="google-auth">
-                <img src={icon_google} alt="Google" />
-                Продолжить с Google
-            </button>
+            <Button isGoogle type="button" icon={icon_google}>Продолжить с Google</Button>
         </div>
         <Link href="register.html">Создать аккаунт</Link>
     </div>
