@@ -8,8 +8,8 @@ const App = () => {
   return (
     //<ProfileView />
     //<Search/>
-    <Login />
-    //<Register />
+    //<Login />
+    <Register />
   );
 };
 

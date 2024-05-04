@@ -24,7 +24,7 @@ body {
     box-shadow: 0 4px 8px var(--shadow-color);
     width: 400px;
     max-width: calc(100% - 128px);
-    overflow: hidden;
+    margin: auto;
 }
 
 .login-header {
@@ -32,7 +32,6 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    flex-wrap: wrap;
 }
 
 .h1 {
