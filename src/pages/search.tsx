@@ -1,6 +1,6 @@
 import React from "react";
 
-import './styles_for_search.css';
+import './css/styles_for_search.css';
 
 import { HeaderElements } from '../components/header-elements/header-elements'
 import { CustomSection } from "../components/custom-section"

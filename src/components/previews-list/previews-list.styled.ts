@@ -3,6 +3,9 @@ import styled from "@emotion/styled"
 
 export const StyledPreviewsList = styled.ul`
     width: 50%;
+
+    margin-top: 0;
+    padding-left: 0;
 `
 
 export const StyledPLLi = styled.li`
