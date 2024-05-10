@@ -8,7 +8,9 @@ import { logo_1x } from '../assets/img'
 import { icon_google } from '../assets/img'
 
 import { Link } from '../components/link/link'
-import { Button } from '../components/button';
+import { Button } from '../components/button'
+import { InputField } from '../components/input-field'
+import { TitleH1 } from '../components/title-h1'
 
 const Login = () => {
   return (
@@ -28,19 +30,13 @@ const Login = () => {
               (min-width: 320px) 440px,
               (min-width: 520px) 880px
             "/>
-            <h1 className="h1">Войдите в свой аккаунт</h1>
+            <div className="title">
+                <TitleH1>Войдите в свой аккаунт</TitleH1>
+            </div>
         </header>
         <form className="login-htmlForm">
-            <div className="input-group">
-                <input name="number-phone" id="number-phone" className="input-login" type="tel" placeholder=" " maxLength={13}/>
-                <div className="cut"></div>
-                <label htmlFor="number-phone" className="placeholder">Номер телефона</label>
-            </div>
-            <div className="input-group">
-                <input name="password" id="password" className="input-login" type="password" placeholder=" " maxLength={24}/>
-                <div className="cut"></div>
-                <label htmlFor="password" className="placeholder">Пароль</label>
-            </div>
+            <InputField inColumn name="number-phone" id="number-phone" type="tel" maxLength={12}>Номер телефона</InputField>
+            <InputField inColumn name="password" id="password" type="password" maxLength={24}>Пароль</InputField>
             <div className="login-button">
                 <Button type="submit">Войти</Button>
             </div>
