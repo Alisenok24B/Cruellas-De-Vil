@@ -8,6 +8,7 @@ import { PreviewsList } from "../components/previews-list"
 import { Logo } from "../components/logo"
 import { Contacts } from "../components/contacts"
 import { Container } from '../components/container'
+import { TitleH1 } from '../components/title-h1'
 
 import { logo } from '../assets/img'
 
@@ -21,7 +22,9 @@ const Search = () => {
     </header>
     <main id="main" className="main">
         <Container className="container">
-            <h1 className="find">Найти догситтера</h1>
+            <div className="find">
+              <TitleH1>Найти догситера</TitleH1>
+            </div>
             <div className="search">
                 <div className="boxes">
                     <CustomSection className="place" type="text">Где искать?</CustomSection>

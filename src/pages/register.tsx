@@ -11,6 +11,7 @@ import { Link } from '../components/link/link'
 import { CheckBox } from '../components/check-box';
 import { Button } from '../components/button';
 import { InputField } from '../components/input-field';
+import { TitleH1 } from '../components/title-h1'
 
 const Register = () => {
   return (
@@ -30,7 +31,9 @@ const Register = () => {
               (min-width: 320px) 440px,
               (min-width: 520px) 880px
             "/>
-            <h1 className="h1">Создайте аккаунт</h1>
+            <div className="title">
+                <TitleH1>Войдите в свой аккаунт</TitleH1>
+            </div>
         </header>
         
         <form className="register-form">

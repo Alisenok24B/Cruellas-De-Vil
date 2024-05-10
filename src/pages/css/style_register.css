@@ -37,10 +37,9 @@ body {
     flex-wrap: wrap;
 }
 
-.h1 {
-    color: var(--black);
-    margin-top: auto;
+.title {
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .register-logo {

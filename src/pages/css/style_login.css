@@ -35,10 +35,9 @@ body {
     flex-direction: column;
 }
 
-.h1 {
-    color: var(--black);
-    margin-top: auto;
+.title {
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .login-header a {

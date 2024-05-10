@@ -8,8 +8,9 @@ import { logo_1x } from '../assets/img'
 import { icon_google } from '../assets/img'
 
 import { Link } from '../components/link/link'
-import { Button } from '../components/button';
-import { InputField } from '../components/input-field';
+import { Button } from '../components/button'
+import { InputField } from '../components/input-field'
+import { TitleH1 } from '../components/title-h1'
 
 const Login = () => {
   return (
@@ -29,7 +30,9 @@ const Login = () => {
               (min-width: 320px) 440px,
               (min-width: 520px) 880px
             "/>
-            <h1 className="h1">Войдите в свой аккаунт</h1>
+            <div className="title">
+                <TitleH1>Войдите в свой аккаунт</TitleH1>
+            </div>
         </header>
         <form className="login-htmlForm">
             <InputField inColumn name="number-phone" id="number-phone" type="tel" maxLength={12}>Номер телефона</InputField>
