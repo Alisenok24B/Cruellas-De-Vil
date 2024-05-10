@@ -4,7 +4,6 @@ import styled from "@emotion/styled";
 export const StyledCheckBox = styled.div`
     display: flex;
     align-items: center;
-    margin: 15px 0 0 0;
 `;
 
 
