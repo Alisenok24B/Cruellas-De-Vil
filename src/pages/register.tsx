@@ -13,6 +13,14 @@ import { Button } from '../components/button';
 import { InputField } from '../components/input-field';
 import { TitleH1 } from '../components/title-h1'
 
+const inputFieldsList = [
+  {id:"first-name", title:"Имя", name:"first-name", type:"text", maxLength:35},
+  {id:"second-name", title:"Фамилия", name:"second-name", type:"text", maxLength:35},
+  {id:"number-phone", title:"Номер телефона", name:"number-phone", type:"tel", maxLength:12},
+  {id:"password", title:"Пароль", name:"password", type:"password", maxLength:24},
+  {id:"password-confirmation", title:"Подтвердите пароль", name:"password-confirmation", type:"password", maxLength:24}
+]
+
 const Register = () => {
   return (
     <div className="register-container">
@@ -36,11 +44,9 @@ const Register = () => {
             </div>
         </header>
         <form className="register-form">
-            <InputField name="first-name" id="first-name" type="text" max-length={35} inColumn>Имя</InputField>
-            <InputField name="second-name" id="second-name" type="text" max-length={35} inColumn>Фамилия</InputField>
-            <InputField name="number-phone" id="number-phone" type="tel" max-length={12} inColumn>Номер телефона</InputField>
-            <InputField name="password" id="password" type="password" max-length={24} inColumn>Пароль</InputField>
-            <InputField name="password-confirmation" id="password-confirmation" type="password" max-length={24} inColumn>Подтвердите пароль</InputField>
+            {inputFieldsList.map((element) => (
+              <InputField inColumn name={element.name} id={element.id} type={element.type} maxLength={element.maxLength}>{element.title}</InputField>
+            ))}
             <div className="checkboxes-container">
                 <CheckBox name="host" id="host">Я хозяин</CheckBox>
                 <CheckBox name="dogsitter" id="dogsitter">Я догситер</CheckBox>

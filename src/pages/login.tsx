@@ -12,6 +12,11 @@ import { Button } from '../components/button'
 import { InputField } from '../components/input-field'
 import { TitleH1 } from '../components/title-h1'
 
+const inputFieldsList = [
+  {title:"Номер телефона", name:"number-phone", id:"number-phone", type:"tel", maxLength:12},
+  {title:"Пароль", name:"password", id:"password", type:"password", maxLength:24}
+]
+
 const Login = () => {
   return (
     <div className="login-container">
@@ -35,8 +40,9 @@ const Login = () => {
             </div>
         </header>
         <form className="login-htmlForm">
-            <InputField inColumn name="number-phone" id="number-phone" type="tel" maxLength={12}>Номер телефона</InputField>
-            <InputField inColumn name="password" id="password" type="password" maxLength={24}>Пароль</InputField>
+            {inputFieldsList.map((element) => (
+              <InputField inColumn name={element.name} id={element.id} type={element.type} maxLength={element.maxLength}>{element.title}</InputField>
+            ))}
             <div className="login-button">
                 <Button type="submit">Войти</Button>
             </div>
