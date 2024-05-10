@@ -13,15 +13,15 @@ import { StyledPLCostRH } from "./previews-list.styled";
 function Preview({ userPhoto, fullName, cost, fullDesc }) {
   return (
     <StyledPLLi>
-      <StyledPLPhoto className="photo">
+      <StyledPLPhoto>
         <StyledPLPhotoImg src={userPhoto} alt="Фото пользователя"/>
       </StyledPLPhoto>
-      <StyledPLDesc className="desc">
-        <StyledPLFullNameCost className="fullname">{fullName}</StyledPLFullNameCost>
-        <StyledPLFullNameCost className="cost">
-          Стоимость: <StyledPLCostRH className="cost-rh">{cost}</StyledPLCostRH>
+      <StyledPLDesc>
+        <StyledPLFullNameCost>{fullName}</StyledPLFullNameCost>
+        <StyledPLFullNameCost>
+          Стоимость: <StyledPLCostRH>{cost}</StyledPLCostRH>
         </StyledPLFullNameCost>
-        <StyledPLFullDesc className="fulldesc">{fullDesc}</StyledPLFullDesc>
+        <StyledPLFullDesc>{fullDesc}</StyledPLFullDesc>
       </StyledPLDesc>
     </StyledPLLi>
   );
@@ -45,7 +45,7 @@ export function PreviewsList() {
   ];
 
   return (
-    <StyledPreviewsList className="previews">
+    <StyledPreviewsList>
       {users.map((user, index) => (
         <Preview
           key={index}

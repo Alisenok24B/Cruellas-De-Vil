@@ -4,7 +4,7 @@ import { StyledContainer } from "./container.styled"
 
 export function Container (props) {
     return (
-        <StyledContainer className={`${props.className}`}>
+        <StyledContainer>
             { props.children }
         </StyledContainer>
     )

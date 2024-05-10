@@ -6,7 +6,7 @@ import { StyledHeaderElements } from "./header-elements.styled"
 
 export function HeaderElements(props) {
     return (
-        <StyledHeaderElements className={`${props.className}`}>
+        <StyledHeaderElements>
             <Logo src={`${props.src}`} alt={`${props.alt}`}></Logo>
             <Menu className="menu show-profile"/>
         </StyledHeaderElements>
