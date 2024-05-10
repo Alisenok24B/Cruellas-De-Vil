@@ -4,10 +4,8 @@ import styled from "@emotion/styled"
 export const StyledInp = styled.div`
     position: relative;
 
-    width: 413px;
-    height: 60px;
-
-    margin-top: 15px;
+    width: 274px;
+    height: 40px;
 `
 
 export const StyledInpInput = styled.input`
@@ -58,7 +56,7 @@ export const StyledInpSelect = styled.select`
         
     color: #C6C5C1;
 
-    font-size: 20px;
+    font-size: 16px;
     font-family: 'Raleway', sans-serif;;
         
     height: 100%;

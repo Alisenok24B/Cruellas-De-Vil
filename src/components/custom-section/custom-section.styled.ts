@@ -6,7 +6,7 @@ export const StyledCustomSectionPlace = styled.section`
     flex-direction: column;
     align-items: center;
         
-    margin-right: 120px;
+    margin-right: 250px;
 
     @media only screen and (max-width: 1024px) {
         margin-right: 0;

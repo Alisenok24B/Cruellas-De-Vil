@@ -49,8 +49,8 @@ ul, li {
     
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .search h1 {
@@ -66,14 +66,11 @@ ul, li {
     color: #FFFFFF;
     text-decoration: underline;
 
-    margin-top: 65px;
+    margin-top: 55px;
+    margin-bottom: 25px;
 
     display: flex;
     justify-content: center;
-}
-
-.reset:active {
-    color: #96A467;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -83,7 +80,7 @@ ul, li {
     }
 
     .reset {
-        margin-top: 75px;
+        margin-top: 55px;
     }
 }
 
