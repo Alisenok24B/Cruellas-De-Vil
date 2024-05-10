@@ -9,9 +9,7 @@
 }
 
 body {
-    align-items: center;
-    display: flex;
-    justify-content: center;
+    
     min-height: 100vh;
     background-color: var(--beige);
     font-family: "Roboto", sans-serif;
@@ -24,7 +22,11 @@ body {
     box-shadow: 0 4px 8px var(--shadow-color);
     width: 400px;
     max-width: calc(100% - 128px);
-    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: min-content;
 }
 
 .register-header {
@@ -38,14 +40,16 @@ body {
 .h1 {
     color: var(--black);
     margin-top: auto;
+    text-align: center;
 }
 
 .register-logo {
-    margin: 28px auto 0 auto;
+    margin: 10px auto 0 auto;
 }
 
 .register-form {
     align-items: center;
+    width: 100%;
 }
 
 .input-group {
