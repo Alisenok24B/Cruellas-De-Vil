@@ -3,6 +3,7 @@ import React from "react"
 import { Inp } from '../../components/inp/inp'
 import { StyledCustomSectionPlace } from "./custom-section.styled"
 import { StyledCustomSectionSort } from "./custom-section.styled"
+import { InputField } from '../input-field'
 
 export function CustomSection (props) {
     return (
@@ -10,7 +11,7 @@ export function CustomSection (props) {
             {props.type === 'text' && (
                 <StyledCustomSectionPlace>
                     <h1>{ props.children }</h1>
-                    <Inp type={`${props.type}`} name="where-find" placeholder="Страна, регион, город" />
+                    <InputField name="where-find" id="where-find" type="text" max-length={100}>Страна, регион, город</InputField>
                 </StyledCustomSectionPlace>
             )}
             {props.type === 'select' && (

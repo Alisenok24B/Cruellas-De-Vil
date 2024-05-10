@@ -9,6 +9,7 @@ import { icon_google } from '../assets/img'
 
 import { Link } from '../components/link/link'
 import { Button } from '../components/button';
+import { InputField } from '../components/input-field';
 
 const Login = () => {
   return (
@@ -31,16 +32,8 @@ const Login = () => {
             <h1 className="h1">Войдите в свой аккаунт</h1>
         </header>
         <form className="login-htmlForm">
-            <div className="input-group">
-                <input name="number-phone" id="number-phone" className="input-login" type="tel" placeholder=" " maxLength={13}/>
-                <div className="cut"></div>
-                <label htmlFor="number-phone" className="placeholder">Номер телефона</label>
-            </div>
-            <div className="input-group">
-                <input name="password" id="password" className="input-login" type="password" placeholder=" " maxLength={24}/>
-                <div className="cut"></div>
-                <label htmlFor="password" className="placeholder">Пароль</label>
-            </div>
+            <InputField name="number-phone" id="number-phone" type="tel" max-length={12}>Номер телефона</InputField>
+            <InputField name="password" id="password" type="password" max-length={24}>Пароль</InputField>
             <div className="login-button">
                 <Button type="submit">Войти</Button>
             </div>

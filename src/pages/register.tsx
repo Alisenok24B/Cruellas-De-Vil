@@ -10,6 +10,7 @@ import { icon_google } from '../assets/img'
 import { Link } from '../components/link/link'
 import { CheckBox } from '../components/check-box';
 import { Button } from '../components/button';
+import { InputField } from '../components/input-field';
 
 const Register = () => {
   return (
@@ -33,31 +34,11 @@ const Register = () => {
         </header>
         
         <form className="register-form">
-            <div className="input-group">
-                <input name="first-name" id="first-name" className="input-register" type="text" placeholder=" " maxLength={35}/>
-                <div className="cut"></div>
-                <label htmlFor="first-name" className="placeholder">Имя</label>
-            </div>
-            <div className="input-group">
-                <input name="second-name" id="second-name" className="input-register" type="text" placeholder=" " maxLength={35}/>
-                <div className="cut"></div>
-                <label htmlFor="second-name" className="placeholder">Фамилия</label>
-            </div>
-            <div className="input-group">
-                <input name="number-phone" id="number-phone" className="input-register" type="tel" placeholder=" " maxLength={12}/>
-                <div className="cut"></div>
-                <label htmlFor="number-phone" className="placeholder">Номер телефона</label>
-            </div>
-            <div className="input-group">
-                <input name="password" id="password" className="input-register" type="password" placeholder=" " maxLength={24}/>
-                <div className="cut"></div>
-                <label htmlFor="password" className="placeholder">Пароль</label>
-            </div>
-            <div className="input-group">
-                <input name="password-confirmation" id="password-confirmation" className="input-register" type="password" placeholder=" " maxLength={24}/>
-                <div className="cut"></div>
-                <label htmlFor="password-confirmation" className="placeholder">Подтвердите пароль</label>
-            </div>
+            <InputField name="first-name" id="first-name" type="text" max-length={35}>Имя</InputField>
+            <InputField name="second-name" id="second-name" type="text" max-length={35}>Фамилия</InputField>
+            <InputField name="number-phone" id="number-phone" type="tel" max-length={12}>Номер телефона</InputField>
+            <InputField name="password" id="password" type="password" max-length={24}>Пароль</InputField>
+            <InputField name="password-confirmation" id="password-confirmation" type="password" max-length={24}>Подтвердите пароль</InputField>
             <div className="checkboxes-container">
                 <CheckBox name="host" id="host">Я хозяин</CheckBox>
                 <CheckBox name="dogsitter" id="dogsitter">Я догситер</CheckBox>
