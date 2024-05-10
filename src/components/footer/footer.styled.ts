@@ -6,7 +6,8 @@ export const StyledFooter = styled.footer`
 
     text-align: center;
 
-    margin-bottom: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
 `
 
 export const StyledFContainer = styled.div`
