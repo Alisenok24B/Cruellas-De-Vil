@@ -9,6 +9,7 @@ import { Contacts } from "../components/contacts";
 import { Container } from '../components/container';
 import { TitleH1 } from '../components/title-h1';
 import { Header } from '../components/header';
+import { Button } from '../components/button';
 
 import { logo } from '../assets/img';
 
@@ -26,9 +27,12 @@ const Search = () => {
                     <CustomSection type="text">Где искать?</CustomSection>
                     <CustomSection type="select">Сортировка</CustomSection>
                 </div>
-                <a href="#">
+                <div className="reset">
+                    <Button>Сбросить настройки</Button>
+                </div>
+                {/* <a href="#">
                     <h1 className="reset">Сбросить настройки</h1>
-                </a>
+                </a> */}
             </div>
             <p className="finded">Найдено: 2 догситтера</p>
             <div className="preview-map">
