@@ -4,14 +4,11 @@ import './css/styles_for_search.css';
 
 import { CustomSection } from "../components/custom-section";
 import { PreviewsList } from "../components/previews-list";
-import { Logo } from "../components/logo";
-import { Contacts } from "../components/contacts";
 import { Container } from '../components/container';
 import { TitleH1 } from '../components/title-h1';
 import { Header } from '../components/header';
 import { Button } from '../components/button';
-
-import { logo } from '../assets/img';
+import { Footer } from '../components/footer';
 
 const Search = () => {
   return (
@@ -43,12 +40,7 @@ const Search = () => {
             </div>
         </Container>
     </main>
-    <footer id="footer" className="footer">
-        <Container>
-            <Logo src={logo} alt="Человек с собакой" title="DogSittersFinder — любовь и забота о вашей собаке"/>
-            <Contacts>+7 800 555-35-35</Contacts>
-        </Container>
-    </footer>
+    <Footer/>
     </>
   );
 };
