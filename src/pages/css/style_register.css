@@ -15,40 +15,8 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
-.register-container {
-    background: var(--white);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px var(--shadow-color);
-    width: 400px;
-    max-width: calc(100% - 128px);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: min-content;
-}
-
-.register-header {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    flex-wrap: wrap;
-}
-
-.title {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
 .register-logo {
     margin: 10px auto 0 auto;
-}
-
-.register-form {
-    align-items: center;
-    width: 100%;
 }
 
 .checkboxes-container {
@@ -57,14 +25,4 @@ body {
     justify-content: space-evenly;
     margin: 15px 0;
     flex-wrap: wrap;
-}
-
-.register-button,
-.google-auth-button {
-    display: flex;
-    justify-content: center;
-}
-
-.google-auth-button {
-    margin-top: 15px;
 }

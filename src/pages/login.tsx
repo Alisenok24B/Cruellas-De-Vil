@@ -11,6 +11,8 @@ import { Link } from '../components/link/link'
 import { Button } from '../components/button'
 import { InputField } from '../components/input-field'
 import { TitleH1 } from '../components/title-h1'
+import { Wrapper, Header, Title, Form, SubmitButton, GoogleAuthButton } from './login-register.styled'
+
 
 const inputFieldsList = [
   {title:"Номер телефона", name:"number-phone", id:"number-phone", type:"tel", maxLength:12},
@@ -19,8 +21,8 @@ const inputFieldsList = [
 
 const Login = () => {
   return (
-    <div className="login-container">
-        <header className="login-header">
+    <Wrapper>
+        <Header>
             <img className="login-logo"
             width="60"
             src={logo_4x} 
@@ -35,23 +37,23 @@ const Login = () => {
               (min-width: 320px) 440px,
               (min-width: 520px) 880px
             "/>
-            <div className="title">
+            <Title>
                 <TitleH1>Войдите в свой аккаунт</TitleH1>
-            </div>
-        </header>
-        <form className="login-htmlForm">
+            </Title>
+        </Header>
+        <Form>
             {inputFieldsList.map((element) => (
               <InputField inColumn name={element.name} id={element.id} type={element.type} maxLength={element.maxLength}>{element.title}</InputField>
             ))}
-            <div className="login-button">
+            <SubmitButton>
                 <Button type="submit">Войти</Button>
-            </div>
-        </form>
-        <div className="google-auth-button">
+            </SubmitButton>
+        </Form>
+        <GoogleAuthButton>
             <Button isGoogle type="button" icon={icon_google}>Продолжить с Google</Button>
-        </div>
+        </GoogleAuthButton>
         <Link href="register.html">Создать аккаунт</Link>
-    </div>
+    </Wrapper>
   );
 };
 

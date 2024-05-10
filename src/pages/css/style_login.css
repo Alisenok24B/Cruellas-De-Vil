@@ -14,61 +14,6 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
-.login-container {
-    background: var(--white);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px var(--shadow-color);
-    width: 400px;
-    max-width: calc(100% - 128px);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: min-content;
-}
-
-.login-header {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.title {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.login-header a {
-    text-decoration: none;
-    background-color: var(--grey);
-    border-radius: 8px;
-    border: 0;
-    box-sizing: border-box;
-    color: var(--black);
-    cursor: pointer;
-    font-size: 16px;
-    height: 30px;
-    padding: 5px;
-    text-align: center;
-}
-
 .login-logo {
     margin: 10px auto 0 auto;
-}
-
-.login-form {
-    align-items: center;
-    width: 100%
-}
-
-.login-button,
-.google-auth-button {
-    display: flex;
-    justify-content: center;
-}
-
-.google-auth-button {
-    margin-top: 15px;
 }
