@@ -2,24 +2,20 @@ import React from "react";
 
 import './css/styles_for_search.css';
 
-import { HeaderElements } from '../components/header-elements/header-elements';
 import { CustomSection } from "../components/custom-section";
 import { PreviewsList } from "../components/previews-list";
 import { Logo } from "../components/logo";
 import { Contacts } from "../components/contacts";
 import { Container } from '../components/container';
 import { TitleH1 } from '../components/title-h1';
+import { Header } from '../components/header';
 
 import { logo } from '../assets/img';
 
 const Search = () => {
   return (
     <>
-      <header id="header" className="header">
-        <Container className="container">
-            <HeaderElements className="nav" src={logo} alt="Человек с собакой"/>
-        </Container>
-    </header>
+    <Header/>
     <main id="main" className="main">
         <Container className="container">
             <div className="find">
