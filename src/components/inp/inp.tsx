@@ -11,13 +11,13 @@ export function Inp(props) {
         <StyledInp className="inp">
             {props.type === 'text' && (
                 <>
-                    <StyledInpInput name={props.name} className="input-find" placeholder=" "/>
+                    <StyledInpInput name={props.name} placeholder=" "/>
                     <StyledInpCut className="cut"></StyledInpCut>
                     <StyledInpLabel htmlFor={props.name} className="placeholder">{props.placeholder}</StyledInpLabel>
                 </>
             )}
             {props.type === 'select' && (
-                <StyledInpSelect className="input-find">
+                <StyledInpSelect>
                     <option value="" disabled selected>{props.placeholder}</option>
                     {props.options.map((option, index) => (
                         <option key={index} value={option.value}>{option.label}</option>

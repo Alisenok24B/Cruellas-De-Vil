@@ -5,7 +5,7 @@ import { StyledLogoImg } from "./logo.styled"
 
 export function Logo(props) {
   return (
-    <StyledLogo className={props.className}>
+    <StyledLogo>
         <StyledLogoImg src={props.src} alt={props.alt}/>
         {props.title && <p>{props.title}</p>}
     </StyledLogo>

@@ -7,7 +7,7 @@ import { InputField } from '../input-field'
 
 export function CustomSection (props) {
     return (
-        <section className={`${props.className}`}>
+        <section>
             {props.type === 'text' && (
                 <StyledCustomSectionPlace>
                     <h1>{ props.children }</h1>

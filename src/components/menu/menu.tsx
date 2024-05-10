@@ -10,7 +10,7 @@ import { StyledMenuShowProfile } from "./menu.styled"
 
 export function Menu(props) {
     return (
-        <StyledMenu className={`${props.className}`}>
+        <StyledMenu>
             <StyledMenuLi>
                 <a href="#">
                     <img src={map} alt="Картинка в виде карты" />

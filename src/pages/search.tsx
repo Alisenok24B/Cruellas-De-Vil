@@ -17,14 +17,14 @@ const Search = () => {
     <>
     <Header/>
     <main id="main" className="main">
-        <Container className="container">
+        <Container>
             <div className="find">
               <TitleH1>Найти догситера</TitleH1>
             </div>
             <div className="search">
                 <div className="boxes">
-                    <CustomSection className="place" type="text">Где искать?</CustomSection>
-                    <CustomSection className="sort" type="select">Сортировка</CustomSection>
+                    <CustomSection type="text">Где искать?</CustomSection>
+                    <CustomSection type="select">Сортировка</CustomSection>
                 </div>
                 <a href="#">
                     <h1 className="reset">Сбросить настройки</h1>
@@ -40,9 +40,9 @@ const Search = () => {
         </Container>
     </main>
     <footer id="footer" className="footer">
-        <Container className="container">
-            <Logo className="logo" src={logo} alt="Человек с собакой" title="DogSittersFinder — любовь и забота о вашей собаке"/>
-            <Contacts className="contacts">+7 800 555-35-35</Contacts>
+        <Container>
+            <Logo src={logo} alt="Человек с собакой" title="DogSittersFinder — любовь и забота о вашей собаке"/>
+            <Contacts>+7 800 555-35-35</Contacts>
         </Container>
     </footer>
     </>
