@@ -35,7 +35,6 @@ const Register = () => {
                 <TitleH1>Войдите в свой аккаунт</TitleH1>
             </div>
         </header>
-        
         <form className="register-form">
             <InputField name="first-name" id="first-name" type="text" max-length={35} inColumn>Имя</InputField>
             <InputField name="second-name" id="second-name" type="text" max-length={35} inColumn>Фамилия</InputField>
