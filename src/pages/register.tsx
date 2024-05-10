@@ -34,11 +34,11 @@ const Register = () => {
         </header>
         
         <form className="register-form">
-            <InputField name="first-name" id="first-name" type="text" max-length={35}>Имя</InputField>
-            <InputField name="second-name" id="second-name" type="text" max-length={35}>Фамилия</InputField>
-            <InputField name="number-phone" id="number-phone" type="tel" max-length={12}>Номер телефона</InputField>
-            <InputField name="password" id="password" type="password" max-length={24}>Пароль</InputField>
-            <InputField name="password-confirmation" id="password-confirmation" type="password" max-length={24}>Подтвердите пароль</InputField>
+            <InputField name="first-name" id="first-name" type="text" max-length={35} inColumn>Имя</InputField>
+            <InputField name="second-name" id="second-name" type="text" max-length={35} inColumn>Фамилия</InputField>
+            <InputField name="number-phone" id="number-phone" type="tel" max-length={12} inColumn>Номер телефона</InputField>
+            <InputField name="password" id="password" type="password" max-length={24} inColumn>Пароль</InputField>
+            <InputField name="password-confirmation" id="password-confirmation" type="password" max-length={24} inColumn>Подтвердите пароль</InputField>
             <div className="checkboxes-container">
                 <CheckBox name="host" id="host">Я хозяин</CheckBox>
                 <CheckBox name="dogsitter" id="dogsitter">Я догситер</CheckBox>

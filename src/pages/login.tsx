@@ -32,8 +32,8 @@ const Login = () => {
             <h1 className="h1">Войдите в свой аккаунт</h1>
         </header>
         <form className="login-htmlForm">
-            <InputField name="number-phone" id="number-phone" type="tel" max-length={12}>Номер телефона</InputField>
-            <InputField name="password" id="password" type="password" max-length={24}>Пароль</InputField>
+            <InputField inColumn name="number-phone" id="number-phone" type="tel" maxLength={12}>Номер телефона</InputField>
+            <InputField inColumn name="password" id="password" type="password" maxLength={24}>Пароль</InputField>
             <div className="login-button">
                 <Button type="submit">Войти</Button>
             </div>

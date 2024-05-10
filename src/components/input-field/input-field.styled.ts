@@ -6,7 +6,7 @@ export const StyledInputGroup = styled.div`
     position: relative;
     width: 100%;
     overflow: hidden;
-    margin-bottom: 15px;
+    margin-bottom: ${(props: any) => props.inColumn ? '15px' : '0px'};
 `;
 
 export const StyledInput = styled.input`
