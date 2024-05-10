@@ -69,3 +69,7 @@ body {
     display: flex;
     justify-content: center;
 }
+
+.google-auth-button {
+    margin-top: 15px;
+}

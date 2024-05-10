@@ -11,7 +11,6 @@ export const StyledButton = styled.button`
     display: ${( props: any ) => props.isGoogle ? 'flex' : 'block'};
     align-items: center;
     justify-content: center;
-    margin-top: 15px;
     border: ${( props: any ) => props.isGoogle ? '2px solid var(--brown)' : 'none'};
 
     &:hover {
