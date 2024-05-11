@@ -5,7 +5,7 @@ export const StyledLink = styled.a`
     display: flex;
     justify-content: center;
     box-sizing: border-box;
-    color: var(--grey);
+    color: ${( props: any ) => props.exit ? 'var(--black)' : 'var(--grey)'};
     cursor: pointer;
     font-size: 16px;
     height: 30px;

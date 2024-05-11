@@ -12,6 +12,7 @@ import { CheckBox } from '../components/check-box';
 import { Button } from '../components/button';
 import { InputField } from '../components/input-field';
 import { TitleH1 } from '../components/title-h1'
+import { Wrapper, Header, Title, Form, SubmitButton, GoogleAuthButton, CheckboxesContainer } from './login-register.styled'
 
 const inputFieldsList = [
   {id:"first-name", title:"Имя", name:"first-name", type:"text", maxLength:35},
@@ -23,8 +24,8 @@ const inputFieldsList = [
 
 const Register = () => {
   return (
-    <div className="register-container">
-        <header className="register-header">
+    <Wrapper>
+        <Header>
             <img className="login-logo" 
             width="60"
             src={logo_4x} 
@@ -39,27 +40,27 @@ const Register = () => {
               (min-width: 320px) 440px,
               (min-width: 520px) 880px
             "/>
-            <div className="title">
+            <Title>
                 <TitleH1>Войдите в свой аккаунт</TitleH1>
-            </div>
-        </header>
-        <form className="register-form">
+            </Title>
+        </Header>
+        <Form>
             {inputFieldsList.map((element) => (
               <InputField inColumn name={element.name} id={element.id} type={element.type} maxLength={element.maxLength}>{element.title}</InputField>
             ))}
-            <div className="checkboxes-container">
+            <CheckboxesContainer>
                 <CheckBox name="host" id="host">Я хозяин</CheckBox>
                 <CheckBox name="dogsitter" id="dogsitter">Я догситер</CheckBox>
-            </div>
-            <div className="register-button">
+            </CheckboxesContainer>
+            <SubmitButton>
                 <Button type="submit">Зарегистрироваться</Button>
-            </div>
-        </form>
-        <div className="google-auth-button">
+            </SubmitButton>
+        </Form>
+        <GoogleAuthButton>
             <Button isGoogle type="button" icon={icon_google}>Продолжить с Google</Button>
-        </div>
+        </GoogleAuthButton>
         <Link href="login.html">Уже есть аккаунт? Войти</Link>
-    </div>
+    </Wrapper>
   );
 };
 
