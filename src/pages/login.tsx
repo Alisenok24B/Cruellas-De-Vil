@@ -52,7 +52,7 @@ const Login = () => {
         <GoogleAuthButton>
             <Button isGoogle type="button" icon={icon_google}>Продолжить с Google</Button>
         </GoogleAuthButton>
-        <Link href="register.html">Создать аккаунт</Link>
+        <Link href="/dog-sitters-finder/register">Создать аккаунт</Link>
     </Wrapper>
   );
 };

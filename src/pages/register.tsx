@@ -59,7 +59,7 @@ const Register = () => {
         <GoogleAuthButton>
             <Button isGoogle type="button" icon={icon_google}>Продолжить с Google</Button>
         </GoogleAuthButton>
-        <Link href="login.html">Уже есть аккаунт? Войти</Link>
+        <Link href="/dog-sitters-finder">Уже есть аккаунт? Войти</Link>
     </Wrapper>
   );
 };
