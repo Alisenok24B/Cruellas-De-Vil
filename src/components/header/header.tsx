@@ -11,7 +11,7 @@ export function Header(props) {
     return (
         <StyledHeader>
             <Container>
-                <HeaderElements src={logo} alt="Человек с собакой"/>
+                <HeaderElements currentNavElement={props.currentNavElement} src={logo} alt="Человек с собакой"/>
             </Container>
         </StyledHeader>
     );

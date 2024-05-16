@@ -13,4 +13,13 @@ export const StyledLink = styled.a`
     text-align: center;
     margin: 10px;
     text-decoration: none;
+
+    svg {
+        max-height: 200%;
+        max-width: 200%;
+    }
+
+    svg path {
+        fill: ${( props: any ) => props.contrast ? 'var(--green)' : 'var(--black)'};
+    }
 `;

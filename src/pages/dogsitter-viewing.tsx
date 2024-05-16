@@ -8,15 +8,12 @@ import { UserPhoto } from '../components/user-photo';
 import { UserData } from '../components/user-data';
 import { UserInfo } from '../components/user-info';
 import { UserAbout } from '../components/user-about';
+import { Header } from '../components/header';
 
 const ProfileView = () => {
     return (
         <>
-        <header id="header" className="header">
-        <Container className="container">
-            <HeaderElements className="nav" src={logo} alt="Человек с собакой"/>
-        </Container>
-        </header>
+        <Header currentNavElement={"Профиль"}/>
 
         <main id="main" className="main">
             <UserData className="name" name="Имя Фамилия" src={user_photo} alt="Фото пользователя"/>

@@ -10,10 +10,11 @@ import { Header } from '../components/header';
 import { Button } from '../components/button';
 import { Footer } from '../components/footer';
 
+
 const Search = () => {
   return (
     <>
-    <Header/>
+    <Header currentNavElement={"Карта"}/>
     <main id="main" className="main">
         <Container>
             <div className="find">
