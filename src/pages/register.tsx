@@ -12,7 +12,7 @@ import { CheckBox } from '../components/check-box';
 import { Button } from '../components/button';
 import { InputField } from '../components/input-field';
 import { TitleH1 } from '../components/title-h1'
-import { Wrapper, Header, Title, Form, SubmitButton, GoogleAuthButton, CheckboxesContainer } from './login-register.styled'
+import { Wrapper, Header, Title, Form, SubmitButton, GoogleAuthButton, CheckboxesContainer, LinkContainer } from './login-register.styled'
 
 const inputFieldsList = [
   {id:"first-name", title:"Имя", name:"first-name", type:"text", maxLength:35},
@@ -59,7 +59,9 @@ const Register = () => {
         <GoogleAuthButton>
             <Button isGoogle type="button" icon={icon_google}>Продолжить с Google</Button>
         </GoogleAuthButton>
-        <Link href="/dog-sitters-finder">Уже есть аккаунт? Войти</Link>
+        <LinkContainer>
+            <Link href="/dog-sitters-finder">Уже есть аккаунт? Войти</Link>
+        </LinkContainer>
     </Wrapper>
   );
 };

@@ -11,7 +11,7 @@ import { Link } from '../components/link/link'
 import { Button } from '../components/button'
 import { InputField } from '../components/input-field'
 import { TitleH1 } from '../components/title-h1'
-import { Wrapper, Header, Title, Form, SubmitButton, GoogleAuthButton } from './login-register.styled'
+import { Wrapper, Header, Title, Form, SubmitButton, GoogleAuthButton, LinkContainer } from './login-register.styled'
 
 
 const inputFieldsList = [
@@ -52,7 +52,9 @@ const Login = () => {
         <GoogleAuthButton>
             <Button isGoogle type="button" icon={icon_google}>Продолжить с Google</Button>
         </GoogleAuthButton>
-        <Link href="/dog-sitters-finder/register">Создать аккаунт</Link>
+        <LinkContainer>
+            <Link href="/dog-sitters-finder/register">Создать аккаунт</Link>
+        </LinkContainer>
     </Wrapper>
   );
 };

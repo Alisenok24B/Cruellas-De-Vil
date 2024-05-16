@@ -49,3 +49,11 @@ export const CheckboxesContainer = styled.div`
     margin: 15px 0;
     flex-wrap: wrap;
 `
+
+export const LinkContainer = styled.div`
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    margin: 10px;
+`

@@ -11,16 +11,16 @@ import { Link } from "../link"
 import { Svg } from "../svg-icon"
 
 const svgPropsMap = {
-    width: '55',
-    height: '55',
+    width: '55px',
+    height: '55px',
     fill: 'none',
     viewBox: "0 0 55 55",
     paths: [{ d: "M20.8725 50.6275L4.58331 45.194V8.27979L20.3775 13.5506L36.4902 4.33583L50.4166 9.90687V46.9265L36.8431 41.4952L20.8748 50.6275H20.8725ZM9.16665 14.6483V41.8894L18.3333 44.9442V17.6917L9.16665 14.6483ZM32.0833 12.1275L22.9166 17.3708V44.1833L32.0833 38.94V12.1275ZM36.8431 9.40958L36.6666 9.515V36.4902L45.8333 40.1569V13.0075L36.8431 9.40958Z" }]
 };
 
 const svgPropsProfile = {
-    width: '55',
-    height: '55',
+    width: '55px',
+    height: '55px',
     fill: 'none',
     viewBox: "0 0 55 56",
     paths: [
@@ -60,7 +60,7 @@ export function Menu({ currentNavElement, className }) {
             </StyledMenuLi>
             <StyledMenuLi>
                 <Link exit contrast={currentNavElement === nav.exit.title} href={nav.exit.href}>
-                        {nav.exit.title}
+                    {nav.exit.title}
                 </Link>
             </StyledMenuLi>
         </StyledMenu>
