@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
+import { Link as ConnectedLink } from 'react-router-dom';
 
-export const StyledLink = styled.a`
+export const StyledLink = styled(ConnectedLink)<{
+    contrast?: boolean;
+    exit?: boolean;
+  }>`
     color: ${( props: any ) => props.exit ? 'var(--black)' : 'var(--grey)'};
     cursor: pointer;
     font-size: 16px;

@@ -7,6 +7,8 @@ import { logo_2x } from '../assets/img'
 import { logo_1x } from '../assets/img'
 import { icon_google } from '../assets/img'
 
+import { ErrorBoundary } from '../components/error-boundary';
+import { URLs } from "../__data__/urls";
 import { Link } from '../components/link/link'
 import { CheckBox } from '../components/check-box';
 import { Button } from '../components/button';
@@ -22,9 +24,16 @@ const inputFieldsList = [
   {id:"password-confirmation", title:"Подтвердите пароль", name:"password-confirmation", type:"password", maxLength:24}
 ]
 
+const InputFields = () => 
+    inputFieldsList.map((element) => (
+      <InputField inColumn name={element.name} id={element.id} type={element.type} maxLength={element.maxLength}>{element.title}</InputField>
+    ));
+
+
 const Register = () => {
   return (
     <Wrapper>
+      <ErrorBoundary>
         <Header>
             <img className="login-logo" 
             width="60"
@@ -44,10 +53,10 @@ const Register = () => {
                 <TitleH1>Войдите в свой аккаунт</TitleH1>
             </Title>
         </Header>
+      </ErrorBoundary>
+      <ErrorBoundary>
         <Form>
-            {inputFieldsList.map((element) => (
-              <InputField inColumn name={element.name} id={element.id} type={element.type} maxLength={element.maxLength}>{element.title}</InputField>
-            ))}
+            <InputFields/>
             <CheckboxesContainer>
                 <CheckBox name="host" id="host">Я хозяин</CheckBox>
                 <CheckBox name="dogsitter" id="dogsitter">Я догситер</CheckBox>
@@ -56,12 +65,17 @@ const Register = () => {
                 <Button type="submit">Зарегистрироваться</Button>
             </SubmitButton>
         </Form>
+      </ErrorBoundary>
+      <ErrorBoundary>
         <GoogleAuthButton>
             <Button isGoogle type="button" icon={icon_google}>Продолжить с Google</Button>
         </GoogleAuthButton>
+      </ErrorBoundary>
+      <ErrorBoundary>
         <LinkContainer>
-            <Link href="/dog-sitters-finder">Уже есть аккаунт? Войти</Link>
+            <Link href={URLs.baseUrl}>Уже есть аккаунт? Войти</Link>
         </LinkContainer>
+      </ErrorBoundary>
     </Wrapper>
   );
 };

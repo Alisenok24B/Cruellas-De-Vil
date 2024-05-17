@@ -7,6 +7,8 @@ import { logo_2x } from '../assets/img'
 import { logo_1x } from '../assets/img'
 import { icon_google } from '../assets/img'
 
+import { ErrorBoundary } from '../components/error-boundary'
+import { URLs } from "../__data__/urls";
 import { Link } from '../components/link/link'
 import { Button } from '../components/button'
 import { InputField } from '../components/input-field'
@@ -19,9 +21,15 @@ const inputFieldsList = [
   {title:"Пароль", name:"password", id:"password", type:"password", maxLength:24}
 ]
 
+const InputFields = () => 
+  inputFieldsList.map((element) => (
+    <InputField inColumn name={element.name} id={element.id} type={element.type} maxLength={element.maxLength}>{element.title}</InputField>
+  ));
+
 const Login = () => {
   return (
     <Wrapper>
+      <ErrorBoundary>
         <Header>
             <img className="login-logo"
             width="60"
@@ -41,20 +49,25 @@ const Login = () => {
                 <TitleH1>Войдите в свой аккаунт</TitleH1>
             </Title>
         </Header>
+      </ErrorBoundary>
+      <ErrorBoundary>
         <Form>
-            {inputFieldsList.map((element) => (
-              <InputField inColumn name={element.name} id={element.id} type={element.type} maxLength={element.maxLength}>{element.title}</InputField>
-            ))}
+            <InputFields/>
             <SubmitButton>
                 <Button type="submit">Войти</Button>
             </SubmitButton>
         </Form>
+      </ErrorBoundary>
+      <ErrorBoundary>
         <GoogleAuthButton>
             <Button isGoogle type="button" icon={icon_google}>Продолжить с Google</Button>
         </GoogleAuthButton>
+      </ErrorBoundary>
+      <ErrorBoundary>
         <LinkContainer>
-            <Link href="/dog-sitters-finder/register">Создать аккаунт</Link>
+            <Link href={URLs.ui.register}>Создать аккаунт</Link>
         </LinkContainer>
+      </ErrorBoundary>
     </Wrapper>
   );
 };

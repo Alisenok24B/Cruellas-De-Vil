@@ -3,6 +3,7 @@ import React from "react"
 import { map } from '../../assets/img'
 import { profile } from '../../assets/img'
 
+import { URLs } from "../../__data__/urls";
 import { StyledMenu } from "./menu.styled"
 import { StyledMenuLi } from "./menu.styled"
 import { StyledMenuProfile } from "./menu.styled"
@@ -30,9 +31,9 @@ const svgPropsProfile = {
 };
 
 const nav = {
-    search: {title: "Карта", children: <Svg {...svgPropsMap} />, href: "/dog-sitters-finder/search"},
-    viewing: {title: "Профиль", children: <Svg {...svgPropsProfile} />, href: "/dog-sitters-finder/dogsitter-viewing"},
-    exit: {title: "Выход", href: "/dog-sitters-finder"}
+    search: {title: "Карта", svg: <Svg {...svgPropsMap} />, href: URLs.ui.search},
+    viewing: {title: "Профиль", svg: <Svg {...svgPropsProfile} />, href: URLs.ui.dogsitterViewing}, //URLs.ui.dogsitterViewing.getUrl(char.id)
+    exit: {title: "Выход", href: URLs.baseUrl}
 }
 
 export function Menu({ currentNavElement, className }) {
@@ -40,20 +41,20 @@ export function Menu({ currentNavElement, className }) {
         <StyledMenu>
             <StyledMenuLi>
                 <Link contrast={currentNavElement === nav.search.title} href={nav.search.href}>
-                    {nav.search.children}
+                    {nav.search.svg}
                 </Link>
             </StyledMenuLi>
             <StyledMenuLi>
                 {className.includes("show-profile") ? (
                     <StyledMenuShowProfile>
                         <Link contrast={currentNavElement === nav.viewing.title} href={nav.viewing.href}>
-                            {nav.viewing.children}
+                            {nav.viewing.svg}
                         </Link>
                     </StyledMenuShowProfile>
                 ) : (
                     <StyledMenuProfile>
                         <Link contrast={currentNavElement === nav.viewing.title} href={nav.viewing.href}>
-                            {nav.viewing.children}
+                            {nav.viewing.svg}
                         </Link>
                     </StyledMenuProfile>
                 )}

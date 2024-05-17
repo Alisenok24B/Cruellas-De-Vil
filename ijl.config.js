@@ -9,7 +9,11 @@ module.exports = {
   },
   /* use https://kc.admin.inno-js.ru/ to create config, navigations and features */
   navigations: {
-    'cruellas-de-vil.main': '/cruellas-de-vil'
+    "dog-sitters-finder.main": "/dog-sitters-finder",
+    "dog-sitters-finder.register": "/register",
+    "dog-sitters-finder.search": "/search",
+    //"dog-sitters-finder.dogsitter.viewing": "/profile/:id"
+    "dog-sitters-finder.dogsitter.viewing": "/dogsitter-viewing"
   },
   features: {
     'cruellas-de-vil': {
