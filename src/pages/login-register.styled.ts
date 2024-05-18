@@ -46,7 +46,7 @@ export const CheckboxesContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    margin: 15px 0;
+    margin-bottom: 20px;
     flex-wrap: wrap;
 `
 

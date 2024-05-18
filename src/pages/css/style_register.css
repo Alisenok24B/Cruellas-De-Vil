@@ -6,6 +6,7 @@
     --grey: #C6C5C1;
     --green: #96A467;
     --brown: #816A58;
+    --red: #C23131;
 }
 
 body {
@@ -17,12 +18,4 @@ body {
 
 .register-logo {
     margin: 10px auto 0 auto;
-}
-
-.checkboxes-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    margin: 15px 0;
-    flex-wrap: wrap;
 }

@@ -14,6 +14,8 @@ export { default as logo_4x } from './logo_4x.png';
 
 export { default as icon_google } from './icon-google.png';
 
+export { default as icon_error } from './icon-error.png';
+
 //export { default as android_chrome_192 } from '..favicon/android-chrome-192x192.png';
 
 //export { default as android_chrome_512 } from '..favicon/android-chrome-512x512.png';

@@ -1,13 +1,26 @@
 import React from "react";
-import { StyledInputGroup, StyledInput, StyledCut, StyledLabel } from './input-field.styled';
+import { icon_error } from '../../assets/img'
+import { StyledInputGroup, StyledInput, StyledCut, StyledLabel, ErrorIcon, ErrorMessage } from './input-field.styled';
 
 
-export function InputField (props) {
+export function InputField ({ name, id, type, maxLength, children, error, onChange, onBlur, onFocus }) {
     return (
-        <StyledInputGroup inColumn={props.inColumn}>
-            <StyledInput name={props.name} id={props.id} type={props.type} placeholder=" " maxLength={props.maxLength}/>
+        <StyledInputGroup inColumn error={error}>
+            <StyledInput
+                name={name}
+                id={id}
+                type={type}
+                placeholder=" "
+                maxLength={maxLength}
+                onChange={onChange}
+                onBlur={onBlur}
+                onFocus={onFocus}
+                error={error}
+            />
+            {error && <ErrorIcon><img src={icon_error} alt="Красный крест. Ошибка" /></ErrorIcon>}
             <StyledCut />
-            <StyledLabel htmlFor={props.name} className="placeholder">{props.children}</StyledLabel>
+            <StyledLabel htmlFor={name} className="placeholder">{children}</StyledLabel>
+            {error && <ErrorMessage>{error}</ErrorMessage>}
         </StyledInputGroup>
     );
 }
