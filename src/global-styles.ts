@@ -1,3 +1,6 @@
+import { css } from "@emotion/react";
+
+export const globalStyles = css`
 :root {
     --beige: #DDD3C7;
     --white: white;
@@ -10,12 +13,20 @@
 }
 
 body {
-    
+	color: rgba(0, 0, 0, 0.8);
+	font-size: 16px;
     min-height: 100vh;
     background-color: var(--beige);
     font-family: "Roboto", sans-serif;
+    width: 100%;
+    height: 100%;
+}
+
+.login-logo {
+    margin: 10px auto 0 auto;
 }
 
 .register-logo {
     margin: 10px auto 0 auto;
 }
+`;
