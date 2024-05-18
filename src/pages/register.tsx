@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 
-import './css/style_register.css';
-
 import { logo_4x } from '../assets/img'
 import { logo_2x } from '../assets/img'
 import { logo_1x } from '../assets/img'
