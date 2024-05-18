@@ -1,7 +1,5 @@
 import React from "react";
 
-import './css/styles_for_search.css';
-
 import { CustomSection } from "../components/custom-section";
 import { PreviewsList } from "../components/previews-list";
 import { Container } from '../components/container';
@@ -10,37 +8,39 @@ import { Header } from '../components/header';
 import { Button } from '../components/button';
 import { Footer } from '../components/footer';
 
+import { StyledBoxes, StyledFind, StyledFinded, StyledMain, StyledMap, StyledPreviewMap, StyledReset, StyledSearch, StyledTemp } from './search.styled';
+
 
 const Search = () => {
   return (
     <>
     <Header currentNavElement={"Карта"}/>
-    <main id="main" className="main">
+    <StyledMain>
         <Container>
-            <div className="find">
+            <StyledFind>
               <TitleH1>Найти догситера</TitleH1>
-            </div>
-            <div className="search">
-                <div className="boxes">
+            </StyledFind>
+            <StyledSearch>
+                <StyledBoxes>
                     <CustomSection type="text">Где искать?</CustomSection>
                     <CustomSection type="select">Сортировка</CustomSection>
-                </div>
-                <div className="reset">
+                </StyledBoxes>
+                <StyledReset>
                     <Button>Сбросить настройки</Button>
-                </div>
+                </StyledReset>
                 {/* <a href="#">
                     <h1 className="reset">Сбросить настройки</h1>
                 </a> */}
-            </div>
-            <p className="finded">Найдено: 2 догситтера</p>
-            <div className="preview-map">
+            </StyledSearch>
+            <StyledFinded>Найдено: 2 догситтера</StyledFinded>
+            <StyledPreviewMap>
                 <PreviewsList/>
-                <div className="map">
-                    <h1 className="temprorary">Интеграция с картой</h1>
-                </div>
-            </div>
+                <StyledMap>
+                    <StyledTemp>Интеграция с картой</StyledTemp>
+                </StyledMap>
+            </StyledPreviewMap>
         </Container>
-    </main>
+    </StyledMain>
     <Footer/>
     </>
   );
