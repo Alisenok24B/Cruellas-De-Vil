@@ -2,6 +2,8 @@ import styled from "@emotion/styled"
 
 
 export const StyledMenu = styled.ul`
+    display: block;
+
     display: flex;
     align-items: center;
 
@@ -9,6 +11,7 @@ export const StyledMenu = styled.ul`
 `
 
 export const StyledMenuLi = styled.li`
+	display: block;
     margin-right: 40px;
 `
 
