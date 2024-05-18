@@ -16,6 +16,7 @@ export const PageRoutes = () => (
             <Route path={URLs.ui.register} element={<Register/>}/>
             <Route path={URLs.ui.search} element={<Search/>}/>
             <Route path={URLs.ui.dogsitterViewing} element={<ProfileView/>}/>
+            {/* <Route path={URLs.ui.dogsitterViewing.url} element={<ProfileView/>}/> */}
 
             <Route path="*" element={<h1>Page not found</h1>}/>
         </Routes>
