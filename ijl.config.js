@@ -21,6 +21,6 @@ module.exports = {
     },
   },
   config: {
-    key: 'value'
+    "dog-sitters-finder.api": "/ms"
   }
 }

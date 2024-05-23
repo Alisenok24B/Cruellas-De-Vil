@@ -1,4 +1,4 @@
-import { getNavigationsValue } from '@ijl/cli';
+import { getNavigationsValue, getConfigValue } from '@ijl/cli';
 import { generatePath } from 'react-router-dom';
 
 const baseUrl = getNavigationsValue('dog-sitters-finder.main');
@@ -16,5 +16,7 @@ export const URLs = {
           }*/
         dogsitterViewing: getNavigationsValue('dog-sitters-finder.dogsitter.viewing') && `${baseUrl}${getNavigationsValue('dog-sitters-finder.dogsitter.viewing')}`
     },
-    api: {}
+    api: {
+        main: getConfigValue('dog-sitters-finder.api')
+    }
 }
