@@ -2,7 +2,7 @@
     {
         "id": 1,
         "phone_number": 89283244141,
-        "password": 1234,
+        "password": "1234",
         "first_name": "Вася",
         "second_name": "Пупкин",
         "role": "dogsitter",
@@ -13,7 +13,7 @@
     {
         "id": 2,
         "phone_number": 89272844541,
-        "password": 1234,
+        "password": "1234",
         "first_name": "Ваня",
         "second_name": "Пуськин",
         "role": "dogsitter",
@@ -24,7 +24,7 @@
     {
         "id": 3,
         "phone_number": 89872855893,
-        "password": 12345,
+        "password": "12345",
         "first_name": "Гадий",
         "second_name": "Петрович",
         "role": "owner"
@@ -32,7 +32,7 @@
     {
         "id": 4,
         "phone_number": 89872844591,
-        "password": 12345,
+        "password": "12345",
         "first_name": "Галкин",
         "second_name": "Максим",
         "role": "owner"
