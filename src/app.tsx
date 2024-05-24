@@ -6,6 +6,7 @@ import { PageRoutes } from "./routes";
 import { globalStyles } from "./global-styles";
 import { Global } from "@emotion/react";
 
+
 const App = () => {
   return (
     <BrowserRouter>

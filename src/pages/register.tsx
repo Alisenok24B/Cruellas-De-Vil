@@ -9,7 +9,8 @@ import { Button } from '../components/button';
 import { InputField } from '../components/input-field';
 import { TitleH1 } from '../components/title-h1';
 import { Wrapper, Header, Title, Form, SubmitButton, GoogleAuthButton, CheckboxesContainer, LinkContainer } from './login-register.styled';
-import usersData from '../__stubs__/users.json';
+import usersData from '../../stubs/json/users.json';
+import { useGoogleLogin } from '@react-oauth/google';
 
 const InputFields = ({ formValues, setFormValues, formErrors, setFormErrors }) => {
   const handleChange = (e) => {
@@ -125,7 +126,7 @@ const Register = () => {
     if (roles.dogsitter) role.push("dogsitter");
 
     const newUser = {
-      id: Date.now(),
+      id: Math.random(),
       phone_number: formValues['number-phone'],
       password: formValues['password'],
       first_name: formValues['first-name'],
@@ -139,8 +140,21 @@ const Register = () => {
     //console.log(newUser)
     sessionStorage.setItem('isAuthenticated', 'true');
     sessionStorage.setItem('userRole', role.includes("dogsitter") ? "dogsitter" : role[0]);
+    sessionStorage.setItem('id', newUser.id.toString())
     navigate(URLs.ui.search);
   };
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: (response) => {
+      console.log('Google Login Success:', response);
+      sessionStorage.setItem('isAuthenticated', 'true');
+      sessionStorage.setItem('userRole', 'user'); // Хочется нормальную ролевку в перспективе...
+      navigate(URLs.ui.search);
+    },
+    onError: (error) => {
+      console.log('Google Login Failed:', error);
+    }
+  });
 
   return (
     <Wrapper>
@@ -184,7 +198,14 @@ const Register = () => {
       </ErrorBoundary>
       <ErrorBoundary>
         <GoogleAuthButton>
-          <Button isGoogle type="button" icon={icon_google}>Продолжить с Google</Button>
+          <Button 
+          isGoogle 
+          type="button" 
+          icon={icon_google}
+          onClick={googleLogin}
+          >
+            Продолжить с Google
+          </Button>
         </GoogleAuthButton>
       </ErrorBoundary>
       <ErrorBoundary>

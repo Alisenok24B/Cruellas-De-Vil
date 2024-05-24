@@ -42,19 +42,9 @@ export function Menu({ currentNavElement, className }) {
       </StyledMenuLi>
       {userRole !== 'owner' && (
         <StyledMenuLi>
-          {className.includes("show-profile") ? (
-            <StyledMenuShowProfile>
-              <Link contrast={currentNavElement === nav.viewing.title} href={nav.viewing.href}>
+          <Link contrast={currentNavElement === nav.viewing.title} href={nav.viewing.href}>
                 {nav.viewing.svg}
-              </Link>
-            </StyledMenuShowProfile>
-          ) : (
-            <StyledMenuProfile>
-              <Link contrast={currentNavElement === nav.viewing.title} href={nav.viewing.href}>
-                {nav.viewing.svg}
-              </Link>
-            </StyledMenuProfile>
-          )}
+          </Link>
         </StyledMenuLi>
       )}
       <StyledMenuLi>
