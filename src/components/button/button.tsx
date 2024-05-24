@@ -6,8 +6,7 @@ export function Button (props) {
         <StyledButton 
             type={props.type} 
             isGoogle={props.isGoogle} 
-            onClick={props.onClick} 
-            disabled={props.disabled}
+            onClick={props.onClick}
         >
             {props.isGoogle && props.icon && <Icon src={props.icon} alt="Google" />}
             {props.children}
