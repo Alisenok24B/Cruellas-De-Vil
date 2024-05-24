@@ -9,7 +9,7 @@ import { Button } from '../components/button';
 import { InputField } from '../components/input-field';
 import { TitleH1 } from '../components/title-h1';
 import { Wrapper, Header, Title, Form, SubmitButton, GoogleAuthButton, CheckboxesContainer, LinkContainer } from './login-register.styled';
-import usersData from '../__stubs__/users.json';
+import usersData from '../../stubs/json/users.json';
 
 const InputFields = ({ formValues, setFormValues, formErrors, setFormErrors }) => {
   const handleChange = (e) => {

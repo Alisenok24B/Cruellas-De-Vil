@@ -8,6 +8,7 @@ import { Button } from '../components/button';
 import { InputField } from '../components/input-field';
 import { TitleH1 } from '../components/title-h1';
 import { Wrapper, Header, Title, Form, SubmitButton, GoogleAuthButton, LinkContainer } from './login-register.styled';
+import { useGoogleLogin } from '@react-oauth/google';
 
 const InputFields = ({ formValues, setFormValues, formErrors, setFormErrors }) => {
   const handleChange = (e) => {
@@ -114,6 +115,18 @@ const Login = () => {
     }
   };
 
+  const googleLogin = useGoogleLogin({
+    onSuccess: (response) => {
+      console.log('Google Login Success:', response);
+      sessionStorage.setItem('isAuthenticated', 'true');
+      sessionStorage.setItem('userRole', 'user'); // Хочется нормальную ролевку в перспективе...
+      navigate(URLs.ui.search);
+    },
+    onError: (error) => {
+      console.log('Google Login Failed:', error);
+    }
+  });
+
   return (
     <Wrapper>
       <ErrorBoundary>
@@ -152,7 +165,7 @@ const Login = () => {
       </ErrorBoundary>
       <ErrorBoundary>
         <GoogleAuthButton>
-          <Button isGoogle type="button" icon={icon_google}>Продолжить с Google</Button>
+          <Button isGoogle type="button" icon={icon_google} onClick={googleLogin}>Продолжить с Google</Button>
         </GoogleAuthButton>
       </ErrorBoundary>
       <ErrorBoundary>
