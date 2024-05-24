@@ -65,7 +65,7 @@ const validatePhoneNumber = (value) => {
 };
  
 const inputFieldsList = [
-  { title: "Номер телефона", name: "number-phone", id: "number-phone", type: "tel", maxLength: 12, validation: validatePhoneNumber },
+  { title: "Номер телефона", name: "number-phone", id: "number-phone", type: "tel", maxLength: 11, validation: validatePhoneNumber },
   { title: "Пароль", name: "password", id: "password", type: "password", maxLength: 24 }
 ];
  

@@ -35,6 +35,9 @@
         "password": "12345",
         "first_name": "Галкин",
         "second_name": "Максим",
-        "role": ["owner", "dogsitter"]
+        "role": ["owner", "dogsitter"],
+        "location": "Элитный район",
+        "price": 1000000,
+        "about_me": "Миллион алых роз"
     }
 ]
