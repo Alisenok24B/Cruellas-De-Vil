@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { logo_4x, logo_2x, logo_1x, icon_google } from '../assets/img';
 import { ErrorBoundary } from '../components/error-boundary';
@@ -8,37 +8,40 @@ import { Button } from '../components/button';
 import { InputField } from '../components/input-field';
 import { TitleH1 } from '../components/title-h1';
 import { Wrapper, Header, Title, Form, SubmitButton, GoogleAuthButton, LinkContainer } from './login-register.styled';
- 
+
 const InputFields = ({ formValues, setFormValues, formErrors, setFormErrors }) => {
- 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
- 
-    // Validate the field
-    const fieldConfig = inputFieldsList.find(field => field.name === name);
-    if (fieldConfig && fieldConfig.validation) {
-      const error = fieldConfig.validation(value);
-      setFormErrors({ ...formErrors, [name]: error });
+    setFormValues(prevState => ({ ...prevState, [name]: value }));
+
+    if (value.trim() === '') {
+      setFormErrors(prevState => ({ ...prevState, [name]: '' }));
+    } else {
+      const fieldConfig = inputFieldsList.find(field => field.name === name);
+      if (fieldConfig && fieldConfig.validation) {
+        const error = fieldConfig.validation(value);
+        setFormErrors(prevState => ({ ...prevState, [name]: error }));
+      }
     }
   };
- 
+
   const handleBlur = (e) => {
     const { name, value } = e.target;
     const fieldConfig = inputFieldsList.find(field => field.name === name);
     if (fieldConfig && fieldConfig.validation) {
-      const error = value ? fieldConfig.validation(value) : "";
-      setFormErrors({ ...formErrors, [name]: error });
+      const error = value.trim() === '' ? '' : fieldConfig.validation(value);
+      setFormErrors(prevState => ({ ...prevState, [name]: error }));
     }
   };
- 
+
   const handleFocus = (e) => {
     const { name } = e.target;
-    if (!formErrors[name]) {
-      setFormErrors({ ...formErrors, [name]: '' });
+    // Сбрасываем только ошибку "Поле не может быть пустым" при фокусировке на поле
+    if (formErrors[name] === "Поле не может быть пустым") {
+      setFormErrors(prevState => ({ ...prevState, [name]: '' }));
     }
   };
- 
+
   return inputFieldsList.map((element) => (
     <InputField
       key={element.id}
@@ -55,7 +58,7 @@ const InputFields = ({ formValues, setFormValues, formErrors, setFormErrors }) =
     </InputField>
   ));
 };
- 
+
 const validatePhoneNumber = (value) => {
   const phoneRegex = /^\d+$/;
   if (!phoneRegex.test(value)) {
@@ -63,12 +66,12 @@ const validatePhoneNumber = (value) => {
   }
   return "";
 };
- 
+
 const inputFieldsList = [
   { title: "Номер телефона", name: "number-phone", id: "number-phone", type: "tel", maxLength: 11, validation: validatePhoneNumber },
   { title: "Пароль", name: "password", id: "password", type: "password", maxLength: 24 }
 ];
- 
+
 const Login = () => {
   const [formValues, setFormValues] = useState({
     'number-phone': '',
@@ -79,15 +82,29 @@ const Login = () => {
     'password': ''
   });
   const navigate = useNavigate();
- 
+
+  const validateForm = () => {
+    const errors = {};
+    for (const field of inputFieldsList) {
+      if (!formValues[field.name]) {
+        errors[field.name] = "Поле не может быть пустым";
+      }
+    }
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
- 
+
+    if (!validateForm()) {
+      return;
+    }
+
     const response = await fetch('/api/users');
     const users = await response.json();
- 
+
     const user = users.find(u => u.phone_number.toString() === formValues['number-phone'] && u.password.toString() === formValues['password']);
-    console.log(user.role)
     if (user) {
       sessionStorage.setItem('isAuthenticated', 'true');
       sessionStorage.setItem('userRole', user.role);
@@ -96,14 +113,14 @@ const Login = () => {
       alert('Неверный номер телефона или пароль');
     }
   };
- 
+
   return (
     <Wrapper>
       <ErrorBoundary>
         <Header>
           <img className="login-logo"
             width="60"
-            src={logo_4x} 
+            src={logo_4x}
             alt="Логотип. Собака лежит на абривиатуре DFS"
             srcSet={`
               ${logo_1x} 60w,
@@ -114,7 +131,7 @@ const Login = () => {
               (max-width: 240px) 100px,
               (min-width: 320px) 440px,
               (min-width: 520px) 880px
-            "/>
+            " />
           <Title>
             <TitleH1>Войдите в свой аккаунт</TitleH1>
           </Title>
@@ -146,5 +163,5 @@ const Login = () => {
     </Wrapper>
   );
 };
- 
+
 export default Login;
