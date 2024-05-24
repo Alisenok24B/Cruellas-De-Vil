@@ -87,7 +87,7 @@ const Login = () => {
     const users = await response.json();
  
     const user = users.find(u => u.phone_number.toString() === formValues['number-phone'] && u.password.toString() === formValues['password']);
- 
+    console.log(user.role)
     if (user) {
       sessionStorage.setItem('isAuthenticated', 'true');
       sessionStorage.setItem('userRole', user.role);
