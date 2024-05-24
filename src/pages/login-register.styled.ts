@@ -46,7 +46,7 @@ export const CheckboxesContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    margin-bottom: 20px;
+    margin-bottom: ${( props: any ) => props.roleError ? '5px' : '24px'};
     flex-wrap: wrap;
 `
 
@@ -57,3 +57,11 @@ export const LinkContainer = styled.div`
     padding: 5px;
     margin: 10px;
 `
+
+export const RoleErrorMessage = styled.div`
+  color: var(--red);
+  font-size: 12px;
+  margin-top: 5px;
+  text-align: center;
+  width: 100%;
+`;

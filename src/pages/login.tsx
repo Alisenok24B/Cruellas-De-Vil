@@ -15,10 +15,14 @@ const InputFields = ({ formValues, setFormValues, formErrors, setFormErrors }) =
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
 
-    const fieldConfig = inputFieldsList.find(field => field.name === name);
-    if (fieldConfig && fieldConfig.validation) {
-      const error = fieldConfig.validation(value);
-      setFormErrors({ ...formErrors, [name]: error });
+    if (value.trim() === '') {
+      setFormErrors(prevState => ({ ...prevState, [name]: '' }));
+    } else {
+      const fieldConfig = inputFieldsList.find(field => field.name === name);
+      if (fieldConfig && fieldConfig.validation) {
+        const error = fieldConfig.validation(value);
+        setFormErrors(prevState => ({ ...prevState, [name]: error }));
+      }
     }
   };
 
@@ -26,15 +30,16 @@ const InputFields = ({ formValues, setFormValues, formErrors, setFormErrors }) =
     const { name, value } = e.target;
     const fieldConfig = inputFieldsList.find(field => field.name === name);
     if (fieldConfig && fieldConfig.validation) {
-      const error = value ? fieldConfig.validation(value) : "";
-      setFormErrors({ ...formErrors, [name]: error });
+      const error = value.trim() === '' ? '' : fieldConfig.validation(value);
+      setFormErrors(prevState => ({ ...prevState, [name]: error }));
     }
   };
 
   const handleFocus = (e) => {
     const { name } = e.target;
-    if (!formErrors[name]) {
-      setFormErrors({ ...formErrors, [name]: '' });
+    // Сбрасываем только ошибку "Поле не может быть пустым" при фокусировке на поле
+    if (formErrors[name] === "Поле не может быть пустым") {
+      setFormErrors(prevState => ({ ...prevState, [name]: '' }));
     }
   };
 
@@ -79,8 +84,23 @@ const Login = () => {
   });
   const navigate = useNavigate();
 
+  const validateForm = () => {
+    const errors = {};
+    for (const field of inputFieldsList) {
+      if (!formValues[field.name]) {
+        errors[field.name] = "Поле не может быть пустым";
+      }
+    }
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
 
     const response = await fetch('/api/users');
     const users = await response.json();
