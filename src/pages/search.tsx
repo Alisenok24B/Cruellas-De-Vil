@@ -18,8 +18,8 @@ import { URLs } from "../__data__/urls";
 const Search = () => {
     const [formValues, setFormValues] = useState({ 'where-find': '', 'sort-by': '' });
     const [currenctCoord, setcurrenctCoord] = useState([55.801619, 49.08803]);
-    
     const [users, setUsers] = useState([]);
+
     useEffect(() => {
         const fetchUsers = async () => {
           try {
@@ -53,16 +53,20 @@ const Search = () => {
     }, []);
 
     useEffect(() => {
-        ymaps.ready(function () {  
-            const currentPosition = ymaps.geocode(formValues["where-find"])
-         
-            currentPosition.then((res)=>
-            {
-                const coord = res.geoObjects.get(0).geometry.getCoordinates()
-                setcurrenctCoord(coord)
+        const fetchData = async () => {
+            const response = await fetch(`https://geocode-maps.yandex.ru/1.x/?format=json&apikey=cd99061c-900b-4ae4-a9ae-60d9e98c6827&geocode=${encodeURI(formValues['where-find'])}`);
+            const data = await response.json();
+            
+            if (data.response.GeoObjectCollection.featureMember.length > 0) {
+                const coordinates = data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos.split(' ').reverse();
+                setcurrenctCoord(coordinates);
+            } else {
+                setcurrenctCoord([]);
             }
-        );});
-    }, [formValues]);
+        };
+    
+        fetchData();
+    }, [formValues['where-find']]);
 
     const [points, setPoints] = useState([]);
 
