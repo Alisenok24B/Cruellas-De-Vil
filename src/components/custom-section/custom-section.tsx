@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Inp } from '../../components/inp/inp';
+import { InputSelect } from '../input-select/input-select';
 import { StyledCustomSectionPlace } from "./custom-section.styled";
 import { StyledCustomSectionSort } from "./custom-section.styled";
 import { InputField } from '../input-field';
@@ -70,7 +70,7 @@ export function CustomSection (props) {
             {props.type === 'select' && (
                 <StyledCustomSectionSort>
                     <h1>{ props.children }</h1>
-                    <Inp type={props.type} placeholder="Сортировать по:" options={[
+                    <InputSelect placeholder="Сортировать по:" options={[
                             { value: "ascending", label: "Возрастанию цены" },
                             { value: "descending", label: "Убыванию цены" }]} />
                 </StyledCustomSectionSort>
