@@ -1,19 +1,18 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-import { CustomSection } from "../components/custom-section";
 import { PreviewsList } from "../components/previews-list";
 import { Container } from '../components/container';
 import { TitleH1 } from '../components/title-h1';
 import { Header } from '../components/header';
-import { Button } from '../components/button';
 import { Footer } from '../components/footer';
+import { DivSearch } from '../components/div-search';
 import { ErrorBoundary } from '../components/error-boundary';
 
-import { StyledBoxes, StyledFind, StyledFinded, StyledMain, StyledMap, StyledPreviewMap, StyledReset, StyledSearch } from './search.styled';
+import { StyledFind, StyledFinded, StyledMain, StyledMap, StyledPreviewMap } from './search.styled';
 
-import { YMaps, Map, Placemark } from 'react-yandex-maps';
-import { Form } from "./login-register.styled";
+import { YMaps, Map } from 'react-yandex-maps';
+// import { Form } from "./login-register.styled";
 
 // const изменить координаты в карте - 2 параметра (широта и долгота)
 
@@ -40,17 +39,9 @@ const Search = () => {
         <StyledMain>
             <Container>
                 <StyledFind>
-                <TitleH1>Найти догситера</TitleH1>
+                    <TitleH1>Найти догситера</TitleH1>
                 </StyledFind>
-                <StyledSearch>
-                    <StyledBoxes>
-                        <CustomSection type="text">Где искать?</CustomSection>
-                        <CustomSection type="select">Сортировка</CustomSection>
-                    </StyledBoxes>
-                    <StyledReset>
-                        <Button>Сбросить настройки</Button>
-                    </StyledReset>
-                </StyledSearch>
+                <DivSearch/>
                 <StyledFinded>Найдено: 2 догситтера</StyledFinded>
                 <StyledPreviewMap>
                     <PreviewsList/>
