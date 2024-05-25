@@ -24,11 +24,6 @@ export const StyledInpSelect = styled.select`
     padding: 4px 10px 0;
     transition: border-color 200ms;
     
-    &:focus ~ .placeholder,
-    .input-find:not(:placeholder-shown) ~ .placeholder {
-        transform: translateY(-20px) translateX(0px) scale(0.75);
-    }
-    
     &:not(:placeholder-shown) ~ .placeholder {
         color: #C6C5C1;
     }
