@@ -1,9 +1,9 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 
-import { Inp } from '../../components/inp/inp'
-import { StyledCustomSectionPlace } from "./custom-section.styled"
-import { StyledCustomSectionSort } from "./custom-section.styled"
-import { InputField } from '../input-field'
+import { Inp } from '../../components/inp/inp';
+import { StyledCustomSectionPlace } from "./custom-section.styled";
+import { StyledCustomSectionSort } from "./custom-section.styled";
+import { InputField } from '../input-field';
 
 const InputFields = () => {
     const [formValues, setFormValues] = useState({ 'where-find': '' });
@@ -12,6 +12,7 @@ const InputFields = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
+        console.log(formValues['where-find'])
 
         // Validate the field
         const error = validateLocation(value);
@@ -30,8 +31,7 @@ const InputFields = () => {
             setFormErrors({ ...formErrors, [name]: '' });
         }
     };
-  
-  
+
     return (
         <InputField
             name="where-find"
@@ -42,6 +42,7 @@ const InputFields = () => {
             onChange={handleChange}
             onBlur={handleBlur}
             onFocus={handleFocus}
+
         >
             Страна, регион, город
         </InputField>
@@ -69,7 +70,7 @@ export function CustomSection (props) {
             {props.type === 'select' && (
                 <StyledCustomSectionSort>
                     <h1>{ props.children }</h1>
-                    <Inp type={`${props.type}`} placeholder="Сортировать по:" options={[
+                    <Inp type={props.type} placeholder="Сортировать по:" options={[
                             { value: "ascending", label: "Возрастанию цены" },
                             { value: "descending", label: "Убыванию цены" }]} />
                 </StyledCustomSectionSort>
