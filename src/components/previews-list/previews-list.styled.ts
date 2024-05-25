@@ -26,6 +26,20 @@ export const StyledPLLi = styled.li`
     margin-bottom: 10px;
 `
 
+export const StyledSelectedLi = styled.li`
+    width: 85%;
+    height: 190px;
+
+    display: flex;
+    align-items: center;
+
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: inset 0 4px 4px 0 rgba(129, 106, 88, 0.85);
+
+    margin-bottom: 10px;
+`
+
 export const StyledPLPhoto = styled.div`
     width: 230px; 
     height: 150px; 
