@@ -17,7 +17,7 @@ import { URLs } from "../__data__/urls";
 
 const Search = () => {
     const [formValues, setFormValues] = useState({ 'where-find': '', 'sort-by': '' });
-    const [currenctCoord, setcurrenctCoord] = useState([55.753215, 37.622504]);
+    const [currenctCoord, setcurrenctCoord] = useState([55.801619, 49.08803]);
     
     const [users, setUsers] = useState([]);
     useEffect(() => {
@@ -54,11 +54,11 @@ const Search = () => {
 
     useEffect(() => {
         ymaps.ready(function () {  
-           let currentPosition = ymaps.geocode(formValues["where-find"])
+            const currentPosition = ymaps.geocode(formValues["where-find"])
          
            currentPosition.then((res)=>
             {
-                let coord = res.geoObjects.get(0).geometry.getCoordinates()
+                const coord = res.geoObjects.get(0).geometry.getCoordinates()
                 setcurrenctCoord(coord)
             }
         );});
@@ -96,14 +96,14 @@ const Search = () => {
                     <TitleH1>Найти догситера</TitleH1>
                 </StyledFind>
                 <DivSearch formValues={formValues} setFormValues={setFormValues} users={users} setUsers={setUsers}/>
-                <StyledFinded>Найдено: 2 догситтера</StyledFinded>
+                <StyledFinded>Найдено: {users.length} догситтера</StyledFinded>
                 <StyledPreviewMap>
                     <PreviewsList users={users} currentPoint={currentPoint}/>
                     <StyledMap>
                         <YMaps>
                             <Map state={{ center: currenctCoord, zoom: 10 }} width="100%" height="100%">
                                 {points.map((point, index) => (
-                                    <Placemark geometry={point.coordinates} properties={{ iconContent: `${index + 1}` }} onClick={() => setCurrentPoint(point)}/>
+                                    <Placemark key={index} geometry={point.coordinates} properties={{ iconContent: `${index + 1}` }} onClick={() => setCurrentPoint(point.id)}/>
                                 ))}
                             </Map>
                         </YMaps>
