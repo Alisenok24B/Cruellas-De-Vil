@@ -6,17 +6,7 @@ import { StyledCustomSectionSort } from "./custom-section.styled";
 import { InputField } from '../input-field';
 
 const InputFields = ({value, onChange}) => {
-    // const [formValues, setFormValues] = useState({ 'where-find': '' });
     const [formErrors, setFormErrors] = useState({ 'where-find': '' });
-
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setFormValues({ ...formValues, [name]: value });
-
-    //     // Validate the field
-    //     const error = validateLocation(value);
-    //     setFormErrors({ ...formErrors, [name]: error });
-    // };
   
     const handleBlur = (e) => {
         const { name, value } = e.target;
@@ -58,11 +48,6 @@ const validateLocation = (value) => {
 
 
 export function CustomSection (props) {
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     props.setFormValues({ ...props.formValues, [name]: value });
-    // };
-
     return (
         <section>
             {props.type === 'text' && (
