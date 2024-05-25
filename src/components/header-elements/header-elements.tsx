@@ -8,7 +8,7 @@ export function HeaderElements(props) {
     return (
         <StyledHeaderElements>
             <Logo src={`${props.src}`} alt={`${props.alt}`}></Logo>
-            <Menu currentNavElement={props.currentNavElement} className="menu show-profile"/>
+            <Menu currentNavElement={props.currentNavElement}/>
         </StyledHeaderElements>
     );
 }
