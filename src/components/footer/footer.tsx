@@ -7,7 +7,7 @@ import { logo } from '../../assets/img';
 
 import { StyledFooter, StyledFContainer } from "./footer.styled";
 
-export function Footer(props) {
+export function Footer() {
     return (
     <StyledFooter id="footer" className="footer">
         <StyledFContainer>
