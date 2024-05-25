@@ -11,7 +11,7 @@ export function Footer() {
     return (
     <StyledFooter id="footer" className="footer">
         <StyledFContainer>
-            <Logo src={logo} alt="Человек с собакой" title="DogSittersFinder — любовь и забота о вашей собаке"/>
+            <Logo src={logo} alt="Человек с собакой">DogSittersFinder — любовь и забота о вашей собаке</Logo>
             <Contacts>+7 800 555-35-35</Contacts>
         </StyledFContainer>
     </StyledFooter>

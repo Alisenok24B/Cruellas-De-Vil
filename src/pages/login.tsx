@@ -9,6 +9,7 @@ import { InputField } from '../components/input-field';
 import { TitleH1 } from '../components/title-h1';
 import { Wrapper, Header, Title, Form, SubmitButton, GoogleAuthButton, LinkContainer } from './login-register.styled';
 import { useGoogleLogin } from '@react-oauth/google';
+import { Logo } from '../components/logo';
 
 const InputFields = ({ formValues, setFormValues, formErrors, setFormErrors }) => {
   const handleChange = (e) => {
@@ -132,8 +133,7 @@ return (
     <Wrapper>
       <ErrorBoundary>
         <Header>
-          <img className="login-logo"
-            width="60"
+          <Logo width="60"
             src={logo_4x}
             alt="Логотип. Собака лежит на абривиатуре DFS"
             srcSet={`
@@ -145,7 +145,7 @@ return (
               (max-width: 240px) 100px,
               (min-width: 320px) 440px,
               (min-width: 520px) 880px
-            " />
+            "></Logo>
           <Title>
             <TitleH1>Войдите в свой аккаунт</TitleH1>
           </Title>
