@@ -72,10 +72,6 @@ export const StyledMap = styled.div`
 
     background:#816A58;
     border-radius: 12px;
+    overflow: hidden;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-`
-
-export const StyledTemp = styled.h1`
-    width: 100%; 
-    height: 100%;
 `
