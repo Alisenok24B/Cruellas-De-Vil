@@ -1,10 +1,10 @@
 import React from 'react';
-import { HeaderElements } from '../components/header-elements/header-elements'
+// import { HeaderElements } from '../components/header-elements/header-elements'
 import { Container } from '../components/container'
 import { logo, user_photo } from '../assets/img';
 import { Contacts } from '../components/contacts';
 import { Logo } from '../components/logo';
-import { UserPhoto } from '../components/user-photo';
+// import { UserPhoto } from '../components/user-photo';
 import { UserData } from '../components/user-data';
 import { UserInfo } from '../components/user-info';
 import { UserAbout } from '../components/user-about';
