@@ -4,7 +4,7 @@ import { StyledPreviewsList, StyledA, StyledPLDesc, StyledPLCostRH, StyledPLFull
 
 import { URLs } from "../../__data__/urls";
 
-function Preview({ userIndex, userPhoto, fullName, cost, fullDesc }) {
+function Preview({ userId, userIndex, userPhoto, fullName, cost, fullDesc, selected }) {
   const StyledLi = selected ? StyledSelectedLi : StyledPLLi;
 
   return (
