@@ -8,6 +8,7 @@ import { CheckBox } from '../components/check-box';
 import { Button } from '../components/button';
 import { InputField } from '../components/input-field';
 import { TitleH1 } from '../components/title-h1';
+import { Logo } from '../components/logo';
 import { Wrapper, Header, Title, Form, SubmitButton, GoogleAuthButton, CheckboxesContainer, LinkContainer, RoleErrorMessage } from './login-register.styled';
 import usersData from '../../stubs/json/users.json';
 import { useGoogleLogin } from '@react-oauth/google';
@@ -195,9 +196,8 @@ const Register = () => {
     <Wrapper>
       <ErrorBoundary>
         <Header>
-          <img className="login-logo"
-            width="60"
-            src={logo_4x} 
+        <Logo width="60"
+            src={logo_4x}
             alt="Логотип. Собака лежит на абривиатуре DFS"
             srcSet={`
               ${logo_1x} 60w,
@@ -208,7 +208,7 @@ const Register = () => {
               (max-width: 240px) 100px,
               (min-width: 320px) 440px,
               (min-width: 520px) 880px
-            "/>
+            "></Logo>
           <Title>
             <TitleH1>Создайте свой аккаунт</TitleH1>
           </Title>
