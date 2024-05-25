@@ -1,1 +1,0 @@
-export { Inp } from './inp'
