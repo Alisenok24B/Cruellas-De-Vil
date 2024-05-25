@@ -5,19 +5,18 @@ import { StyledCustomSectionPlace } from "./custom-section.styled";
 import { StyledCustomSectionSort } from "./custom-section.styled";
 import { InputField } from '../input-field';
 
-const InputFields = () => {
-    const [formValues, setFormValues] = useState({ 'where-find': '' });
+const InputFields = ({value, onChange}) => {
+    // const [formValues, setFormValues] = useState({ 'where-find': '' });
     const [formErrors, setFormErrors] = useState({ 'where-find': '' });
-  
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormValues({ ...formValues, [name]: value });
-        console.log(formValues['where-find'])
 
-        // Validate the field
-        const error = validateLocation(value);
-        setFormErrors({ ...formErrors, [name]: error });
-    };
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setFormValues({ ...formValues, [name]: value });
+
+    //     // Validate the field
+    //     const error = validateLocation(value);
+    //     setFormErrors({ ...formErrors, [name]: error });
+    // };
   
     const handleBlur = (e) => {
         const { name, value } = e.target;
@@ -39,10 +38,10 @@ const InputFields = () => {
             type="text"
             maxLength={100}
             error={formErrors['where-find']}
-            onChange={handleChange}
+            onChange={onChange}
             onBlur={handleBlur}
             onFocus={handleFocus}
-
+            value={value}
         >
             Страна, регион, город
         </InputField>
@@ -59,18 +58,29 @@ const validateLocation = (value) => {
 
 
 export function CustomSection (props) {
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     props.setFormValues({ ...props.formValues, [name]: value });
+    // };
+
     return (
         <section>
             {props.type === 'text' && (
                 <StyledCustomSectionPlace>
                     <h1>{ props.children }</h1>
-                    <InputFields/>
+                    <InputFields
+                    value={props.value} 
+                    onChange={props.onChange}/>
                 </StyledCustomSectionPlace>
             )}
             {props.type === 'select' && (
                 <StyledCustomSectionSort>
                     <h1>{ props.children }</h1>
-                    <InputSelect placeholder="Сортировать по:" options={[
+                    <InputSelect 
+                    value={props.value} 
+                    onChange={props.onChange} 
+                    placeholder="Сортировать по:" 
+                    options={[
                             { value: "ascending", label: "Возрастанию цены" },
                             { value: "descending", label: "Убыванию цены" }]} />
                 </StyledCustomSectionSort>
