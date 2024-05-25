@@ -56,7 +56,7 @@ const Search = () => {
         ymaps.ready(function () {  
             const currentPosition = ymaps.geocode(formValues["where-find"])
          
-           currentPosition.then((res)=>
+            currentPosition.then((res)=>
             {
                 const coord = res.geoObjects.get(0).geometry.getCoordinates()
                 setcurrenctCoord(coord)
