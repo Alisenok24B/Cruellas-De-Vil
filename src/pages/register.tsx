@@ -196,6 +196,7 @@ const Register = () => {
       console.log('Google Login Success:', response);
       sessionStorage.setItem('isAuthenticated', 'true');
       sessionStorage.setItem('userRole', 'user'); // Хочется нормальную ролевку в перспективе...
+      sessionStorage.setItem('id', Math.random().toString());
       navigate(URLs.ui.search);
     },
     onError: (error) => {
