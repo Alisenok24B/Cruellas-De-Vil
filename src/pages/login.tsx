@@ -102,7 +102,7 @@ const Login = () => {
       return;
     }
 
-    const response = await fetch('/api/users');
+    const response = await fetch(`${URLs.api.main}/users`);
     const users = await response.json();
 
     const user = users.find(u => u.phone_number.toString() === formValues['number-phone'] && u.password.toString() === formValues['password']);
