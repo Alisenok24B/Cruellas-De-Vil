@@ -6,7 +6,7 @@
         "first_name": "Вася",
         "second_name": "Пупкин",
         "role": "dogsitter",
-        "location": "Вахитовский район",
+        "location": "Улица Карбышева, 57",
         "price": 1500,
         "about_me": "Я люблю собак"
     },
@@ -17,7 +17,7 @@
         "first_name": "Ваня",
         "second_name": "Пуськин",
         "role": "dogsitter",
-        "location": "Приволжский район",
+        "location": "Улица Академика Парина, 16",
         "price": 1000000,
         "about_me": "Я не люблю собак. И вообще я котоман."
     },
