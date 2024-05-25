@@ -30,7 +30,6 @@ export const StyledBoxes = styled.form`
 
 export const StyledReset = styled.div`
     color: #FFFFFF;
-    text-decoration: underline;
 
     margin-top: 55px;
     margin-bottom: 25px;
@@ -39,6 +38,6 @@ export const StyledReset = styled.div`
     justify-content: center;
 
     @media only screen and (max-width: 1024px) {
-        margin-top: 55px;
+        margin-top: 65px;
     }
 `

@@ -31,6 +31,7 @@ export function DivSearch ({formValues, setFormValues, users, setUsers}) {
     
     const handleReset = () => {
         setFormValues({ 'where-find': '', 'sort-by': '' });
+        // window.location.reload();
     };
 
     return (
@@ -45,7 +46,7 @@ export function DivSearch ({formValues, setFormValues, users, setUsers}) {
                 onChange={handleSortByChange}>Сортировка</CustomSection>
             </StyledBoxes>
             <StyledReset>
-                <Button onClick={handleReset}>Сбросить настройки</Button>
+                <Button isReset onClick={handleReset}>Сбросить настройки</Button>
             </StyledReset>
         </StyledSearch>
     );
