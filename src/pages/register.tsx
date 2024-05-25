@@ -8,8 +8,9 @@ import { CheckBox } from '../components/check-box';
 import { Button } from '../components/button';
 import { InputField } from '../components/input-field';
 import { TitleH1 } from '../components/title-h1';
-import { Wrapper, Header, Title, Form, SubmitButton, GoogleAuthButton, CheckboxesContainer, LinkContainer } from './login-register.styled';
-import usersData from '../__stubs__/users.json';
+import { Wrapper, Header, Title, Form, SubmitButton, GoogleAuthButton, CheckboxesContainer, LinkContainer, RoleErrorMessage } from './login-register.styled';
+import usersData from '../../stubs/json/users.json';
+import { useGoogleLogin } from '@react-oauth/google';
 
 const InputFields = ({ formValues, setFormValues, formErrors, setFormErrors }) => {
   const handleChange = (e) => {
@@ -18,8 +19,19 @@ const InputFields = ({ formValues, setFormValues, formErrors, setFormErrors }) =
 
     const fieldConfig = inputFieldsList.find(field => field.name === name);
     if (fieldConfig && fieldConfig.validation) {
-      const error = fieldConfig.validation(value, formValues);
+      const error = value.trim() === '' ? '' : fieldConfig.validation(value, formValues);
       setFormErrors({ ...formErrors, [name]: error });
+    }
+
+    // Дополнительно проверяем совпадение паролей
+    if (name === 'password' && formValues['password-confirmation']) {
+      const confirmPasswordError = validatePasswordConfirmation(formValues['password-confirmation'], { ...formValues, [name]: value });
+      setFormErrors({ ...formErrors, 'password-confirmation': confirmPasswordError });
+    }
+
+    if (name === 'password-confirmation') {
+      const confirmPasswordError = validatePasswordConfirmation(value, formValues);
+      setFormErrors({ ...formErrors, [name]: confirmPasswordError });
     }
   };
 
@@ -27,14 +39,15 @@ const InputFields = ({ formValues, setFormValues, formErrors, setFormErrors }) =
     const { name, value } = e.target;
     const fieldConfig = inputFieldsList.find(field => field.name === name);
     if (fieldConfig && fieldConfig.validation) {
-      const error = value ? fieldConfig.validation(value, formValues) : "";
+      const error = value.trim() === '' ? '' : fieldConfig.validation(value, formValues);
       setFormErrors({ ...formErrors, [name]: error });
     }
   };
 
   const handleFocus = (e) => {
     const { name } = e.target;
-    if (!formErrors[name]) {
+    // Сбрасываем только ошибку "Поле не может быть пустым" при фокусировке на поле
+    if (formErrors[name] === "Поле не может быть пустым") {
       setFormErrors({ ...formErrors, [name]: '' });
     }
   };
@@ -106,6 +119,7 @@ const Register = () => {
     host: false,
     dogsitter: false
   });
+  const [roleError, setRoleError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -115,17 +129,40 @@ const Register = () => {
   const handleRoleChange = (e) => {
     const { name, checked } = e.target;
     setRoles({ ...roles, [name]: checked });
+    if (roleError) {
+      setRoleError('');
+    }
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    for (const field of inputFieldsList) {
+      if (!formValues[field.name]) {
+        errors[field.name] = "Поле не может быть пустым";
+      }
+    }
+
+    if (!roles.host && !roles.dogsitter) {
+      setRoleError('Выберите хотя бы одну роль');
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0 && (roles.host || roles.dogsitter);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
 
     const role = [];
     if (roles.host) role.push("owner");
     if (roles.dogsitter) role.push("dogsitter");
 
     const newUser = {
-      id: Date.now(),
+      id: Math.random(),
       phone_number: formValues['number-phone'],
       password: formValues['password'],
       first_name: formValues['first-name'],
@@ -136,11 +173,23 @@ const Register = () => {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
-    //console.log(newUser)
     sessionStorage.setItem('isAuthenticated', 'true');
     sessionStorage.setItem('userRole', role.includes("dogsitter") ? "dogsitter" : role[0]);
+    sessionStorage.setItem('id', newUser.id.toString())
     navigate(URLs.ui.search);
   };
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: (response) => {
+      console.log('Google Login Success:', response);
+      sessionStorage.setItem('isAuthenticated', 'true');
+      sessionStorage.setItem('userRole', 'user'); // Хочется нормальную ролевку в перспективе...
+      navigate(URLs.ui.search);
+    },
+    onError: (error) => {
+      console.log('Google Login Failed:', error);
+    }
+  });
 
   return (
     <Wrapper>
@@ -173,9 +222,10 @@ const Register = () => {
             formErrors={formErrors} 
             setFormErrors={setFormErrors} 
           />
-          <CheckboxesContainer>
+          <CheckboxesContainer roleError={roleError}>
             <CheckBox name="host" id="host" onChange={handleRoleChange} checked={roles.host}>Я хозяин</CheckBox>
             <CheckBox name="dogsitter" id="dogsitter" onChange={handleRoleChange} checked={roles.dogsitter}>Я догситер</CheckBox>
+            {roleError && <RoleErrorMessage>{roleError}</RoleErrorMessage>}
           </CheckboxesContainer>
           <SubmitButton>
             <Button type="submit">Зарегистрироваться</Button>
@@ -184,7 +234,14 @@ const Register = () => {
       </ErrorBoundary>
       <ErrorBoundary>
         <GoogleAuthButton>
-          <Button isGoogle type="button" icon={icon_google}>Продолжить с Google</Button>
+          <Button 
+          isGoogle 
+          type="button" 
+          icon={icon_google}
+          onClick={googleLogin}
+          >
+            Продолжить с Google
+          </Button>
         </GoogleAuthButton>
       </ErrorBoundary>
       <ErrorBoundary>

@@ -1,29 +1,36 @@
 import styled from "@emotion/styled";
 
 
-export const StyledInputGroup = styled.div`
+export const StyledInputContainer = styled.div`
     height: 60px;
     position: relative;
     width: 100%;
     overflow: hidden;
-    //margin-bottom: ${(props: any) => props.inColumn ? '5px' : '0px'};
+`;
+
+
+export const StyledInputGroup = styled.div`
+    height: 40px;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
 `;
 
 export const StyledInput = styled.input`
     border-radius: 8px;
-    border: 2px solid ${(props: any) => props.error ? 'var(--red)' : 'var(--grey)'};
+    border: 2px solid ${(props: any) => props.onError ? 'var(--red)' : 'var(--grey)'};
     box-sizing: border-box;
     color: var(--black);
     font-size: 20px;
-    height: 66%;
+    height: 100%;
     padding: 4px 10px 0;
     width: 100%;
     transition: border-color 200ms;
     
     &:focus {
-        border: 3px solid ${(props: any) => props.error ? 'var(--red)' : 'var(--green)'};
+        border: 3px solid ${(props: any) => props.onError ? 'var(--red)' : 'var(--green)'};
         outline: none;
-        caret-color: ${(props: any) => props.error ? 'var(--red)' : 'var(--green)'};
+        caret-color: ${(props: any) => props.onError ? 'var(--red)' : 'var(--green)'};
     }
 
     &:focus ~ div,
@@ -75,6 +82,5 @@ export const StyledLabel = styled.label`
 export const ErrorMessage = styled.div`
     color: var(--black);
     font-size: 12px;
-    margin-top: -14px;
     margin-left: 5px;
 `;

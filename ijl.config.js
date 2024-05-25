@@ -21,6 +21,6 @@ module.exports = {
     },
   },
   config: {
-    "dog-sitters-finder.api": "/ms"
+    "dog-sitters-finder.api": "/api"
   }
 }

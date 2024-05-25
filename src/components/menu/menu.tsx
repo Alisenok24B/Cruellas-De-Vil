@@ -1,7 +1,6 @@
 import React from "react";
-import { map, profile } from '../../assets/img';
 import { URLs } from "../../__data__/urls";
-import { StyledMenu, StyledMenuLi, StyledMenuProfile, StyledMenuShowProfile } from "./menu.styled";
+import { StyledMenu, StyledMenuLi } from "./menu.styled";
 import { Link } from "../link";
 import { Svg } from "../svg-icon";
 
@@ -30,7 +29,7 @@ const nav = {
   exit: { title: "Выход", href: URLs.baseUrl }
 };
 
-export function Menu({ currentNavElement, className }) {
+export function Menu({ currentNavElement }) {
   const userRole = sessionStorage.getItem('userRole');
   
   return (
@@ -42,19 +41,9 @@ export function Menu({ currentNavElement, className }) {
       </StyledMenuLi>
       {userRole !== 'owner' && (
         <StyledMenuLi>
-          {className.includes("show-profile") ? (
-            <StyledMenuShowProfile>
-              <Link contrast={currentNavElement === nav.viewing.title} href={nav.viewing.href}>
+          <Link contrast={currentNavElement === nav.viewing.title} href={nav.viewing.href}>
                 {nav.viewing.svg}
-              </Link>
-            </StyledMenuShowProfile>
-          ) : (
-            <StyledMenuProfile>
-              <Link contrast={currentNavElement === nav.viewing.title} href={nav.viewing.href}>
-                {nav.viewing.svg}
-              </Link>
-            </StyledMenuProfile>
-          )}
+          </Link>
         </StyledMenuLi>
       )}
       <StyledMenuLi>
