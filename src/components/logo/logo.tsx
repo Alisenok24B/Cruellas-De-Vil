@@ -6,8 +6,8 @@ import { StyledLogoImg } from "./logo.styled"
 export function Logo(props) {
   return (
     <StyledLogo>
-        <StyledLogoImg src={props.src} alt={props.alt}/>
-        {props.title && <p>{props.title}</p>}
+        <StyledLogoImg src={props.src} alt={props.alt} srcSet={props.srcSet} sizes={props.sizes} width={props.width}/>
+        {props.children && <p>{props.children}</p>}
     </StyledLogo>
   );
 }
