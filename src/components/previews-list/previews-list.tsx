@@ -1,58 +1,57 @@
 import React from "react";
 import user_photo from '../../assets/img/user_photo.jpg';
+import { useEffect, useState } from "react";
+import { StyledPreviewsList, StyledA, StyledPLDesc, StyledPLCostRH, StyledPLFullDesc, StyledPLFullNameCost, StyledPLLi, StyledPLPhoto, StyledPLPhotoImg} from "./previews-list.styled";
 
-import { StyledPreviewsList } from "./previews-list.styled";
-import { StyledPLLi } from "./previews-list.styled";
-import { StyledPLPhoto } from "./previews-list.styled";
-import { StyledPLPhotoImg } from "./previews-list.styled";
-import { StyledPLDesc } from "./previews-list.styled";
-import { StyledPLFullDesc } from "./previews-list.styled";
-import { StyledPLFullNameCost } from "./previews-list.styled";
-import { StyledPLCostRH } from "./previews-list.styled";
+import { URLs } from "../../__data__/urls";
 
-function Preview({ userPhoto, fullName, cost, fullDesc }) {
+function Preview({ userIndex, userPhoto, fullName, cost, fullDesc }) {
   return (
-    <StyledPLLi>
-      <StyledPLPhoto>
-        <StyledPLPhotoImg src={userPhoto} alt="Фото пользователя"/>
-      </StyledPLPhoto>
-      <StyledPLDesc>
-        <StyledPLFullNameCost>{fullName}</StyledPLFullNameCost>
-        <StyledPLFullNameCost>
-          Стоимость: <StyledPLCostRH>{cost}</StyledPLCostRH>
-        </StyledPLFullNameCost>
-        <StyledPLFullDesc>{fullDesc}</StyledPLFullDesc>
-      </StyledPLDesc>
-    </StyledPLLi>
+    <StyledA href={URLs.ui.dogsitterViewing}>
+      <StyledPLLi>
+        <StyledPLPhoto>
+          <StyledPLPhotoImg src={userPhoto} alt="Фото пользователя"/>
+        </StyledPLPhoto>
+        <StyledPLDesc>
+          <StyledPLFullNameCost>{userIndex}. {fullName}</StyledPLFullNameCost>
+          <StyledPLFullNameCost>
+            Стоимость: <StyledPLCostRH>{cost}</StyledPLCostRH> руб/час
+          </StyledPLFullNameCost>
+          <StyledPLFullDesc>{fullDesc}</StyledPLFullDesc>
+        </StyledPLDesc>
+      </StyledPLLi>
+    </StyledA>
   );
 }
 
 export function PreviewsList() {
-  const users = [
-    {
-      userPhoto: user_photo,
-      fullName: "1. Имя Фамилия",
-      cost: "1500 руб/час",
-      fullDesc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit ..."
-    },
-    {
-      userPhoto: user_photo,
-      fullName: "2. Имя Фамилия",
-      cost: "1500 руб/час",
-      fullDesc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit ..."
-    },
-    // Остальные пользователи
-  ];
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch(`${URLs.api.main}/users`);
+        const userData = await response.json();
+        const filteredUsers = userData.filter(user => user.role === 'dogsitter');
+        setUsers(filteredUsers);
+      } catch (error) {
+        console.error('Error fetching users data: ', error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   return (
     <StyledPreviewsList>
       {users.map((user, index) => (
         <Preview
           key={index}
-          userPhoto={user.userPhoto}
-          fullName={user.fullName}
-          cost={user.cost}
-          fullDesc={user.fullDesc}
+          userIndex={index + 1}
+          userPhoto={user_photo}
+          fullName={`${user.first_name} ${user.second_name}`}
+          cost={user.price}
+          fullDesc={user.about_me}
         />
       ))}
     </StyledPreviewsList>

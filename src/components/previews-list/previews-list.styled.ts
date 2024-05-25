@@ -1,5 +1,9 @@
 import styled from "@emotion/styled"
 
+export const StyledA = styled.a`
+    color: inherit;
+    text-decoration: none;
+`
 
 export const StyledPreviewsList = styled.ul`
     width: 50%;
