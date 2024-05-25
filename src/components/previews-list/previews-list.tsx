@@ -4,11 +4,11 @@ import { StyledPreviewsList, StyledA, StyledPLDesc, StyledPLCostRH, StyledPLFull
 
 import { URLs } from "../../__data__/urls";
 
-function Preview({ userIndex, userPhoto, fullName, cost, fullDesc, selected }) {
+function Preview({ userIndex, userPhoto, fullName, cost, fullDesc }) {
   const StyledLi = selected ? StyledSelectedLi : StyledPLLi;
 
   return (
-    <StyledA href={URLs.ui.dogsitterViewing}>
+    <StyledA href={`${URLs.ui.dogsitterViewing}?id=${userId}`}>
       <StyledLi>
         <StyledPLPhoto>
           <StyledPLPhotoImg src={userPhoto} alt="Фото пользователя"/>
@@ -36,6 +36,7 @@ export function PreviewsList({users, currentPoint}) {
           fullName={`${user.first_name} ${user.second_name}`}
           cost={user.price}
           fullDesc={user.about_me}
+          userId={user.id}
         />
       ))}
     </StyledPreviewsList>

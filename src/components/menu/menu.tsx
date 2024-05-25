@@ -3,6 +3,7 @@ import { URLs } from "../../__data__/urls";
 import { StyledMenu, StyledMenuLi } from "./menu.styled";
 import { Link } from "../link";
 import { Svg } from "../svg-icon";
+import { useSearchParams } from 'react-router-dom';
 
 const svgPropsMap = {
   width: '55px',
@@ -23,15 +24,17 @@ const svgPropsProfile = {
   ]
 };
 
+const id = sessionStorage.getItem('id')
 const nav = {
   search: { title: "Карта", svg: <Svg {...svgPropsMap} />, href: URLs.ui.search },
-  viewing: { title: "Профиль", svg: <Svg {...svgPropsProfile} />, href: URLs.ui.dogsitterViewing }, //URLs.ui.dogsitterViewing.getUrl(char.id)
+  viewing: { title: "Профиль", svg: <Svg {...svgPropsProfile} />, href: `${URLs.ui.dogsitterViewing}?id=${id}` }, //URLs.ui.dogsitterViewing.getUrl(char.id)
   exit: { title: "Выход", href: URLs.baseUrl }
 };
 
 export function Menu({ currentNavElement }) {
   const userRole = sessionStorage.getItem('userRole');
-  
+  const [ searchParams ] = useSearchParams();
+  const urlUserId = searchParams.get('id'); // Получаем user_id из URL-параметра
   return (
     <StyledMenu>
       <StyledMenuLi>
@@ -41,7 +44,7 @@ export function Menu({ currentNavElement }) {
       </StyledMenuLi>
       {userRole !== 'owner' && (
         <StyledMenuLi>
-          <Link contrast={currentNavElement === nav.viewing.title} href={nav.viewing.href}>
+          <Link contrast={(currentNavElement === nav.viewing.title) && (urlUserId === id)} href={nav.viewing.href}>
                 {nav.viewing.svg}
           </Link>
         </StyledMenuLi>
