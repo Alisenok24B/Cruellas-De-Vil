@@ -92,6 +92,10 @@ const Login = () => {
         errors[field.name] = "Поле не может быть пустым";
       }
     }
+    const phoneRegex = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
+    if (!phoneRegex.test(formValues['number-phone'])) {
+      errors['number-phone'] = "Введите корректный номер телефона.";
+    }
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
