@@ -21,12 +21,4 @@ body {
     width: 100%;
     height: 100%;
 }
-
-.login-logo {
-    margin: 10px auto 0 auto;
-}
-
-.register-logo {
-    margin: 10px auto 0 auto;
-}
 `;
