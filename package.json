@@ -4,7 +4,7 @@
   "description": "--------------------------\r ### Макеты: [Figma](https://www.figma.com/file/XxffsVfQXzZAovWFR1LKky/SberHubProject?type=design&node-id=0%3A1&mode=design&t=wKPq5bK26bBrxTas-1)\r ### Фичи для MVP1\r * Форма регистрации/авторизации (Биксон Алиса)\r   * регистрация и авторизация;\r   * разделение ролей (хозяин собаки, догситтер);\r   * регистрация/авторизация через Google аккаунт;\r   * валидация номера телефона при регистрации.",
   "main": "./src/index.tsx",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "ijl-cli server --port=8099 --with-open-browser",
     "build": "npm run clean && ijl-cli build --dev",
     "build:prod": "npm run clean && ijl-cli build",
@@ -23,11 +23,14 @@
     "@types/react-dom": "^18.2.25",
     "emotion": "^11.0.0",
     "express": "^4.19.2",
+    "jest": "^29.7.0",
+    "or": "^0.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.0",
     "react-yandex-maps": "^4.6.0",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "with": "^7.0.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.3.0",
