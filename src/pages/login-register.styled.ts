@@ -42,6 +42,7 @@ export const GoogleAuthButton = styled.div`
     justify-content: center;
     margin-top: 15px;
 `
+
 export const CheckboxesContainer = styled.div`
     display: flex;
     align-items: center;

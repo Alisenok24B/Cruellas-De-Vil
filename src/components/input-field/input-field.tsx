@@ -6,7 +6,7 @@ import { StyledInputGroup, StyledInput, StyledCut, StyledLabel, ErrorIcon, Error
 export function InputField ({ name, id, type, maxLength, children, error, onChange, onBlur, onFocus }) {
     return (
         <StyledInputContainer>
-        <StyledInputGroup error={error}>
+        <StyledInputGroup onError={error}>
             <StyledInput
                 name={name}
                 id={id}
@@ -16,7 +16,7 @@ export function InputField ({ name, id, type, maxLength, children, error, onChan
                 onChange={onChange}
                 onBlur={onBlur}
                 onFocus={onFocus}
-                error={error}
+                onError={error}
             />
             {error && <ErrorIcon><img src={icon_error} alt="Красный крест. Ошибка" /></ErrorIcon>}
             <StyledCut />

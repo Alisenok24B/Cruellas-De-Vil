@@ -18,7 +18,7 @@ export const StyledInputGroup = styled.div`
 
 export const StyledInput = styled.input`
     border-radius: 8px;
-    border: 2px solid ${(props: any) => props.error ? 'var(--red)' : 'var(--grey)'};
+    border: 2px solid ${(props: any) => props.onError ? 'var(--red)' : 'var(--grey)'};
     box-sizing: border-box;
     color: var(--black);
     font-size: 20px;
@@ -28,9 +28,9 @@ export const StyledInput = styled.input`
     transition: border-color 200ms;
     
     &:focus {
-        border: 3px solid ${(props: any) => props.error ? 'var(--red)' : 'var(--green)'};
+        border: 3px solid ${(props: any) => props.onError ? 'var(--red)' : 'var(--green)'};
         outline: none;
-        caret-color: ${(props: any) => props.error ? 'var(--red)' : 'var(--green)'};
+        caret-color: ${(props: any) => props.onError ? 'var(--red)' : 'var(--green)'};
     }
 
     &:focus ~ div,

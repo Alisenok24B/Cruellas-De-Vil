@@ -8,5 +8,17 @@ export default [
   {languageOptions: { globals: globals.browser }},
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
-  pluginReactConfig,
+  pluginReactConfig,{
+    rules: {
+      'react/prop-types': 'off',
+        '@typescript-eslint/no-unused-vars': [
+            'warn',
+            { argsIgnorePattern: '^_', caughtErrors: 'none' },
+        ],
+        '@typescript-eslint/ban-types': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
+        "@typescript-eslint/no-explicit-any": "off"
+    },
+    ignores: ["src/index.tsx"]
+  }
 ];
