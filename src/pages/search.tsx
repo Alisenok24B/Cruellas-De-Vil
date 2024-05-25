@@ -8,6 +8,7 @@ import { TitleH1 } from '../components/title-h1';
 import { Header } from '../components/header';
 import { Button } from '../components/button';
 import { Footer } from '../components/footer';
+import { ErrorBoundary } from '../components/error-boundary';
 
 import { StyledBoxes, StyledFind, StyledFinded, StyledMain, StyledMap, StyledPreviewMap, StyledReset, StyledSearch } from './search.styled';
 
@@ -34,37 +35,37 @@ const Search = () => {
     }, []);
 
   return (
-    <>
-    <Header currentNavElement={"Карта"}/>
-    <StyledMain>
-        <Container>
-            <StyledFind>
-              <TitleH1>Найти догситера</TitleH1>
-            </StyledFind>
-            <StyledSearch>
-                <StyledBoxes>
-                    <CustomSection type="text">Где искать?</CustomSection>
-                    <CustomSection type="select">Сортировка</CustomSection>
-                </StyledBoxes>
-                <StyledReset>
-                    <Button>Сбросить настройки</Button>
-                </StyledReset>
-            </StyledSearch>
-            <StyledFinded>Найдено: 2 догситтера</StyledFinded>
-            <StyledPreviewMap>
-                <PreviewsList/>
-                <StyledMap>
-                    <YMaps>
-                        <Map defaultState={{ center: [55.753215, 37.622504], zoom: 10 }} width="100%" height="100%">
-                            {/* <Placemark geometry={[55.753215, 37.622504]}/> */}
-                        </Map>
-                    </YMaps>
-                </StyledMap>
-            </StyledPreviewMap>
-        </Container>
-    </StyledMain>
-    <Footer/>
-    </>
+    <ErrorBoundary>
+        <Header currentNavElement={"Карта"}/>
+        <StyledMain>
+            <Container>
+                <StyledFind>
+                <TitleH1>Найти догситера</TitleH1>
+                </StyledFind>
+                <StyledSearch>
+                    <StyledBoxes>
+                        <CustomSection type="text">Где искать?</CustomSection>
+                        <CustomSection type="select">Сортировка</CustomSection>
+                    </StyledBoxes>
+                    <StyledReset>
+                        <Button>Сбросить настройки</Button>
+                    </StyledReset>
+                </StyledSearch>
+                <StyledFinded>Найдено: 2 догситтера</StyledFinded>
+                <StyledPreviewMap>
+                    <PreviewsList/>
+                    <StyledMap>
+                        <YMaps>
+                            <Map defaultState={{ center: [55.753215, 37.622504], zoom: 10 }} width="100%" height="100%">
+                                {/* <Placemark geometry={[55.753215, 37.622504]}/> */}
+                            </Map>
+                        </YMaps>
+                    </StyledMap>
+                </StyledPreviewMap>
+            </Container>
+        </StyledMain>
+        <Footer/>
+    </ErrorBoundary>
   );
 };
 
