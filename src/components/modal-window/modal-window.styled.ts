@@ -33,6 +33,7 @@ export const StyledModalContent = styled.div`
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
+    box-sizing: border-box;
   }
 
   textarea {
@@ -53,22 +54,19 @@ export const StyledModalButtons = styled.div`
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
   }
 
   button:first-of-type {
     background-color: var(--green);
     color: white;
-
-    &:hover {
-      background-color: var(--green-hover);
-    }
   }
 
   button:last-of-type {
     background-color: #eee;
-
-    &:hover {
-      background-color: #ddd;
-    }
   }
 `;

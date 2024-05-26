@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
-import { useSearchParams } from "react-router-dom";
 import { StyledLink } from './link.styled';
 
 interface LinkProps {
@@ -12,7 +11,6 @@ interface LinkProps {
 
 export const Link = (props: LinkProps) => {
     const navigate = useNavigate();
-    let [searchParams, setSearchParams] = useSearchParams();
     const linkProps: any = {};
     
     const handleNavigation = (e) => {
