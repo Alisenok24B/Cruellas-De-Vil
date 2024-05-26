@@ -37,7 +37,7 @@ const Search = () => {
 
     useEffect(() => {
         const script = document.createElement('script');
-        script.src = 'https://api-maps.yandex.ru/2.1/?apikey=cd99061c-900b-4ae4-a9ae-60d9e98c6827&lang=ru_RU';
+        script.src = 'https://api-maps.yandex.ru/2.1/?apikey=35bccd6d-a845-4fcd-a7dc-ef66e5fcadfc&lang=ru_RU';
         script.async = true;
 
         script.onload = () => {
@@ -54,7 +54,7 @@ const Search = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`https://geocode-maps.yandex.ru/1.x/?format=json&apikey=cd99061c-900b-4ae4-a9ae-60d9e98c6827&geocode=${encodeURI(formValues['where-find'])}`);
+            const response = await fetch(`https://geocode-maps.yandex.ru/1.x/?format=json&apikey=816d8c8d-fa03-4ba1-85d9-bbb1ebbac0a6&geocode=${encodeURI(formValues['where-find'])}`);
             const data = await response.json();
             
             if (data.response.GeoObjectCollection.featureMember.length > 0) {
@@ -73,7 +73,7 @@ const Search = () => {
     useEffect(() => {
         const fetchData = async () => {
             const newPoints = await Promise.all(users.map(async user => {
-            const response = await fetch(`https://geocode-maps.yandex.ru/1.x/?format=json&apikey=cd99061c-900b-4ae4-a9ae-60d9e98c6827&geocode=${encodeURI(user.location)}`);
+            const response = await fetch(`https://geocode-maps.yandex.ru/1.x/?format=json&apikey=35bccd6d-a845-4fcd-a7dc-ef66e5fcadfc&geocode=${encodeURI(user.location)}`);
             const data = await response.json();
             const coordinates = data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos.split(' ').reverse();
 
