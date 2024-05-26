@@ -15,16 +15,6 @@ const InputFields = ({ formValues, setFormValues, formErrors, setFormErrors }) =
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
-
-    if (value.trim() === '') {
-      setFormErrors(prevState => ({ ...prevState, [name]: '' }));
-    } else {
-      const fieldConfig = inputFieldsList.find(field => field.name === name);
-      if (fieldConfig && fieldConfig.validation) {
-        const error = fieldConfig.validation(value);
-        setFormErrors(prevState => ({ ...prevState, [name]: error }));
-      }
-    }
   };
 
   const handleBlur = (e) => {
@@ -38,9 +28,8 @@ const InputFields = ({ formValues, setFormValues, formErrors, setFormErrors }) =
 
   const handleFocus = (e) => {
     const { name } = e.target;
-    // Сбрасываем только ошибку "Поле не может быть пустым" при фокусировке на поле
-    if (formErrors[name] === "Поле не может быть пустым") {
-      setFormErrors(prevState => ({ ...prevState, [name]: '' }));
+    if (formErrors[name] === "Поле не может быть пустым" || formErrors[name] === "Введите корректный номер телефона") {
+      setFormErrors({ ...formErrors, [name]: '' });
     }
   };
 
@@ -55,6 +44,7 @@ const InputFields = ({ formValues, setFormValues, formErrors, setFormErrors }) =
       onChange={handleChange}
       onBlur={handleBlur}
       onFocus={handleFocus}
+      mask={element.mask}
     >
       {element.title}
     </InputField>
@@ -62,15 +52,15 @@ const InputFields = ({ formValues, setFormValues, formErrors, setFormErrors }) =
 };
 
 const validatePhoneNumber = (value) => {
-  const phoneRegex = /^\d+$/;
+  const phoneRegex = /^8\d{10}$/;
   if (!phoneRegex.test(value)) {
-    return "Введите корректный номер телефона.";
+    return "Введите корректный номер телефона";
   }
   return "";
 };
 
 const inputFieldsList = [
-  { title: "Номер телефона", name: "number-phone", id: "number-phone", type: "tel", maxLength: 11, validation: validatePhoneNumber },
+  { title: "Номер телефона", name: "number-phone", id: "number-phone", type: "tel", maxLength: 11, validation: validatePhoneNumber, mask: "89999999999" },
   { title: "Пароль", name: "password", id: "password", type: "password", maxLength: 24 }
 ];
 
@@ -91,10 +81,12 @@ const Login = () => {
       if (!formValues[field.name]) {
         errors[field.name] = "Поле не может быть пустым";
       }
-    }
-    const phoneRegex = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
-    if (!phoneRegex.test(formValues['number-phone'])) {
-      errors['number-phone'] = "Введите корректный номер телефона.";
+      else if (field.name === 'number-phone') {
+        const error = validatePhoneNumber(formValues[field.name]);
+        if (error) {
+          errors[field.name] = error;
+        }
+      }
     }
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
@@ -126,26 +118,15 @@ const Login = () => {
       console.log('Google Login Success:', response);
       sessionStorage.setItem('isAuthenticated', 'true');
       sessionStorage.setItem('userRole', 'user'); // Хочется нормальную ролевку в перспективе...
-  
-      try {
-        const usersResponse = await fetch(`${URLs.api.main}/users`);
-        if (!usersResponse.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const users = await usersResponse.json();
-        const userCount = users.length;
-        sessionStorage.setItem('id', (Math.floor(Math.random() * (Math.floor(1000) - Math.ceil(userCount + 1) + 1)) + Math.ceil(userCount + 1)).toString());
-        navigate(URLs.ui.search);
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
+      sessionStorage.setItem('id', (Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER - 4)) + 5).toString());
+      navigate(URLs.ui.search);
     },
     onError: (error) => {
       console.log('Google Login Failed:', error);
     }
   });
 
-return (
+  return (
     <Wrapper>
       <ErrorBoundary>
         <Header>

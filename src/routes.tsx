@@ -37,7 +37,7 @@ const PageRoutes = () => (
       <Route path={URLs.baseUrl} element={<UnprotectedRoute><Login /></UnprotectedRoute>} />
       <Route path={URLs.ui.register} element={<UnprotectedRoute><Register /></UnprotectedRoute>} />
       <Route path={URLs.ui.search} element={<ProtectedRoute><Search /></ProtectedRoute>} />
-      <Route path={URLs.ui.dogsitterViewing} element={<ProtectedRoute><RoleProtectedRoute role="owner"><ProfileView /></RoleProtectedRoute></ProtectedRoute>} />
+      <Route path={URLs.ui.dogsitterViewing} element={<ProtectedRoute><ProtectedRoute><ProfileView /></ProtectedRoute></ProtectedRoute>} />
       <Route path="*" element={<h1>Page not found</h1>} />
     </Routes>
   </ErrorBoundary>
