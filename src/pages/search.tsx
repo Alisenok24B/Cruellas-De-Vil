@@ -25,7 +25,7 @@ const Search = () => {
           try {
             const response = await fetch(`${URLs.api.main}/users`);
             const userData = await response.json();
-            const filteredUsers = userData.filter(user => user.role === 'dogsitter');
+            const filteredUsers = userData.filter(user => Array.isArray(user.role) ? user.role.includes('dogsitter') : user.role === 'dogsitter');
             setUsers(filteredUsers);
           } catch (error) {
             console.error('Error fetching users data: ', error);
