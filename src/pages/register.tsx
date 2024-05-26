@@ -162,17 +162,43 @@ const Register = () => {
   };
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validateForm()) {
       return;
     }
 
-    const role = [];
-    if (roles.host) role.push("owner");
-    if (roles.dogsitter) role.push("dogsitter");
+    const role = roles.dogsitter ? "dogsitter" : "owner";
+    console.log('role = ', role);
+    const registerResponse = await fetch(`${URLs.api.main}/register`,
+      {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          firatName: formValues['first-name'],
+          secondName: formValues['second-name'],
+          phoneNumber: formValues['number-phone'],
+          password: formValues['password'],
+          role: role
+        })
+      }
+    )
 
+    if (registerResponse.ok) {
+      const user = await registerResponse.json();
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('userRole', user.data.role);
+      localStorage.setItem('id', user.data.id);
+      navigate(URLs.ui.search);
+    }
+    else {
+      const error = await registerResponse.json();
+      setRoleError(error.error);
+    }
+    /*
     const newUser = {
       id: Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER - 4)) + 5,
       phone_number: formValues['number-phone'],
@@ -185,7 +211,7 @@ const Register = () => {
     localStorage.setItem('isAuthenticated', 'true');
     localStorage.setItem('userRole', role.includes("dogsitter") ? "dogsitter" : role[0]);
     localStorage.setItem('id', newUser.id.toString())
-    navigate(URLs.ui.search);
+    navigate(URLs.ui.search);*/
   };
 
 

@@ -1,0 +1,9 @@
+{
+    "data": {
+        "id": 6,
+        "phoneNumber": 89888888888,
+        "firstName": "Генадий",
+        "secondName": "Паровозов",
+        "role": "owner"
+    }
+}
