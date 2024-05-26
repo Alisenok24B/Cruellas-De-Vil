@@ -8,7 +8,7 @@ import Search from './pages/search';
 import ProfileView from './pages/dogsitter-viewing';
 
 const ProtectedRoute = ({ children }) => {
-  const isAuthenticated = sessionStorage.getItem('isAuthenticated');
+  const isAuthenticated = localStorage.getItem('isAuthenticated');
   if (!isAuthenticated) {
     return <Navigate to={URLs.baseUrl} />;
   }
@@ -16,7 +16,7 @@ const ProtectedRoute = ({ children }) => {
 };
 
 const UnprotectedRoute = ({ children }) => {
-  const isAuthenticated = sessionStorage.getItem('isAuthenticated');
+  const isAuthenticated = localStorage.getItem('isAuthenticated');
   if (isAuthenticated) {
     return <Navigate to={URLs.ui.search} />;
   }
@@ -24,7 +24,7 @@ const UnprotectedRoute = ({ children }) => {
 };
 
 const RoleProtectedRoute = ({ role, children }) => {
-  const userRole = sessionStorage.getItem('userRole');
+  const userRole = localStorage.getItem('userRole');
   if (userRole === role) {
     return <Navigate to={URLs.ui.search} />;
   }

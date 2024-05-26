@@ -1,0 +1,12 @@
+{
+    "data": {
+        "id": 1,
+        "phoneNumber": 89283244141,
+        "firstName": "Вася",
+        "secondName": "Пупкин",
+        "role": "dogsitter",
+        "location": "Россия, республика Татарстан, Казань, улица Пушкина, 12",
+        "price": 1500,
+        "aboutMe": "Я люблю собак"
+    }
+}

@@ -32,7 +32,7 @@ const ProfileViewing = () => {
   console.log('userId from URL', user_id);
   
   useEffect(() => {
-    const userId = sessionStorage.getItem('id'); // Получение id из сессии
+    const userId = localStorage.getItem('id'); // Получение id из сессии
     console.log('userId from session:', userId);
   
     const defaultUserId = '1';
@@ -68,7 +68,7 @@ const ProfileViewing = () => {
     setIsModalOpen(false);
   };
   
-  const isCurrentUser = user_id === sessionStorage.getItem('id') || user_id === 'null'; // Проверяем, является ли текущий пользователь владельцем профиля
+  const isCurrentUser = user_id === localStorage.getItem('id') || user_id === 'null'; // Проверяем, является ли текущий пользователь владельцем профиля
   
   if (!userData) {
     return <div>Loading...</div>;

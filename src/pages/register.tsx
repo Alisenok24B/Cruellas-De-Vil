@@ -182,9 +182,9 @@ const Register = () => {
       role: role.length > 1 ? role : role[0]
     };
 
-    sessionStorage.setItem('isAuthenticated', 'true');
-    sessionStorage.setItem('userRole', role.includes("dogsitter") ? "dogsitter" : role[0]);
-    sessionStorage.setItem('id', newUser.id.toString())
+    localStorage.setItem('isAuthenticated', 'true');
+    localStorage.setItem('userRole', role.includes("dogsitter") ? "dogsitter" : role[0]);
+    localStorage.setItem('id', newUser.id.toString())
     navigate(URLs.ui.search);
   };
 
@@ -192,9 +192,10 @@ const Register = () => {
   const googleLogin = useGoogleLogin({
     onSuccess: async (response) => {
       console.log('Google Login Success:', response);
-      sessionStorage.setItem('isAuthenticated', 'true');
-      sessionStorage.setItem('userRole', 'user'); // Хочется нормальную ролевку в перспективе...
-      sessionStorage.setItem('id', (Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER - 4)) + 5).toString());
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('userRole', 'user'); // Хочется нормальную ролевку в перспективе...
+      const userId = Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER - 4)) + 5;
+      localStorage.setItem('id', (userId).toString());
       navigate(URLs.ui.search);
       
     },

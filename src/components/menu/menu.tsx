@@ -24,15 +24,17 @@ const svgPropsProfile = {
   ]
 };
 
-const id = sessionStorage.getItem('id')
-const nav = {
-  search: { title: "Карта", svg: <Svg {...svgPropsMap} />, href: URLs.ui.search },
-  viewing: { title: "Профиль", svg: <Svg {...svgPropsProfile} />, href: `${URLs.ui.dogsitterViewing}?id=${id}` }, //URLs.ui.dogsitterViewing.getUrl(char.id)
-  exit: { title: "Выход", href: URLs.baseUrl }
-};
+
 
 export function Menu({ currentNavElement }) {
-  const userRole = sessionStorage.getItem('userRole');
+  const id = localStorage.getItem('id')
+  console.log('id = ', id)
+  const nav = {
+    search: { title: "Карта", svg: <Svg {...svgPropsMap} />, href: URLs.ui.search },
+    viewing: { title: "Профиль", svg: <Svg {...svgPropsProfile} />, href: `${URLs.ui.dogsitterViewing}?id=${id}` }, //URLs.ui.dogsitterViewing.getUrl(char.id)
+    exit: { title: "Выход", href: URLs.baseUrl }
+  };
+  const userRole = localStorage.getItem('userRole');
   const [ searchParams ] = useSearchParams();
   const urlUserId = searchParams.get('id'); // Получаем user_id из URL-параметра
   return (

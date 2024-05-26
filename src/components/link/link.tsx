@@ -16,8 +16,8 @@ export const Link = (props: LinkProps) => {
     const handleNavigation = (e) => {
         if (props.exit) {
             e.preventDefault();
-            sessionStorage.removeItem('isAuthenticated');
-            sessionStorage.removeItem('userRole');
+            localStorage.removeItem('isAuthenticated');
+            localStorage.removeItem('userRole');
             navigate(props.href);
         }
     };

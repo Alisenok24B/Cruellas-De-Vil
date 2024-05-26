@@ -98,27 +98,52 @@ const Login = () => {
     if (!validateForm()) {
       return;
     }
+    const authResponse = await fetch(`${URLs.api.main}/auth`,
+      {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          phoneNumber: formValues['number-phone'],
+          password: formValues['password']
+        })
+      }
+    )
 
-    const response = await fetch(`${URLs.api.main}/users`);
+    if (authResponse.ok) {
+      const user = await authResponse.json();
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('userRole', user.data.role);
+      localStorage.setItem('id', user.data.id);
+      navigate(URLs.ui.search);
+    }
+    else {
+      const error = await authResponse.json();
+      setFormErrors({...formErrors, 'number-phone': error.error });
+    }
+
+    /*const response = await fetch(`${URLs.api.main}/users`);
     const users = await response.json();
 
     const user = users.find(u => u.phone_number.toString() === formValues['number-phone'] && u.password.toString() === formValues['password']);
     if (user) {
-      sessionStorage.setItem('isAuthenticated', 'true');
-      sessionStorage.setItem('userRole', user.role);
-      sessionStorage.setItem('id', user.id)
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('userRole', user.role);
+      localStorage.setItem('id', user.id);
       navigate(URLs.ui.search);
     } else {
       alert('Неверный номер телефона или пароль');
-    }
+    }*/
   };
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (response) => {
       console.log('Google Login Success:', response);
-      sessionStorage.setItem('isAuthenticated', 'true');
-      sessionStorage.setItem('userRole', 'user'); // Хочется нормальную ролевку в перспективе...
-      sessionStorage.setItem('id', (Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER - 4)) + 5).toString());
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('userRole', 'user'); // Хочется нормальную ролевку в перспективе...
+      const userId = Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER - 4)) + 5;
+      localStorage.setItem('id', (userId).toString());
       navigate(URLs.ui.search);
     },
     onError: (error) => {
