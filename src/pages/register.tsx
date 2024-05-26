@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { logo_4x, logo_2x, logo_1x, icon_google } from '../assets/img';
 import { ErrorBoundary } from '../components/error-boundary';
@@ -18,13 +18,14 @@ const InputFields = ({ formValues, setFormValues, formErrors, setFormErrors }) =
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
 
-    const fieldConfig = inputFieldsList.find(field => field.name === name);
-    if (fieldConfig && fieldConfig.validation) {
-      const error = value.trim() === '' ? '' : fieldConfig.validation(value, formValues);
-      setFormErrors({ ...formErrors, [name]: error });
+    if (name !== 'number-phone') {
+      const fieldConfig = inputFieldsList.find(field => field.name === name);
+      if (fieldConfig && fieldConfig.validation) {
+        const error = value.trim() === '' ? '' : fieldConfig.validation(value, formValues);
+        setFormErrors({ ...formErrors, [name]: error });
+      }
     }
 
-    // Дополнительно проверяем совпадение паролей
     if (name === 'password' && formValues['password-confirmation']) {
       const confirmPasswordError = validatePasswordConfirmation(formValues['password-confirmation'], { ...formValues, [name]: value });
       setFormErrors({ ...formErrors, 'password-confirmation': confirmPasswordError });
@@ -47,8 +48,7 @@ const InputFields = ({ formValues, setFormValues, formErrors, setFormErrors }) =
 
   const handleFocus = (e) => {
     const { name } = e.target;
-    // Сбрасываем только ошибку "Поле не может быть пустым" при фокусировке на поле
-    if (formErrors[name] === "Поле не может быть пустым") {
+    if (formErrors[name] === "Поле не может быть пустым" || formErrors[name] === "Введите корректный номер телефона") {
       setFormErrors({ ...formErrors, [name]: '' });
     }
   };
@@ -64,6 +64,8 @@ const InputFields = ({ formValues, setFormValues, formErrors, setFormErrors }) =
       onChange={handleChange}
       onBlur={handleBlur}
       onFocus={handleFocus}
+      value={formValues[element.name]}
+      mask={element.mask}
     >
       {element.title}
     </InputField>
@@ -79,12 +81,13 @@ const validateName = (value) => {
 };
 
 const validatePhoneNumber = (value) => {
-  const phoneRegex = /^\d+$/;
+  const phoneRegex = /^8\d{10}$/;
   if (!phoneRegex.test(value)) {
     return "Введите корректный номер телефона";
   }
   return "";
 };
+
 
 const validatePasswordConfirmation = (value, formValues) => {
   if (value !== formValues['password']) {
@@ -96,7 +99,7 @@ const validatePasswordConfirmation = (value, formValues) => {
 const inputFieldsList = [
   { id: "first-name", title: "Имя", name: "first-name", type: "text", maxLength: 35, validation: validateName },
   { id: "second-name", title: "Фамилия", name: "second-name", type: "text", maxLength: 35, validation: validateName },
-  { id: "number-phone", title: "Номер телефона", name: "number-phone", type: "tel", maxLength: 11, validation: validatePhoneNumber },
+  { id: "number-phone", title: "Номер телефона", name: "number-phone", type: "tel", maxLength: 11, validation: validatePhoneNumber, mask: "89999999999" },
   { id: "password", title: "Пароль", name: "password", type: "password", maxLength: 24 },
   { id: "password-confirmation", title: "Подтвердите пароль", name: "password-confirmation", type: "password", maxLength: 24, validation: validatePasswordConfirmation }
 ];
@@ -123,9 +126,6 @@ const Register = () => {
   const [roleError, setRoleError] = useState('');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    localStorage.setItem('users', JSON.stringify(usersData));
-  }, []);
 
   const handleRoleChange = (e) => {
     const { name, checked } = e.target;
@@ -140,18 +140,17 @@ const Register = () => {
     for (const field of inputFieldsList) {
       if (!formValues[field.name]) {
         errors[field.name] = "Поле не может быть пустым";
+      } else if (field.validation) {
+        const error = field.validation(formValues[field.name], formValues);
+        if (error) {
+          errors[field.name] = error;
+        }
+      } else if (field.name == 'number-phone') {
+        const error = validatePhoneNumber(formValues[field.name])
+        if (error) {
+          errors[field.name] = error;
+        }
       }
-    }
-    const phoneRegex = /^((8|\+7)[- ]?)?(\(?\d{3}\)?[- ]?)?[\d\- ]{7,10}$/;
-    if (!phoneRegex.test(formValues['number-phone'])) {
-      errors['number-phone'] = "Введите корректный номер телефона.";
-    }
-    const nameRegex = /^[a-zA-Zа-яА-ЯёЁ]+$/;
-    if (!nameRegex.test(formValues['first-name'])) {
-      errors['first-name'] = "Поле должно содержать только буквы";
-    }
-    if (!nameRegex.test(formValues['second-name'])) {
-      errors['second-name'] = "Поле должно содержать только буквы";
     }
 
     if (!roles.host && !roles.dogsitter) {
@@ -161,6 +160,7 @@ const Register = () => {
     setFormErrors(errors);
     return Object.keys(errors).length === 0 && (roles.host || roles.dogsitter);
   };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -174,7 +174,7 @@ const Register = () => {
     if (roles.dogsitter) role.push("dogsitter");
 
     const newUser = {
-      id: Math.random(),
+      id: Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER - 4)) + 5,
       phone_number: formValues['number-phone'],
       password: formValues['password'],
       first_name: formValues['first-name'],
@@ -182,33 +182,21 @@ const Register = () => {
       role: role.length > 1 ? role : role[0]
     };
 
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    users.push(newUser);
-    localStorage.setItem('users', JSON.stringify(users));
     sessionStorage.setItem('isAuthenticated', 'true');
     sessionStorage.setItem('userRole', role.includes("dogsitter") ? "dogsitter" : role[0]);
     sessionStorage.setItem('id', newUser.id.toString())
     navigate(URLs.ui.search);
   };
 
+
   const googleLogin = useGoogleLogin({
     onSuccess: async (response) => {
       console.log('Google Login Success:', response);
       sessionStorage.setItem('isAuthenticated', 'true');
       sessionStorage.setItem('userRole', 'user'); // Хочется нормальную ролевку в перспективе...
-  
-      try {
-        const usersResponse = await fetch(`${URLs.api.main}/users`);
-        if (!usersResponse.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const users = await usersResponse.json();
-        const userCount = users.length;
-        sessionStorage.setItem('id', (Math.floor(Math.random() * (Math.floor(1000) - Math.ceil(userCount + 1) + 1)) + Math.ceil(userCount + 1)).toString());
-        navigate(URLs.ui.search);
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
+      sessionStorage.setItem('id', (Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER - 4)) + 5).toString());
+      navigate(URLs.ui.search);
+      
     },
     onError: (error) => {
       console.log('Google Login Failed:', error);
