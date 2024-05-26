@@ -192,12 +192,23 @@ const Register = () => {
   };
 
   const googleLogin = useGoogleLogin({
-    onSuccess: (response) => {
+    onSuccess: async (response) => {
       console.log('Google Login Success:', response);
       sessionStorage.setItem('isAuthenticated', 'true');
       sessionStorage.setItem('userRole', 'user'); // Хочется нормальную ролевку в перспективе...
-      sessionStorage.setItem('id', (Math.floor(Math.random() * (Math.floor(1000) - Math.ceil(5) + 1)) + Math.ceil(5)).toString());
-      navigate(URLs.ui.search);
+  
+      try {
+        const usersResponse = await fetch(`${URLs.api.main}/users`);
+        if (!usersResponse.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const users = await usersResponse.json();
+        const userCount = users.length;
+        sessionStorage.setItem('id', (Math.floor(Math.random() * (Math.floor(1000) - Math.ceil(userCount + 1) + 1)) + Math.ceil(userCount + 1)).toString());
+        navigate(URLs.ui.search);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
     },
     onError: (error) => {
       console.log('Google Login Failed:', error);
