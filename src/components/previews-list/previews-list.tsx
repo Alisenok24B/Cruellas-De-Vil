@@ -7,8 +7,13 @@ import { URLs } from "../../__data__/urls";
 function Preview({ userId, userIndex, userPhoto, fullName, cost, fullDesc, selected }) {
   const StyledLi = selected ? StyledSelectedLi : StyledPLLi;
 
+  let url = "#";
+  if (URLs.ui.dogsitterViewing) {
+    url = `${URLs.ui.dogsitterViewing}?id=${userId}`;
+  }
+
   return (
-    <StyledA href={`${URLs.ui.dogsitterViewing}?id=${userId}`}>
+    <StyledA href={url}>
       <StyledLi>
         <StyledPLPhoto>
           <StyledPLPhotoImg src={userPhoto} alt="Фото пользователя"/>
