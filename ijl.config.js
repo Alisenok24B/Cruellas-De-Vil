@@ -17,6 +17,7 @@ module.exports = {
   },
   features: {
     'cruellas-de-vil': {
+      showDogsitters: { value: "true" }
       // add your features here in the format [featureName]: { value: string }
     },
   },
