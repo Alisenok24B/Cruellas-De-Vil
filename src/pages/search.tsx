@@ -15,10 +15,14 @@ import { YMaps, Map, Placemark } from 'react-yandex-maps';
 
 import { URLs } from "../__data__/urls";
 
+import { getFeatures } from "@ijl/cli";
+
 const Search = () => {
     const [formValues, setFormValues] = useState({ 'where-find': '', 'sort-by': '' });
     const [currenctCoord, setcurrenctCoord] = useState([55.801619, 49.08803]);
     const [users, setUsers] = useState([]);
+
+    const { showDogsitters } = getFeatures("cruellas-de-vil");
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -31,8 +35,10 @@ const Search = () => {
             console.error('Error fetching users data: ', error);
           }
         };
-    
-        fetchUsers();
+        
+        if (showDogsitters) {
+            fetchUsers();
+        }
       }, []);
 
     useEffect(() => {
@@ -102,7 +108,7 @@ const Search = () => {
                 <DivSearch formValues={formValues} setFormValues={setFormValues} users={users} setUsers={setUsers}/>
                 <StyledFinded>Найдено: {users.length} догситтера</StyledFinded>
                 <StyledPreviewMap>
-                    <PreviewsList users={users} currentPoint={currentPoint}/>
+                    { showDogsitters && <PreviewsList users={users} currentPoint={currentPoint}/> }
                     <StyledMap>
                         <YMaps>
                             <Map state={{ center: currenctCoord, zoom: 10 }} width="100%" height="100%">
