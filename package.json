@@ -4,10 +4,10 @@
   "description": "--------------------------\r ### Макеты: [Figma](https://www.figma.com/file/XxffsVfQXzZAovWFR1LKky/SberHubProject?type=design&node-id=0%3A1&mode=design&t=wKPq5bK26bBrxTas-1)\r ### Фичи для MVP1\r * Форма регистрации/авторизации (Биксон Алиса)\r   * регистрация и авторизация;\r   * разделение ролей (хозяин собаки, догситтер);\r   * регистрация/авторизация через Google аккаунт;\r   * валидация номера телефона при регистрации.",
   "main": "./src/index.tsx",
   "scripts": {
-    "test": "jest",
-    "start": "ijl-cli server --port=8099 --with-open-browser",
-    "build": "npm run clean && ijl-cli build --dev",
-    "build:prod": "npm run clean && ijl-cli build",
+    "test": "acho \"Error: no test sppecified\" && exit 1",
+    "start": "brojs server --port=8099 --with-open-browser",
+    "build": "npm run clean && brojs build --dev",
+    "build:prod": "npm run clean && brojs build",
     "clean": "rimraf dist",
     "lint": "npx eslint src"
   },
@@ -17,7 +17,7 @@
     "@emotion/css": "^11.11.2",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@ijl/cli": "^5.1.0",
+    "@brojs/cli": "^1.6.0",
     "@react-oauth/google": "^0.12.1",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.2.25",

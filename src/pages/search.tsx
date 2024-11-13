@@ -15,7 +15,7 @@ import { YMaps, Map, Placemark } from 'react-yandex-maps';
 
 import { URLs } from "../__data__/urls";
 
-import { getFeatures } from "@ijl/cli";
+import { getFeatures } from "@brojs/cli";
 
 const Search = () => {
     const [formValues, setFormValues] = useState({ 'where-find': '', 'sort-by': '' });
