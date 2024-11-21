@@ -14,10 +14,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@brojs/cli": "^1.6.2",
     "@emotion/css": "^11.11.2",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@brojs/cli": "^1.6.2",
     "@react-oauth/google": "^0.12.1",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.2.25",
@@ -42,7 +42,8 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.1",
     "globals": "^15.3.0",
-    "typescript-eslint": "^7.10.0"
+    "typescript-eslint": "^7.10.0",
+    "webpack-hot-middleware": "^2.26.1"
   },
   "keywords": []
 }
