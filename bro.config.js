@@ -16,10 +16,14 @@ module.exports = {
     "dog-sitters-finder.dogsitter.viewing": "/dogsitter-viewing"
   },
   features: {
-    'dog-sitters-finder': {
-      showDogsitters: { value: "true" }
-    },
-  },
+    "dog-sitters-finder": {
+        "showDogsitters": {
+            "on": true,
+            "value": "true",
+            "key": "showDogsitters"
+        }
+    }
+},
   config: {
     "dog-sitters-finder.api": "/api"
   }
