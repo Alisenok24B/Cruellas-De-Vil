@@ -16,11 +16,14 @@ module.exports = {
     "dog-sitters-finder.dogsitter.viewing": "/dogsitter-viewing"
   },
   features: {
-    'cruellas-de-vil': {
-      showDogsitters: { value: "true" }
-      // add your features here in the format [featureName]: { value: string }
-    },
-  },
+    "dog-sitters-finder": {
+        "showDogsitters": {
+            "on": true,
+            "value": "true",
+            "key": "showDogsitters"
+        }
+    }
+},
   config: {
     "dog-sitters-finder.api": "/api"
   }

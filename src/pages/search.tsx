@@ -22,7 +22,7 @@ const Search = () => {
     const [currenctCoord, setcurrenctCoord] = useState([55.801619, 49.08803]);
     const [users, setUsers] = useState([]);
 
-    const { showDogsitters } = getFeatures("cruellas-de-vil");
+    const { showDogsitters } = getFeatures("dog-sitters-finder");
 
     useEffect(() => {
         const fetchUsers = async () => {
