@@ -1,6 +1,9 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import { StyledLink } from './link.styled';
+import { AppDispatch } from "../../store/store";
+import { useDispatch } from "react-redux";
+import { userActions } from "../../store/user.slice";
 
 interface LinkProps {
     href: string;
@@ -11,13 +14,13 @@ interface LinkProps {
 
 export const Link = (props: LinkProps) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch<AppDispatch>();
     const linkProps: any = {};
     
     const handleNavigation = (e) => {
         if (props.exit) {
             e.preventDefault();
-            localStorage.removeItem('isAuthenticated');
-            localStorage.removeItem('userRole');
+            dispatch(userActions.logout())
             navigate(props.href);
         }
     };

@@ -12,6 +12,9 @@ import { Logo } from '../components/logo';
 import { Wrapper, Header, Title, Form, SubmitButton, GoogleAuthButton, CheckboxesContainer, LinkContainer, RoleErrorMessage } from './login-register.styled';
 import usersData from '../../stubs/json/users.json';
 import { useGoogleLogin } from '@react-oauth/google';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../store/store';
+import { userActions } from '../store/user.slice';
 
 const InputFields = ({ formValues, setFormValues, formErrors, setFormErrors }) => {
   const handleChange = (e) => {
@@ -125,6 +128,7 @@ const Register = () => {
   });
   const [roleError, setRoleError] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
 
 
   const handleRoleChange = (e) => {
@@ -189,9 +193,16 @@ const Register = () => {
 
     if (registerResponse.ok) {
       const user = await registerResponse.json();
-      localStorage.setItem('isAuthenticated', 'true');
-      localStorage.setItem('userRole', user.data.role);
-      localStorage.setItem('id', user.data.id);
+      // localStorage.setItem('isAuthenticated', 'true');
+      // localStorage.setItem('userRole', user.data.role);
+      // localStorage.setItem('id', user.data.id);
+      dispatch(
+        userActions.addJwt({
+          isAuthenticated: "true",
+          userRole: user.data.role,
+          id: user.data.id,
+        })
+      );
       navigate(URLs.ui.search);
     }
     else {
@@ -218,10 +229,17 @@ const Register = () => {
   const googleLogin = useGoogleLogin({
     onSuccess: async (response) => {
       console.log('Google Login Success:', response);
-      localStorage.setItem('isAuthenticated', 'true');
-      localStorage.setItem('userRole', 'user'); // Хочется нормальную ролевку в перспективе...
+      // localStorage.setItem('isAuthenticated', 'true');
+      // localStorage.setItem('userRole', 'user'); // Хочется нормальную ролевку в перспективе...
       const userId = Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER - 4)) + 5;
-      localStorage.setItem('id', (userId).toString());
+      // localStorage.setItem('id', (userId).toString());
+      dispatch(
+        userActions.addJwt({
+          isAuthenticated: "true",
+          userRole: "user",
+          id: userId,
+        })
+      );
       navigate(URLs.ui.search);
       
     },

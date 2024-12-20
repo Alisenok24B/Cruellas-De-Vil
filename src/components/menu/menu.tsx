@@ -4,6 +4,8 @@ import { StyledMenu, StyledMenuLi } from "./menu.styled";
 import { Link } from "../link";
 import { Svg } from "../svg-icon";
 import { useSearchParams } from 'react-router-dom';
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 const svgPropsMap = {
   width: '55px',
@@ -27,14 +29,14 @@ const svgPropsProfile = {
 
 
 export function Menu({ currentNavElement }) {
-  const id = localStorage.getItem('id')
+  const id = useSelector((s: RootState) => s.user.id);
   console.log('id = ', id)
   const nav = {
     search: { title: "Карта", svg: <Svg {...svgPropsMap} />, href: URLs.ui.search },
     viewing: { title: "Профиль", svg: <Svg {...svgPropsProfile} />, href: `${URLs.ui.dogsitterViewing}?id=${id}` }, //URLs.ui.dogsitterViewing.getUrl(char.id)
     exit: { title: "Выход", href: URLs.baseUrl }
   };
-  const userRole = localStorage.getItem('userRole');
+  const userRole = useSelector((s: RootState) => s.user.userRole);
   const [ searchParams ] = useSearchParams();
   const urlUserId = searchParams.get('id'); // Получаем user_id из URL-параметра
   return (
@@ -46,7 +48,7 @@ export function Menu({ currentNavElement }) {
       </StyledMenuLi>
       {userRole !== 'owner' && (
         <StyledMenuLi>
-          <Link contrast={(currentNavElement === nav.viewing.title) && (urlUserId === id)} href={nav.viewing.href}>
+          <Link contrast={(currentNavElement === nav.viewing.title) && (urlUserId === String(id))} href={nav.viewing.href}>
                 {nav.viewing.svg}
           </Link>
         </StyledMenuLi>

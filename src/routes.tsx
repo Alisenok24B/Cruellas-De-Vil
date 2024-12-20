@@ -6,9 +6,12 @@ import Login from './pages/login';
 import Register from './pages/register';
 import Search from './pages/search';
 import ProfileView from './pages/dogsitter-viewing';
+import { userState } from "./store/user.slice";
+import { useSelector } from "react-redux";
+import { RootState } from "./store/store";
 
 const ProtectedRoute = ({ children }) => {
-  const isAuthenticated = localStorage.getItem('isAuthenticated');
+  const isAuthenticated = useSelector((s: RootState) => s.user.isAuthenticated);
   if (!isAuthenticated) {
     return <Navigate to={URLs.baseUrl} />;
   }
@@ -16,7 +19,7 @@ const ProtectedRoute = ({ children }) => {
 };
 
 const UnprotectedRoute = ({ children }) => {
-  const isAuthenticated = localStorage.getItem('isAuthenticated');
+  const isAuthenticated = useSelector((s: RootState) => s.user.isAuthenticated);
   if (isAuthenticated) {
     return <Navigate to={URLs.ui.search} />;
   }
@@ -24,7 +27,7 @@ const UnprotectedRoute = ({ children }) => {
 };
 
 const RoleProtectedRoute = ({ role, children }) => {
-  const userRole = localStorage.getItem('userRole');
+  const userRole = useSelector((s: RootState) => s.user.userRole);
   if (userRole === role) {
     return <Navigate to={URLs.ui.search} />;
   }
