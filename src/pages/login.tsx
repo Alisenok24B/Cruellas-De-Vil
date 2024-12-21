@@ -21,6 +21,8 @@ import { Logo } from "../components/logo";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store/store";
 import { userActions } from "../store/user.slice";
+import { useAuthenticateMutation } from "../store/api/apiSlice"; // Импорт мутации
+
 
 const InputFields = ({
   formValues,
@@ -108,6 +110,7 @@ const Login = () => {
   });
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+  const [authenticate, { isLoading }] = useAuthenticateMutation();
 
   const validateForm = () => {
     const errors = {};
@@ -131,22 +134,12 @@ const Login = () => {
     if (!validateForm()) {
       return;
     }
-    const authResponse = await fetch(`${URLs.api.main}/auth`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    try {
+      const user = await authenticate({
         phoneNumber: formValues["number-phone"],
         password: formValues["password"],
-      }),
-    });
+      }).unwrap();
 
-    if (authResponse.ok) {
-      const user = await authResponse.json();
-      // localStorage.setItem('isAuthenticated', 'true');
-      // localStorage.setItem('userRole', user.data.role);
-      // localStorage.setItem('id', user.data.id);
       dispatch(
         userActions.addJwt({
           isAuthenticated: "true",
@@ -155,23 +148,13 @@ const Login = () => {
         })
       );
       navigate(URLs.ui.search);
-    } else {
-      const error = await authResponse.json();
-      setFormErrors({ ...formErrors, "number-phone": error.error });
+    } catch (error) {
+      setFormErrors({
+        ...formErrors,
+        "number-phone": error.data?.error || "Произошла ошибка",
+      });
     }
 
-    /*const response = await fetch(`${URLs.api.main}/users`);
-    const users = await response.json();
-
-    const user = users.find(u => u.phone_number.toString() === formValues['number-phone'] && u.password.toString() === formValues['password']);
-    if (user) {
-      localStorage.setItem('isAuthenticated', 'true');
-      localStorage.setItem('userRole', user.role);
-      localStorage.setItem('id', user.id);
-      navigate(URLs.ui.search);
-    } else {
-      alert('Неверный номер телефона или пароль');
-    }*/
   };
 
   const googleLogin = useGoogleLogin({
