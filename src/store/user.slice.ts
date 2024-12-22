@@ -5,13 +5,13 @@ import { URLs } from "../__data__/urls";
 export const JWT_PERSISTENT_STATE = "userData";
 
 export interface userPersistentState {
-  isAuthenticated: string | null;
+  isAuthenticated: boolean | null;
   userRole: string | null;
   id: number | null;
 }
 
 export interface userState {
-  isAuthenticated: string | null;
+  isAuthenticated: boolean | null;
   userRole: string | null;
   id: number | null;
 }
@@ -32,7 +32,7 @@ export const userSlice = createSlice({
     addJwt: (
       state,
       action: PayloadAction<{
-        isAuthenticated: string;
+        isAuthenticated: boolean;
         userRole: string;
         id: number;
       }>
@@ -40,6 +40,14 @@ export const userSlice = createSlice({
       state.isAuthenticated = action.payload.isAuthenticated;
       state.userRole = action.payload.userRole;
       state.id = action.payload.id;
+    },
+    updateJwt: (
+      state,
+      action: PayloadAction<{
+        isAuthenticated: boolean;
+      }>
+    ) => {
+      state.isAuthenticated = action.payload.isAuthenticated;
     },
     logout: (state) => {
       state.isAuthenticated = null;

@@ -23,7 +23,6 @@ import { AppDispatch } from "../store/store";
 import { userActions } from "../store/user.slice";
 import { useAuthenticateMutation } from "../store/api/apiSlice"; // Импорт мутации
 
-
 const InputFields = ({
   formValues,
   setFormValues,
@@ -142,19 +141,18 @@ const Login = () => {
 
       dispatch(
         userActions.addJwt({
-          isAuthenticated: "true",
+          isAuthenticated: false,
           userRole: user.data.role,
           id: user.data.id,
         })
       );
-      navigate(URLs.ui.search);
+      navigate(URLs.ui.twoFactorAuth);
     } catch (error) {
       setFormErrors({
         ...formErrors,
         "number-phone": error.data?.error || "Произошла ошибка",
       });
     }
-
   };
 
   const googleLogin = useGoogleLogin({
@@ -167,7 +165,7 @@ const Login = () => {
       // localStorage.setItem("id", userId.toString());
       dispatch(
         userActions.addJwt({
-          isAuthenticated: "true",
+          isAuthenticated: true,
           userRole: "user",
           id: userId,
         })

@@ -20,6 +20,16 @@ router.post("/auth", (request, response) => {
     }
 })
 
+router.post("/auth/2fa", (request, response) => {
+  const { code } = request.body;
+  if (code === "0000") {
+    response.send(require("../json/2fa/success.json"));
+  } else {
+    response.status(400).send(require("../json/2fa/error.json"));
+  }
+});
+
+
 router.post("/register", (request, response) => {
     const {firstName, secondName, phoneNumber, password, role} = request.body;
     console.log(phoneNumber, password, role);

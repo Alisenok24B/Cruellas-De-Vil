@@ -10,6 +10,7 @@ interface LinkProps {
     children: React.ReactNode;
     contrast?: boolean;
     exit?: boolean;
+    logout?: boolean;
 }
 
 export const Link = (props: LinkProps) => {
@@ -18,7 +19,7 @@ export const Link = (props: LinkProps) => {
     const linkProps: any = {};
     
     const handleNavigation = (e) => {
-        if (props.exit) {
+        if (props.exit || props.logout) {
             e.preventDefault();
             dispatch(userActions.logout())
             navigate(props.href);
@@ -30,6 +31,7 @@ export const Link = (props: LinkProps) => {
             contrast={props.contrast} 
             href={props.href} 
             exit={props.exit} 
+            logout={props.logout}
             to={props.href} 
             onClick={handleNavigation}
             {...linkProps}

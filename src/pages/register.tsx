@@ -249,7 +249,7 @@ const Register = () => {
 
       dispatch(
         userActions.addJwt({
-          isAuthenticated: "true",
+          isAuthenticated: true,
           userRole: user.data.role,
           id: user.data.id,
         })
@@ -271,7 +271,7 @@ const Register = () => {
       // localStorage.setItem('id', (userId).toString());
       dispatch(
         userActions.addJwt({
-          isAuthenticated: "true",
+          isAuthenticated: true,
           userRole: "user",
           id: userId,
         })

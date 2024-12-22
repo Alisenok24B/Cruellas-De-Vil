@@ -33,7 +33,21 @@ export const apiSlice = createApi({
         body: formData,
       }),
     }),
+    verifyTwoFactorAuth: builder.mutation({
+      query: (code: { code: string }) => ({
+        url: "/auth/2fa",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: code,
+      }),
+    }),
   }),
 });
 
-export const { useAuthenticateMutation, useRegisterMutation } = apiSlice;
+export const {
+  useAuthenticateMutation,
+  useRegisterMutation,
+  useVerifyTwoFactorAuthMutation,
+} = apiSlice;
