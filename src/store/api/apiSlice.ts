@@ -1,3 +1,4 @@
+// apiSlice.ts
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { URLs } from "../../__data__/urls";
 
@@ -43,6 +44,12 @@ export const apiSlice = createApi({
         body: code,
       }),
     }),
+    fetchUsers: builder.query({
+      query: () => ({
+        url: "/users",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -50,4 +57,5 @@ export const {
   useAuthenticateMutation,
   useRegisterMutation,
   useVerifyTwoFactorAuthMutation,
+  useFetchUsersQuery,
 } = apiSlice;

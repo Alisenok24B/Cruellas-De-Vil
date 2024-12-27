@@ -29,7 +29,6 @@ router.post("/auth/2fa", (request, response) => {
   }
 });
 
-
 router.post("/register", (request, response) => {
     const {firstName, secondName, phoneNumber, password, role} = request.body;
     console.log(phoneNumber, password, role);
