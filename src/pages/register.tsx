@@ -237,7 +237,6 @@ const Register = () => {
     }
 
     const role = roles.dogsitter ? "dogsitter" : "owner";
-    console.log("role = ", role);
     try {
       const user = await register({
         firstName: formValues["first-name"],
