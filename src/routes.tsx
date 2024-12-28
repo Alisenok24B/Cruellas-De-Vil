@@ -35,10 +35,8 @@ const TwoFactorAuthRoute = ({ children }) => {
 
   // Если пользователь прошел авторизацию, но не выполнил двухфакторную проверку
   if (!isAuthenticated && userId && userRole) {
-    console.log("auth", URLs.ui.twoFactorAuth);
     return <Navigate to={URLs.ui.twoFactorAuth} />;
   }
-  console.log("not auth");
 
   // Перенаправляем на логин, если данные отсутствуют
   return children;

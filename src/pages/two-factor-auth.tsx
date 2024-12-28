@@ -42,6 +42,14 @@ const TwoFactorAuth = () => {
     setError("");
   };
 
+  const handleChange = (e) => {
+    const value = e.target.value;
+
+    // Фильтруем только цифры
+    const filteredValue = value.replace(/\D/g, "");
+    setCode(filteredValue); // Обновляем состояние только с цифрами
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -100,7 +108,7 @@ const TwoFactorAuth = () => {
             type="text"
             maxLength={4}
             value={code}
-            onChange={(e) => setCode(e.target.value)}
+            onChange={handleChange}
             onBlur={handleBlur} // Обработка ухода фокуса
             onFocus={handleFocus} // Обработка фокуса
             error={error} // Передаем сообщение об ошибке
