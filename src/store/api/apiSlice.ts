@@ -50,6 +50,13 @@ export const apiSlice = createApi({
         method: "GET",
       }),
     }),
+    getDogsitterById: builder.query({
+      query: (id: number) => ({
+        url: `/dogsitter-viewing`,
+        method: 'POST',
+        body: { id },
+    }),
+    }),
   }),
 });
 
@@ -58,4 +65,5 @@ export const {
   useRegisterMutation,
   useVerifyTwoFactorAuthMutation,
   useFetchUsersQuery,
+  useGetDogsitterByIdQuery
 } = apiSlice;

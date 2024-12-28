@@ -6,6 +6,22 @@ router.get("/users", (request, response) => {
     response.send(require("../json/users.json"))
 })
 
+router.get("/dogsitter-viewing", (request, response) => {
+    const { id } = request.query;
+    console.log(`Получен запрос для dogsitter с ID: ${id}`);
+
+    const users = require("../json/users.json");
+    const user = users.find(user => user.id === Number(id));
+
+    if (user) {
+        response.json(user);
+    } else {
+        response.status(404).json({ error: "User not found" });
+    }
+});
+
+
+
 router.post("/auth", (request, response) => {
     const {phoneNumber, password} = request.body;
     console.log(phoneNumber, password);
