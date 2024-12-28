@@ -51,7 +51,6 @@ const ProfileViewing = () => {
     return <div>Ошибка загрузки данных</div>;
   }
 
-  // Проверка, является ли текущий пользователь владельцем профиля
   const isCurrentUser = Number(userIdFromUrl) === currentUserId;
 
   return (

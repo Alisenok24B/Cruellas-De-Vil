@@ -9,7 +9,6 @@ router.get("/users", (request, response) => {
 router.get("/dogsitter-viewing", (req, res) => {
     const { id } = req.query;
     console.log(`Получен запрос для dogsitter с ID: ${id}`);
-
     const users = require("../json/users.json");
     const user = users.find((user) => user.id === Number(id));
 
