@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { user_photo } from '../assets/img';
-import { UserPhoto } from '../components/user-photo';
-import { UserInfo } from '../components/user-info';
+import { useSelector } from 'react-redux';
+import { useGetDogsitterByIdQuery } from '../store/api/apiSlice';
 import { Header } from '../components/header';
-import { ModalWindow } from '../components/modal-window';
-import usersData from '../../stubs/json/users.json';
 import { Footer } from '../components/footer';
+import { UserPhoto } from '../components/user-photo';
+import { ModalWindow } from '../components/modal-window';
 import { StyledButton } from '../components/button/button.styled';
+
+import { RootState } from '../store/store';
 
 import {
   ProfileWrapper,
@@ -23,79 +24,59 @@ import {
 } from './profile.styled';
 
 const ProfileViewing = () => {
-  const [userData, setUserData] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
-  const [searchParams] = useSearchParams();
-  console.log('Message', searchParams);
-  const user_id = searchParams.get('id'); // Получаем user_id из URL-параметра
-  console.log('userId from URL', user_id);
-  
-  useEffect(() => {
-    const userId = localStorage.getItem('id'); // Получение id из сессии
-    console.log('userId from session:', userId);
-  
-    const defaultUserId = '1';
-    let userIdToFind = userId || defaultUserId;;
-  
-    if (user_id != 'null') {
-      userIdToFind = user_id;
-    }
 
-    console.log('Итоговый айдишник', userIdToFind);
-    if (userIdToFind) {
-      const user = usersData.find(user => user.id === parseInt(userIdToFind));
-      console.log('User data from JSON:', user);
-  
-      if (user) {
-        setUserData(user);
-      } else {
-        setUserData(usersData.find(user => user.id === 1));
-      }
-    }
-  }, [user_id]);
-  
-  const handleEditClick = () => {
-    setIsModalOpen(true);
-  };
-  
+  const currentUserId = useSelector((state: RootState) => state.user.id);
+
+  const [searchParams] = useSearchParams();
+  const userIdFromUrl = searchParams.get('id');
+  console.log('User ID from URL:', userIdFromUrl);
+
+  const { data: userData, isLoading, error } = useGetDogsitterByIdQuery(Number(userIdFromUrl), {
+    skip: !userIdFromUrl,
+  });
+
+  console.log('Query status:', { isLoading, error, userData });
+
+  const handleEditClick = () => setIsModalOpen(true);
   const handleModalSave = (updatedUserData) => {
-    setUserData(updatedUserData);
+    console.log('Updated user data:', updatedUserData);
     setIsModalOpen(false);
   };
-  
-  const handleModalCancel = () => {
-    setIsModalOpen(false);
-  };
-  
-  const isCurrentUser = user_id === localStorage.getItem('id') || user_id === 'null'; // Проверяем, является ли текущий пользователь владельцем профиля
-  
-  if (!userData) {
-    return <div>Loading...</div>;
+  const handleModalCancel = () => setIsModalOpen(false);
+
+  if (isLoading) return <div>Загрузка...</div>;
+  if (error || !userData) {
+    console.error('Ошибка загрузки данных:', error);
+    return <div>Ошибка загрузки данных</div>;
   }
+
+  // Проверка, является ли текущий пользователь владельцем профиля
+  const isCurrentUser = Number(userIdFromUrl) === currentUserId;
 
   return (
     <>
-      <Header currentNavElement={"Профиль"}/>
+      <Header currentNavElement="Профиль" />
 
       <ProfileWrapper>
         <ProfileHeader>
-          <ProfileTitle>{userData.first_name} {userData.second_name}</ProfileTitle>
-          {isCurrentUser && <StyledButton onClick={handleEditClick}>Редактировать</StyledButton>}
-          {/* <EditButton onClick={handleEditClick}>Редактировать</EditButton> */}
+          <ProfileTitle>
+            {userData.first_name} {userData.second_name}
+          </ProfileTitle>
+          {isCurrentUser && (
+            <StyledButton onClick={handleEditClick}>Редактировать</StyledButton>
+          )}
         </ProfileHeader>
 
         <ProfileMain>
           <ProfilePhoto>
-            <UserPhoto photoSrc={user_photo} photoAlt="Фото пользователя" />
+            <UserPhoto photoSrc="/path/to/default/photo.jpg" photoAlt="Фото пользователя" />
           </ProfilePhoto>
           <ProfileInfo>
             <ProfileInfoItem>
-              <UserInfo className="info"
-                location={userData.location}
-                price={`${userData.price} руб/день`}
-                phone={userData.phone_number}
-              />
+              <div><strong>Местоположение:</strong> {userData.location}</div>
+              <div><strong>Стоимость:</strong> {userData.price} руб/день</div>
+              <div><strong>Телефон:</strong> {userData.phone_number}</div>
             </ProfileInfoItem>
             <ProfileAbout>
               <ProfileAboutTitle>Обо мне</ProfileAboutTitle>
@@ -104,7 +85,8 @@ const ProfileViewing = () => {
           </ProfileInfo>
         </ProfileMain>
       </ProfileWrapper>
-      <Footer/>
+      
+      <Footer />
 
       {isModalOpen && (
         <ModalWindow
