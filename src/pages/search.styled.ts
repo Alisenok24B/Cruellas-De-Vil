@@ -33,3 +33,23 @@ export const StyledMap = styled.div`
     overflow: hidden;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 `
+
+export const AnimationContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding-top: 50px;
+`
+
+export const LottieWrapper = styled.div`
+    width: 550px;
+    height: 550px;
+`
+
+export const StyledText = styled.p`
+    font-size: 25px;
+    font-weight: 550;
+    color: #000000;
+`
