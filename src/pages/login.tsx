@@ -21,7 +21,10 @@ import { Logo } from "../components/logo";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store/store";
 import { userActions } from "../store/user.slice";
-import { useAuthenticateMutation } from "../store/api/apiSlice"; // Импорт мутации
+import { useAuthenticateMutation } from "../store/api/apiSlice";
+import { getFeatures } from "@brojs/cli";
+
+const { googleAuth } = getFeatures("dog-sitters-finder");
 
 const InputFields = ({
   formValues,
@@ -215,16 +218,18 @@ const Login = () => {
         </Form>
       </ErrorBoundary>
       <ErrorBoundary>
-        <GoogleAuthButton>
-          <Button
-            isGoogle
-            type="button"
-            icon={icon_google}
-            onClick={googleLogin}
-          >
-            Продолжить с Google
-          </Button>
-        </GoogleAuthButton>
+        {googleAuth && (
+          <GoogleAuthButton>
+            <Button
+              isGoogle
+              type="button"
+              icon={icon_google}
+              onClick={googleLogin}
+            >
+              Продолжить с Google
+            </Button>
+          </GoogleAuthButton>
+        )}
       </ErrorBoundary>
       <ErrorBoundary>
         <LinkContainer>

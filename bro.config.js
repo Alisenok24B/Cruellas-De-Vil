@@ -23,6 +23,11 @@ module.exports = {
         value: "true",
         key: "showDogsitters",
       },
+      googleAuth: {
+        on: true,
+        value: "true",
+        key: "googleAuth",
+      },
     },
   },
   config: {
