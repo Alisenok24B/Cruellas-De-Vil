@@ -2,14 +2,18 @@ const { response } = require('express');
 
 const router = require('express').Router();
 
+const stubs = {
+    "users": "success"
+}
+
 router.get("/users", (request, response) => {
-    response.send(require("../json/users.json"))
+    response.status(/error/i.test(stubs.users) ? 500 : 200).send(require(`../json/users/${stubs.users}.json`))
 })
 
 router.get("/dogsitter-viewing", (req, res) => {
     const { id } = req.query;
     console.log(`Получен запрос для dogsitter с ID: ${id}`);
-    const users = require("../json/users.json");
+    const users = require(`../json/users/${stubs.users}.json`);
     const user = users.find((user) => user.id === Number(id));
 
     if (user) {
@@ -18,9 +22,6 @@ router.get("/dogsitter-viewing", (req, res) => {
         res.status(404).json({ error: "User not found" });
     }
 });
-
-
-
 
 router.post("/auth", (request, response) => {
     const {phoneNumber, password} = request.body;
@@ -60,3 +61,29 @@ router.post("/register", (request, response) => {
 })
 
 module.exports = router;
+
+const createEelemnt = (key, value, buttonTitle) => `
+    <label>
+        <input name="${key}" type="radio" ${stubs[key] === value && "checked"} onclick="fetch('/api/admin/set/${key}/${value}')"/>
+        ${buttonTitle || value}
+    </label>
+`
+
+router.get("/admin", (request, response) => {
+    response.send(`
+        <div>
+            <fieldset>
+                <legend>users</legend>
+                ${createEelemnt('users', 'success')}
+                ${createEelemnt('users', 'empty')}
+                ${createEelemnt('users', 'error')}
+            </fieldset>
+        </div>    
+    `)
+})
+
+router.get("/admin/set/:key/:value", (request, response) => {
+    const { key, value } = request.params;
+    stubs[key] = value;
+    response.send("Okay")
+})
