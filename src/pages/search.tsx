@@ -7,9 +7,11 @@ import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { DivSearch } from '../components/div-search';
 import { ErrorBoundary } from '../components/error-boundary';
-import { StyledFind, StyledFinded, StyledMain, StyledMap, StyledPreviewMap } from './search.styled';
+import { StyledFind, StyledFinded, StyledMain, StyledMap, StyledPreviewMap, AnimationContainer, 
+    LottieWrapper, StyledText } from './search.styled';
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
 import { getFeatures } from "@brojs/cli";
+import Lottie from 'lottie-react';
 
 const Search = () => {
     const [formValues, setFormValues] = useState({ 'where-find': '', 'sort-by': '' });
@@ -90,19 +92,30 @@ const Search = () => {
                         <TitleH1>Найти догситера</TitleH1>
                     </StyledFind>
                     <DivSearch formValues={formValues} setFormValues={setFormValues} users={users} setUsers={setUsers}/>
-                    <StyledFinded>Найдено: {users.length} догситтера</StyledFinded>
-                    <StyledPreviewMap>
-                        { showDogsitters && <PreviewsList users={users} currentPoint={currentPoint}/> }
-                        <StyledMap>
-                            <YMaps>
-                                <Map state={{ center: currenctCoord, zoom: 10 }} width="100%" height="100%">
-                                    {points.map((point, index) => (
-                                        <Placemark key={index} geometry={point.coordinates} properties={{ iconContent: `${index + 1}` }} onClick={() => setCurrentPoint(point.id)}/>
-                                    ))}
-                                </Map>
-                            </YMaps>
-                        </StyledMap>
-                    </StyledPreviewMap>
+                    {users.length > 0 ? (
+                        <>
+                            <StyledFinded>Найдено: {users.length} догситтера</StyledFinded>
+                            <StyledPreviewMap>
+                                { showDogsitters && <PreviewsList users={users} currentPoint={currentPoint}/> }
+                                <StyledMap>
+                                    <YMaps>
+                                        <Map state={{ center: currenctCoord, zoom: 10 }} width="100%" height="100%">
+                                            {points.map((point, index) => (
+                                                <Placemark key={index} geometry={point.coordinates} properties={{ iconContent: `${index + 1}` }} onClick={() => setCurrentPoint(point.id)}/>
+                                            ))}
+                                        </Map>
+                                    </YMaps>
+                                </StyledMap>
+                            </StyledPreviewMap>
+                        </>
+                    ) : (
+                        <AnimationContainer style={{ textAlign: 'center' }}>
+                            <LottieWrapper>
+                                <Lottie animationData={require('../assets/img/dog_cry.json')} />
+                            </LottieWrapper>
+                            <StyledText>Догситтеры не найдены...</StyledText>
+                        </AnimationContainer>
+                    )}
                 </Container>
             </StyledMain>
             <Footer/>
