@@ -111,7 +111,7 @@ const Search = () => {
                     ) : (
                         <AnimationContainer style={{ textAlign: 'center' }}>
                             <LottieWrapper>
-                                <Lottie animationData={require('../assets/img/dog_cry.json')} />
+                                <Lottie animationData={require('../assets/img/bad_dog.json')} />
                             </LottieWrapper>
                             <StyledText>Догситтеры не найдены...</StyledText>
                         </AnimationContainer>
