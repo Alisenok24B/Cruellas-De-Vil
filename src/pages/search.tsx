@@ -7,8 +7,10 @@ import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { DivSearch } from '../components/div-search';
 import { ErrorBoundary } from '../components/error-boundary';
-import { StyledFind, StyledFinded, StyledMain, StyledMap, StyledPreviewMap, AnimationContainer, 
-    LottieWrapper, StyledText } from './search.styled';
+import {
+    StyledFind, StyledFinded, StyledMain, StyledMap, StyledPreviewMap, AnimationContainer,
+    LottieWrapper, StyledText
+} from './search.styled';
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
 import { getFeatures } from "@brojs/cli";
 import Lottie from 'lottie-react';
@@ -21,9 +23,11 @@ const Search = () => {
     const [currentPoint, setCurrentPoint] = useState(null);
     const { showDogsitters } = getFeatures("dog-sitters-finder");
 
-    const { data: fetchedUsers = [], isLoading: isLoadingUsers } = useFetchUsersQuery(null, {
+    const { data, isLoading: isLoadingUsers } = useFetchUsersQuery(null, {
         skip: !showDogsitters,
     });
+
+    const fetchedUsers = data?.data || [];
 
     useEffect(() => {
         if (fetchedUsers.length > 0) {
@@ -85,23 +89,23 @@ const Search = () => {
 
     return (
         <ErrorBoundary>
-            <Header currentNavElement={"Карта"}/>
+            <Header currentNavElement={"Карта"} />
             <StyledMain>
                 <Container>
                     <StyledFind>
                         <TitleH1>Найти догситера</TitleH1>
                     </StyledFind>
-                    <DivSearch formValues={formValues} setFormValues={setFormValues} users={users} setUsers={setUsers}/>
+                    <DivSearch formValues={formValues} setFormValues={setFormValues} users={users} setUsers={setUsers} />
                     {users.length > 0 ? (
                         <>
                             <StyledFinded>Найдено: {users.length} догситтера</StyledFinded>
                             <StyledPreviewMap>
-                                { showDogsitters && <PreviewsList users={users} currentPoint={currentPoint}/> }
+                                {showDogsitters && <PreviewsList users={users} currentPoint={currentPoint} />}
                                 <StyledMap>
                                     <YMaps>
                                         <Map state={{ center: currenctCoord, zoom: 10 }} width="100%" height="100%">
                                             {points.map((point, index) => (
-                                                <Placemark key={index} geometry={point.coordinates} properties={{ iconContent: `${index + 1}` }} onClick={() => setCurrentPoint(point.id)}/>
+                                                <Placemark key={index} geometry={point.coordinates} properties={{ iconContent: `${index + 1}` }} onClick={() => setCurrentPoint(point.id)} />
                                             ))}
                                         </Map>
                                     </YMaps>
@@ -118,7 +122,7 @@ const Search = () => {
                     )}
                 </Container>
             </StyledMain>
-            <Footer/>
+            <Footer />
         </ErrorBoundary>
     );
 };
