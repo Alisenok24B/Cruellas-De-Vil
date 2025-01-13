@@ -14,6 +14,7 @@ import {
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
 import { getFeatures } from "@brojs/cli";
 import Lottie from 'lottie-react';
+import { FloatButton } from 'antd';
 
 const Search = () => {
     const [formValues, setFormValues] = useState({ 'where-find': '', 'sort-by': '' });
@@ -122,6 +123,7 @@ const Search = () => {
                     )}
                 </Container>
             </StyledMain>
+            <FloatButton.BackTop />
             <Footer />
         </ErrorBoundary>
     );
