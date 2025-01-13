@@ -8,6 +8,9 @@ import { Global } from "@emotion/react";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 
+import 'antd/dist/reset.css';
+
+
 const App = () => {
   return (
     <BrowserRouter>
