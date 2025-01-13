@@ -26,12 +26,15 @@ export function DivSearch ({formValues, setFormValues, users, setUsers}) {
           } else if (value === 'descending') {
             const sortedUsers = [...users].sort((a, b) => b.price - a.price);
             setUsers(sortedUsers);
+          } else if (value === 'rating') {
+            const sortedUsers = [...users].sort((a, b) => b.rating - a.rating);
+            setUsers(sortedUsers);
           }
     };
     
     const handleReset = () => {
         setFormValues({ 'where-find': '', 'sort-by': '' });
-        // window.location.reload();
+        window.location.reload();
     };
 
     return (
