@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 export const StyledMain = styled.main`
     padding-top: 40px;
     padding-bottom: 40px;
+    min-width: 576px;
 `
 
 export const StyledFind = styled.div`
