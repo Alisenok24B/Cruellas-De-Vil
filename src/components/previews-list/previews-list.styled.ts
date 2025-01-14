@@ -1,4 +1,5 @@
-import styled from "@emotion/styled"
+import styled from "@emotion/styled";
+import { Card } from 'antd';
 
 export const StyledA = styled.a`
     color: inherit;
@@ -12,7 +13,7 @@ export const StyledPreviewsList = styled.ul`
     padding-left: 0;
 `
 
-export const StyledPLLi = styled.li`
+export const StyledPL1Li = styled.li`
     width: 85%;
     height: 190px;
 
@@ -26,7 +27,15 @@ export const StyledPLLi = styled.li`
     margin-bottom: 10px;
 `
 
-export const StyledSelectedLi = styled.li`
+export const StyledPLLi = styled.li`
+    margin-bottom: 10px;
+    list-style-type: none;
+
+    color: inherit;
+    text-decoration: none;
+`
+
+export const StyledSelected1Li = styled.li`
     width: 85%;
     height: 190px;
 
@@ -38,9 +47,18 @@ export const StyledSelectedLi = styled.li`
     box-shadow: inset 0 4px 4px 0 rgba(129, 106, 88, 0.85);
 
     margin-bottom: 10px;
+
+    color: inherit;
+    text-decoration: none;
 `
 
-export const StyledPLPhoto = styled.div`
+export const StyledSelectedLi = styled.li`
+    box-shadow: inset 0 4px 4px 0 rgba(129, 106, 88, 0.85);
+    margin-bottom: 10px;
+    list-style-type: none;
+`
+
+export const StyledPL1Photo = styled.div`
     width: 230px; 
     height: 150px; 
 
@@ -50,6 +68,16 @@ export const StyledPLPhoto = styled.div`
     margin-left: 35px;
     margin-right: 45px;
 
+    @media only screen and (max-width: 1220px) {
+        display: none;
+    }
+`
+
+export const StyledPLPhoto = styled.div`
+    border-radius: 10px 0 0 10px;
+    overflow: hidden;
+    margin-right: -5px;
+    z-index: 2;
     @media only screen and (max-width: 1220px) {
         display: none;
     }
@@ -97,10 +125,29 @@ export const StyledRating = styled.div`
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-top: -20px;
-    margin-bottom: -20px;
+    margin-top: -12px;
 
     @media only screen and (max-width: 715px) {
         margin-bottom: -5px;
     }
+`
+
+export const StyledFullname= styled.p`
+    padding: 0;
+    margin: 0;
+`
+
+export const StyledCost = styled.p`
+    padding: 0;
+    margin: 0;
+
+    font-weight: 500;
+`
+
+export const StyledDivCost = styled.div`
+    height: 25px;
+    width: 65px;
+    background-color: rgb(226, 227, 213);
+    border-radius: 10%;
+    text-align: center;
 `
