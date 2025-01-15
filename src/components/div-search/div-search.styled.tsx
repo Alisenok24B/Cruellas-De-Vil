@@ -16,6 +16,9 @@ export const StyledSearch = styled.div`
     padding-bottom: 20px;
 
     color: #FFFFFF;
+
+    position: relative;
+    z-index: 3;
 `
 
 export const StyledBoxes = styled.form`
@@ -26,6 +29,9 @@ export const StyledBoxes = styled.form`
         flex-direction: column;
         align-items: center;
     }
+
+    position: relative;
+    z-index: 2;
 `
 
 export const StyledReset = styled.div`
@@ -40,4 +46,17 @@ export const StyledReset = styled.div`
     @media only screen and (max-width: 1024px) {
         margin-top: 65px;
     }
+
+    position: relative;
+    z-index: 2;
+`
+
+export const LottieWrapper = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
 `
