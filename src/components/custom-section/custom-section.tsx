@@ -67,7 +67,8 @@ export function CustomSection (props) {
                     placeholder="Сортировать по:" 
                     options={[
                             { value: "ascending", label: "Возрастанию цены" },
-                            { value: "descending", label: "Убыванию цены" }]} />
+                            { value: "descending", label: "Убыванию цены" },
+                            { value: "rating", label: "Рейтингу" }]} />
                 </StyledCustomSectionSort>
             )}
         </section>

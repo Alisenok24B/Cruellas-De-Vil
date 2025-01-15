@@ -79,6 +79,7 @@ export const StyledPLFullDesc = styled.p`
     color: #816A58;
     font-size: 16px;
     margin-top: 15px;
+    margin-bottom: 10px;
 
     @media only screen and (max-width: 715px) {
         display: none;
@@ -88,6 +89,18 @@ export const StyledPLFullDesc = styled.p`
 export const StyledPLFullNameCost = styled.p`
     @media only screen and (max-width: 715px) {
         margin-left: 5px;
-        font-size: 20px;
+        font-size: 15px;
+    }
+`
+
+export const StyledRating = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: -20px;
+    margin-bottom: -20px;
+
+    @media only screen and (max-width: 715px) {
+        margin-bottom: -5px;
     }
 `
