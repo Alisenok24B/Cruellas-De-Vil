@@ -1,4 +1,6 @@
 import React from 'react'
+import {AnimationContainer, LottieWrapper, StyledText} from '../pages/search.styled';
+import Lottie from 'lottie-react';
 
 export class ErrorBoundary extends React.Component {
   state = {
@@ -13,7 +15,12 @@ export class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.error) {
-      return <h1>Something went wrong.</h1>
+      return <AnimationContainer style={{ textAlign: 'center' }}>
+        <LottieWrapper>
+          <Lottie animationData={require('../assets/img/dog_cry.json')} />
+        </LottieWrapper>
+        <StyledText>Что-то пошло не так...</StyledText>
+      </AnimationContainer>
     }
 
     return this.props.children
