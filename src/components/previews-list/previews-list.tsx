@@ -1,8 +1,7 @@
 import React from "react";
 import user_photo from '../../assets/img/user_photo.jpg';
 import {
-  StyledPreviewsList, StyledA, StyledPLDesc, StyledPLCostRH, StyledPLFullDesc, StyledPLFullNameCost, StyledPLLi,
-  StyledPLPhoto, StyledPLPhotoImg, StyledSelectedLi, StyledRating, StyledFullname, StyledCost, StyledDivCost
+  StyledPreviewsList, StyledPLLi, StyledPhoto, StyledSelectedLi, StyledRating, StyledFullname, StyledCost, StyledDivCost
 } from "./previews-list.styled";
 
 import { URLs } from "../../__data__/urls";
@@ -16,7 +15,7 @@ const imgStyle: React.CSSProperties = {
   height: 200
 };
 
-function Preview({ userId, userIndex, userPhoto, fullName, cost, rating, fullDesc, selected, tg }) {
+function Preview({ userId, userPhoto, fullName, cost, rating, fullDesc, selected, tg }) {
   const StyledLi = selected ? StyledSelectedLi : StyledPLLi;
 
   let url = "#";
@@ -40,9 +39,9 @@ function Preview({ userId, userIndex, userPhoto, fullName, cost, rating, fullDes
   return (
     <StyledLi>
       <Flex>
-        <StyledPLPhoto>
+        <StyledPhoto>
           <img src={userPhoto} alt="Фото пользователя" style={imgStyle} />
-        </StyledPLPhoto>
+        </StyledPhoto>
         <Card
           hoverable
           style={{ width: 300 }}
@@ -80,7 +79,6 @@ export function PreviewsList({ users, currentPoint }) {
       {users.map((user, index) => (
         <Preview selected={user.id === currentPoint}
           key={index}
-          userIndex={index + 1}
           userPhoto={user_photo}
           fullName={`${user.first_name} ${user.second_name}`}
           cost={user.price}
