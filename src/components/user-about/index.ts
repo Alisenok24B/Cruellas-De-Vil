@@ -1,1 +1,0 @@
-export { UserAbout } from './user-about'

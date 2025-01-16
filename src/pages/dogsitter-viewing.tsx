@@ -4,23 +4,14 @@ import { useSelector } from 'react-redux';
 import { useGetDogsitterByIdQuery } from '../store/api/apiSlice';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
-import { UserPhoto } from '../components/user-photo';
+import { UserCard } from '../components/user-card';
 import { ModalWindow } from '../components/modal-window';
 import { StyledButton } from '../components/button/button.styled';
-
+  
 import { RootState } from '../store/store';
 
 import {
   ProfileWrapper,
-  ProfileHeader,
-  ProfileTitle,
-  ProfileMain,
-  ProfilePhoto,
-  ProfileInfo,
-  ProfileInfoItem,
-  ProfileAbout,
-  ProfileAboutTitle,
-  ProfileAboutText,
 } from './profile.styled';
 
 const ProfileViewing = () => {
@@ -56,44 +47,15 @@ const ProfileViewing = () => {
   return (
     <>
       <Header currentNavElement="Профиль" />
-
       <ProfileWrapper>
-        <ProfileHeader>
-          <ProfileTitle>
-            {userData.first_name} {userData.second_name}
-          </ProfileTitle>
-          {isCurrentUser && (
-            <StyledButton onClick={handleEditClick}>Редактировать</StyledButton>
-          )}
-        </ProfileHeader>
-
-        <ProfileMain>
-          <ProfilePhoto>
-            <UserPhoto photoSrc="/path/to/default/photo.jpg" photoAlt="Фото пользователя" />
-          </ProfilePhoto>
-          <ProfileInfo>
-            <ProfileInfoItem>
-              <div><strong>Местоположение:</strong> {userData.location}</div>
-              <div><strong>Стоимость:</strong> {userData.price} руб/день</div>
-              <div><strong>Телефон:</strong> {userData.phone_number}</div>
-            </ProfileInfoItem>
-            <ProfileAbout>
-              <ProfileAboutTitle>Обо мне</ProfileAboutTitle>
-              <ProfileAboutText>{userData.about_me}</ProfileAboutText>
-            </ProfileAbout>
-          </ProfileInfo>
-        </ProfileMain>
-      </ProfileWrapper>
-      
-      <Footer />
-
-      {isModalOpen && (
-        <ModalWindow
-          userData={userData}
-          onSave={handleModalSave}
-          onCancel={handleModalCancel}
+        <UserCard 
+          userData={userData} 
+          isEditable={isCurrentUser} 
+          onEdit={handleEditClick} 
         />
-      )}
+
+      </ProfileWrapper>
+      <Footer />
     </>
   );
 };

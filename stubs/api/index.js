@@ -13,15 +13,19 @@ router.get("/users", (request, response) => {
 router.get("/dogsitter-viewing", (req, res) => {
     const { id } = req.query;
     console.log(`Получен запрос для dogsitter с ID: ${id}`);
-    const users = require(`../json/users/${stubs.users}.json`);
+    
+    const usersFile = require(`../json/users/${stubs.users}.json`);
+    const users = usersFile.data; // Извлекаем массив из свойства "data"
+    
     const user = users.find((user) => user.id === Number(id));
 
     if (user) {
-        res.json(user);
+        res.json(user); // Возвращаем найденного пользователя
     } else {
-        res.status(404).json({ error: "User not found" });
+        res.status(404).json({ error: "User not found" }); // Если пользователь не найден
     }
 });
+
 
 router.post("/auth", (request, response) => {
     const {phoneNumber, password} = request.body;

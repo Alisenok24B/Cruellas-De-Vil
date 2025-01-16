@@ -51,7 +51,7 @@ export const apiSlice = createApi({
       }),
     }),
     getDogsitterById: builder.query({
-        query: (id: number) => `/dogsitter-viewing?id=${id}`, // Автоматически использует GET
+        query: (id: number) => `/dogsitter-viewing?id=${id}`,
     }),
   }),
 });
