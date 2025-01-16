@@ -26,6 +26,42 @@ router.get("/dogsitter-viewing", (req, res) => {
     }
 });
 
+const fs = require('fs');
+const path = require('path');
+
+
+router.patch('/users/:id', (req, res) => {
+    const { id } = req.params;
+    const updateData = req.body;
+  
+    console.log('Полученные данные для обновления:', updateData);
+
+    const usersFilePath = path.resolve(__dirname, '../json/users/success.json');
+  
+    delete require.cache[require.resolve(usersFilePath)];
+    const usersFile = require(usersFilePath);
+    const users = usersFile.data;
+  
+    const userIndex = users.findIndex((user) => user.id === Number(id));
+    if (userIndex === -1) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+  
+    // Обновляем данные пользователя
+    users[userIndex] = { ...users[userIndex], ...updateData };
+  
+    // Записываем изменения обратно в файл
+    fs.writeFileSync(
+      usersFilePath,
+      JSON.stringify({ data: users }, null, 2),
+      'utf8'
+    );
+  
+    console.log('Обновлённые данные пользователя:', users[userIndex]);
+  
+    // Возвращаем обновлённого пользователя
+    res.json(users[userIndex]);
+  });
 
 router.post("/auth", (request, response) => {
     const {phoneNumber, password} = request.body;

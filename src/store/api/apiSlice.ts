@@ -7,6 +7,7 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${URLs.api.main}`, // Базовый URL
   }),
+  tagTypes: ['Dogsitter'],
   endpoints: (builder) => ({
     authenticate: builder.mutation({
       query: (credentials: { phoneNumber: string; password: string }) => ({
@@ -52,7 +53,19 @@ export const apiSlice = createApi({
     }),
     getDogsitterById: builder.query({
         query: (id: number) => `/dogsitter-viewing?id=${id}`,
+        providesTags: (result, error, id) => [{ type: 'Dogsitter', id }],
     }),
+    updateUserProfile: builder.mutation({
+      query: (updateData) => ({
+        url: `/users/${updateData.id}`,
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: updateData.data,
+      }),
+      invalidatesTags: (result, error, { id }) => [{ type: 'Dogsitter', id }],
+    }),    
   }),
 });
 
@@ -61,5 +74,6 @@ export const {
   useRegisterMutation,
   useVerifyTwoFactorAuthMutation,
   useFetchUsersQuery,
-  useGetDogsitterByIdQuery
+  useGetDogsitterByIdQuery,
+  useUpdateUserProfileMutation,
 } = apiSlice;

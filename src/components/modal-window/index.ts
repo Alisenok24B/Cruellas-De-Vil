@@ -1,1 +1,1 @@
-export { ModalWindow } from './modal-window' 
+export { EditProfileWindow } from './edit-profile-window' 

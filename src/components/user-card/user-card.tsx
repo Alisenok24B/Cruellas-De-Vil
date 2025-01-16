@@ -15,6 +15,7 @@ import {
 import { StyledButton } from '../button/button.styled';
 import { Button } from 'antd';
 import { EditTwoTone } from '@ant-design/icons';
+import { StarFilled } from '@ant-design/icons';
 import userPhoto from '../../assets/img/user_photo.jpg';
 
 export const UserCard = ({ userData, isEditable, onEdit }) => {
@@ -31,11 +32,17 @@ export const UserCard = ({ userData, isEditable, onEdit }) => {
     <StyledUserCard>
       <UserPhotoWrapper>
         <UserPhoto src={userPhoto} alt={`Фото ${userData.first_name} ${userData.second_name}`} />
-        <UserName>
-          {userData.first_name} {userData.second_name}
-        </UserName>
-        {userData.rating && <UserRating>⭐ {userData.rating.toFixed(1)}</UserRating>}
+        <div className="user-name-rating">
+          <UserName>{userData.first_name} {userData.second_name}</UserName>
+          {userData.rating && (
+            <UserRating>
+              <StarFilled />
+              <span>{userData.rating.toFixed(1)}</span>
+            </UserRating>
+          )}
+        </div>
       </UserPhotoWrapper>
+
 
       <UserInfoWrapper>
         <UserInfoItem>

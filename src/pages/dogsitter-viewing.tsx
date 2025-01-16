@@ -5,8 +5,7 @@ import { useGetDogsitterByIdQuery } from '../store/api/apiSlice';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { UserCard } from '../components/user-card';
-import { ModalWindow } from '../components/modal-window';
-import { StyledButton } from '../components/button/button.styled';
+import { EditProfileWindow } from '../components/modal-window';
   
 import { RootState } from '../store/store';
 
@@ -53,8 +52,14 @@ const ProfileViewing = () => {
           isEditable={isCurrentUser} 
           onEdit={handleEditClick} 
         />
-
       </ProfileWrapper>
+      {isModalOpen && (
+        <EditProfileWindow
+          userData={userData}
+          onSave={handleModalSave}
+          onCancel={handleModalCancel}
+        />
+      )}
       <Footer />
     </>
   );

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 
+
 export const StyledUserCard = styled.div`
   display: flex;
   align-items: flex-start;
@@ -7,7 +8,7 @@ export const StyledUserCard = styled.div`
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 24px;
-  max-width: 90%;
+  max-width: 75%;
   margin: 20px auto;
   background-color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -17,9 +18,34 @@ export const UserPhotoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  width: 40%;
+  justify-content: flex-start;
+  width: 35%;
+
+  /* Добавляем стиль для контейнера имени и рейтинга */
+  & > .user-name-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Отступ между именем и рейтингом */
+    margin-top: 8px;
+    white-space: nowrap; /* Гарантирует, что текст и звезда не будут переноситься */
+  }
 `;
+
+export const UserName = styled.h2`
+  font-size: 1.75rem;
+  margin: 0;
+  color: #333;
+`;
+
+export const UserRating = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 1.2rem;
+  color: #96A467;
+`;
+
 
 export const UserPhoto = styled.img`
   width: 200px;
@@ -29,20 +55,11 @@ export const UserPhoto = styled.img`
   margin-bottom: 16px;
 `;
 
-export const UserName = styled.h2`
-  font-size: 1.75rem;
-  margin: 0;
-  text-align: center;
-`;
 
-export const UserRating = styled.span`
-  font-size: 1.25rem;
-  margin-top: 8px;
-  color: #ffd700;
-`;
+
 
 export const UserInfoWrapper = styled.div`
-  width: 55%;
+  width: 65%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
