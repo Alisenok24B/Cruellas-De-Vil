@@ -6,10 +6,14 @@ import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { UserCard } from '../components/user-card';
 import { EditProfileWindow } from '../components/modal-window';
+import Lottie from 'lottie-react'; // Импортируем Lottie
+
   
 import { RootState } from '../store/store';
 
 import {
+  AnimationBackgroundLeft,
+  AnimationBackgroundRight,
   ProfileWrapper,
 } from './profile.styled';
 
@@ -46,6 +50,12 @@ const ProfileViewing = () => {
   return (
     <>
       <Header currentNavElement="Профиль" />
+      <AnimationBackgroundLeft>
+          <Lottie animationData={require('src/assets/img/profile_background.json')} />
+      </AnimationBackgroundLeft>
+      <AnimationBackgroundRight>
+          <Lottie animationData={require('src/assets/img/profile_background_2.json')} />
+      </AnimationBackgroundRight>
       <ProfileWrapper>
         <UserCard 
           userData={userData} 

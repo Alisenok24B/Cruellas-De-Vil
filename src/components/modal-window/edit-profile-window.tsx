@@ -76,6 +76,13 @@ export const EditProfileWindow = ({ userData, onSave, onCancel }) => {
             placeholder="Номер телефона"
           />
         </div>
+        <input
+          type="text"
+          name="location"
+          value={formData.location}
+          onChange={handleInputChange}
+          placeholder="Местоположение"
+        />
         <textarea
           name="about_me"
           value={formData.about_me}

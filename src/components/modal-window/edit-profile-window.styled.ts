@@ -17,12 +17,12 @@ export const StyledModalContent = styled.div`
   background-color: white;
   padding: 30px;
   border-radius: 12px;
-  width: 600px;
+  width: 700px; /* Увеличена ширина */
   max-width: 90%;
   max-height: 90%;
   border: 2px solid #ddd;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  overflow-y: auto; /* Добавлена прокрутка */
+  overflow-y: auto; /* Прокрутка для длинного содержимого */
 
   h2 {
     margin-top: 0;
@@ -32,7 +32,6 @@ export const StyledModalContent = styled.div`
     color: #333;
   }
 
-  /* Сетка для двух колонок */
   .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -63,7 +62,7 @@ export const StyledModalContent = styled.div`
     border-radius: 6px;
     font-size: 16px;
     box-sizing: border-box;
-    resize: none; /* Убрана возможность растягивать вручную */
+    resize: vertical; /* Возможность растягивать вручную */
     transition: border-color 0.3s ease;
 
     &:focus {
@@ -72,6 +71,22 @@ export const StyledModalContent = styled.div`
       box-shadow: 0 0 4px rgba(150, 164, 103, 0.5);
     }
   }
+
+  input[name='location'] {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        border-color: #96a467;
+        outline: none;
+        box-shadow: 0 0 4px rgba(150, 164, 103, 0.5);
+      }
 `;
 
 export const StyledModalButtons = styled.div`
@@ -97,7 +112,6 @@ export const StyledModalButtons = styled.div`
   button:first-of-type {
     background-color: var(--green);
     color: white;
-
   }
 
   button:last-of-type {
