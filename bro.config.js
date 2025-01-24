@@ -11,7 +11,6 @@ module.exports = {
   navigations: {
     "dog-sitters-finder.main": "/dog-sitters-finder",
     "dog-sitters-finder.register": "/register",
-    "dog-sitters-finder.2fa": "/two-factor-auth",
     "dog-sitters-finder.search": "/search",
     //"dog-sitters-finder.dogsitter.viewing": "/profile/:id"
     "dog-sitters-finder.dogsitter.viewing": "/dogsitter-viewing",
