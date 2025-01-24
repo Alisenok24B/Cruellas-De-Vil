@@ -9,7 +9,6 @@ import ProfileView from "./pages/dogsitter-viewing";
 import { userState } from "./store/user.slice";
 import { useSelector } from "react-redux";
 import { RootState } from "./store/store";
-import TwoFactorAuth from "./pages/two-factor-auth";
 
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = useSelector((s: RootState) => s.user.isAuthenticated);
