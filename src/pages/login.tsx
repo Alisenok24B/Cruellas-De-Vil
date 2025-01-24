@@ -24,57 +24,13 @@ import { userActions } from "../store/user.slice";
 import { useAuthenticateMutation } from "../store/api/apiSlice";
 import { getFeatures } from "@brojs/cli";
 
+// Импортируем кусок кода/логики для второго фактора аутентификации
+import { useVerifyTwoFactorAuthMutation } from "../store/api/apiSlice";
+
 const { googleAuth } = getFeatures("dog-sitters-finder");
 
-const InputFields = ({
-  formValues,
-  setFormValues,
-  formErrors,
-  setFormErrors,
-}) => {
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
-
-  const handleBlur = (e) => {
-    const { name, value } = e.target;
-    const fieldConfig = inputFieldsList.find((field) => field.name === name);
-    if (fieldConfig && fieldConfig.validation) {
-      const error = value.trim() === "" ? "" : fieldConfig.validation(value);
-      setFormErrors((prevState) => ({ ...prevState, [name]: error }));
-    }
-  };
-
-  const handleFocus = (e) => {
-    const { name } = e.target;
-    if (
-      formErrors[name] === "Поле не может быть пустым" ||
-      formErrors[name] === "Введите корректный номер телефона"
-    ) {
-      setFormErrors({ ...formErrors, [name]: "" });
-    }
-  };
-
-  return inputFieldsList.map((element) => (
-    <InputField
-      key={element.id}
-      name={element.name}
-      id={element.id}
-      type={element.type}
-      maxLength={element.maxLength}
-      error={formErrors[element.name]}
-      onChange={handleChange}
-      onBlur={handleBlur}
-      onFocus={handleFocus}
-      mask={element.mask}
-    >
-      {element.title}
-    </InputField>
-  ));
-};
-
-const validatePhoneNumber = (value) => {
+// Валидация номера телефона
+const validatePhoneNumber = (value: string) => {
   const phoneRegex = /^8\d{10}$/;
   if (!phoneRegex.test(value)) {
     return "Введите корректный номер телефона";
@@ -101,7 +57,60 @@ const inputFieldsList = [
   },
 ];
 
+const InputFields = ({
+  formValues,
+  setFormValues,
+  formErrors,
+  setFormErrors,
+}) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const fieldConfig = inputFieldsList.find((field) => field.name === name);
+    if (fieldConfig && fieldConfig.validation) {
+      const error = value.trim() === "" ? "" : fieldConfig.validation(value);
+      setFormErrors((prevState: any) => ({ ...prevState, [name]: error }));
+    }
+  };
+
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name } = e.target;
+    if (
+      formErrors[name] === "Поле не может быть пустым" ||
+      formErrors[name] === "Введите корректный номер телефона"
+    ) {
+      setFormErrors({ ...formErrors, [name]: "" });
+    }
+  };
+
+  return (
+    <>
+      {inputFieldsList.map((element) => (
+        <InputField
+          key={element.id}
+          name={element.name}
+          id={element.id}
+          type={element.type}
+          maxLength={element.maxLength}
+          error={formErrors[element.name]}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          mask={element.mask}
+        >
+          {element.title}
+        </InputField>
+      ))}
+    </>
+  );
+};
+
 const Login = () => {
+  //    Локальное состояние
   const [formValues, setFormValues] = useState({
     "number-phone": "",
     password: "",
@@ -110,12 +119,23 @@ const Login = () => {
     "number-phone": "",
     password: "",
   });
+
+  // STEP: 0 - ввод логина и пароля, 1 - ввод кода из Телеграма
+  const [step, setStep] = useState<number>(0);
+
+  // Здесь хранится код из Telegram
+  const [twoFaCode, setTwoFaCode] = useState("");
+  const [twoFaError, setTwoFaError] = useState("");
+
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const [authenticate, { isLoading }] = useAuthenticateMutation();
+  const [verifyTwoFactorAuth, { isLoading: isVerifyLoading }] =
+    useVerifyTwoFactorAuthMutation();
 
+  //    Валидация формы
   const validateForm = () => {
-    const errors = {};
+    const errors: Record<string, string> = {};
     for (const field of inputFieldsList) {
       if (!formValues[field.name]) {
         errors[field.name] = "Поле не может быть пустым";
@@ -130,18 +150,21 @@ const Login = () => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
+  //    Обработчик отправки логина (Step 1)
+  const handleSubmitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!validateForm()) {
       return;
     }
+
     try {
       const user = await authenticate({
         phoneNumber: formValues["number-phone"],
         password: formValues["password"],
       }).unwrap();
 
+      // В Redux складываем часть данных
       dispatch(
         userActions.addJwt({
           isAuthenticated: false,
@@ -149,8 +172,10 @@ const Login = () => {
           id: user.data.id,
         })
       );
-      navigate(URLs.ui.twoFactorAuth);
-    } catch (error) {
+
+      // --- Поведение для stepper ---
+      setStep(1);
+    } catch (error: any) {
       setFormErrors({
         ...formErrors,
         "number-phone": error.data?.error || "Произошла ошибка",
@@ -158,14 +183,59 @@ const Login = () => {
     }
   };
 
+  //    Обработчик ввода кода (Step 2)
+  const handleBlurCode = () => {
+    if (!twoFaCode.trim()) {
+      setTwoFaError("Поле не может быть пустым");
+    } else if (twoFaCode.length < 4) {
+      setTwoFaError("Введите корректный код");
+    } else {
+      setTwoFaError("");
+    }
+  };
+
+  const handleFocusCode = () => {
+    setTwoFaError("");
+  };
+
+  const handleChangeCode = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Оставляем только цифры
+    const filteredValue = e.target.value.replace(/\D/g, "");
+    setTwoFaCode(filteredValue);
+  };
+
+  const handleSubmitTwoFa = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!twoFaCode.trim()) {
+      setTwoFaError("Поле не может быть пустым");
+      return;
+    } else if (twoFaCode.length < 4) {
+      setTwoFaError("Введите корректный код");
+      return;
+    }
+
+    try {
+      await verifyTwoFactorAuth({ code: twoFaCode }).unwrap();
+      // Обновляем Redux: пользователь прошёл 2FA
+      dispatch(
+        userActions.updateJwt({
+          isAuthenticated: true,
+        })
+      );
+
+      navigate(URLs.ui.search); // Перенаправление на защищенную страницу
+    } catch (err) {
+      setTwoFaError("Неверный код. Попробуйте снова.");
+    }
+  };
+
+  //    Google Login
   const googleLogin = useGoogleLogin({
     onSuccess: async (response) => {
       console.log("Google Login Success:", response);
-      // localStorage.setItem("isAuthenticated", "true");
-      // localStorage.setItem("userRole", "user"); // Хочется нормальную ролевку в перспективе...
       const userId =
         Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER - 4)) + 5;
-      // localStorage.setItem("id", userId.toString());
       dispatch(
         userActions.addJwt({
           isAuthenticated: true,
@@ -180,6 +250,7 @@ const Login = () => {
     },
   });
 
+  // Рендерим либо Step 0 (логин), либо Step 1 (код)
   return (
     <Wrapper>
       <ErrorBoundary>
@@ -198,43 +269,93 @@ const Login = () => {
               (min-width: 320px) 440px,
               (min-width: 520px) 880px
             "
-          ></Logo>
+          />
           <Title>
-            <TitleH1>Войдите в свой аккаунт</TitleH1>
+            <TitleH1>
+              {step === 0
+                ? "Войдите в свой аккаунт"
+                : "Введите код подтверждения"}
+            </TitleH1>
           </Title>
         </Header>
       </ErrorBoundary>
+
       <ErrorBoundary>
-        <Form onSubmit={handleSubmit}>
-          <InputFields
-            formValues={formValues}
-            setFormValues={setFormValues}
-            formErrors={formErrors}
-            setFormErrors={setFormErrors}
-          />
-          <SubmitButton>
-            <Button type="submit">Войти</Button>
-          </SubmitButton>
-        </Form>
-      </ErrorBoundary>
-      <ErrorBoundary>
-        {googleAuth && (
-          <GoogleAuthButton>
-            <Button
-              isGoogle
-              type="button"
-              icon={icon_google}
-              onClick={googleLogin}
+        {step === 0 && (
+          <Form onSubmit={handleSubmitLogin}>
+            {/* Шаг 1: форма логина */}
+            <InputFields
+              formValues={formValues}
+              setFormValues={setFormValues}
+              formErrors={formErrors}
+              setFormErrors={setFormErrors}
+            />
+            <SubmitButton>
+              <Button type="submit">Войти</Button>
+            </SubmitButton>
+          </Form>
+        )}
+
+        {step === 1 && (
+          <Form onSubmit={handleSubmitTwoFa}>
+            {/* Шаг 2: ввод кода из Telegram */}
+            <InputField
+              name="2fa-code"
+              id="2fa-code"
+              type="text"
+              maxLength={4}
+              value={twoFaCode}
+              onChange={handleChangeCode}
+              onBlur={handleBlurCode}
+              onFocus={handleFocusCode}
+              error={twoFaError}
             >
-              Продолжить с Google
-            </Button>
-          </GoogleAuthButton>
+              Введите код из Telegram
+            </InputField>
+            <SubmitButton>
+              <Button type="submit">Подтвердить</Button>
+            </SubmitButton>
+          </Form>
         )}
       </ErrorBoundary>
+
+      {step === 0 && (
+        <ErrorBoundary>
+          {googleAuth && (
+            <GoogleAuthButton>
+              <Button
+                isGoogle
+                type="button"
+                icon={icon_google}
+                onClick={googleLogin}
+              >
+                Продолжить с Google
+              </Button>
+            </GoogleAuthButton>
+          )}
+        </ErrorBoundary>
+      )}
+
       <ErrorBoundary>
-        <LinkContainer>
-          <Link href={URLs.ui.register}>Создать аккаунт</Link>
-        </LinkContainer>
+        {step === 0 && (
+          <LinkContainer>
+            <Link href={URLs.ui.register}>Создать аккаунт</Link>
+          </LinkContainer>
+        )}
+        {step === 1 && (
+          <LinkContainer>
+            <Link
+              logout
+              href={URLs.baseUrl}
+              onClick={(e) => {
+                e.preventDefault();
+                setStep(0);
+              }}
+            >
+              Вернуться
+            </Link>
+          </LinkContainer>
+        )}
       </ErrorBoundary>
     </Wrapper>
   );

@@ -13,9 +13,6 @@ export const URLs = {
     register:
       getNavigationValue("dog-sitters-finder.register") &&
       `${baseUrl}${getNavigationValue("dog-sitters-finder.register")}`,
-    twoFactorAuth:
-      getNavigationValue("dog-sitters-finder.2fa") &&
-      `${baseUrl}${getNavigationValue("dog-sitters-finder.2fa")}`,
     /*dogsitterViewing: {
             url: `${baseUrl}${getNavigationsValue('dog-sitters-finder.dogsitter.viewing')}`,
             on: Boolean(getNavigationsValue('dog-sitters-finder.dogsitter.viewing')),

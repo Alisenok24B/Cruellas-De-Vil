@@ -27,21 +27,6 @@ const UnprotectedRoute = ({ children }) => {
   return children;
 };
 
-// Маршрут для двухфакторной аутентификации
-const TwoFactorAuthRoute = ({ children }) => {
-  const isAuthenticated = useSelector((s: RootState) => s.user.isAuthenticated);
-  const userId = useSelector((s: RootState) => s.user.id);
-  const userRole = useSelector((s: RootState) => s.user.userRole);
-
-  // Если пользователь прошел авторизацию, но не выполнил двухфакторную проверку
-  if (!isAuthenticated && userId && userRole) {
-    return <Navigate to={URLs.ui.twoFactorAuth} />;
-  }
-
-  // Перенаправляем на логин, если данные отсутствуют
-  return children;
-};
-
 const RoleProtectedRoute = ({ role, children }) => {
   const userRole = useSelector((s: RootState) => s.user.userRole);
   if (userRole === role) {
@@ -56,9 +41,9 @@ const PageRoutes = () => (
       <Route
         path={URLs.baseUrl}
         element={
-          <TwoFactorAuthRoute>
+          <UnprotectedRoute>
             <Login />
-          </TwoFactorAuthRoute>
+          </UnprotectedRoute>
         }
       />
       <Route
@@ -66,14 +51,6 @@ const PageRoutes = () => (
         element={
           <UnprotectedRoute>
             <Register />
-          </UnprotectedRoute>
-        }
-      />
-      <Route
-        path={URLs.ui.twoFactorAuth}
-        element={
-          <UnprotectedRoute>
-            <TwoFactorAuth />
           </UnprotectedRoute>
         }
       />
