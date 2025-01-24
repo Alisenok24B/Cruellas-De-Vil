@@ -18,15 +18,15 @@ import { EditTwoTone } from '@ant-design/icons';
 import { StarFilled } from '@ant-design/icons';
 import userPhoto from '../../assets/img/user_photo.jpg';
 
-export const UserCard = ({ userData, isEditable, onEdit }) => {
+export const UserCard = ({ userData, isEditable, onEdit, onRate }) => {
   if (!userData) {
     return <div>Нет данных для отображения.</div>;
   }
 
-  const handleTelegramClick = () => {
-    const telegramLink = `https://t.me/${userData.tg}`;
-    window.open(telegramLink, '_blank');
-  };
+const handleTelegramClick = () => {
+  const telegramLink = `https://t.me/${userData.tg}`;
+  window.open(telegramLink, '_blank');
+};
 
   return (
     <StyledUserCard>
@@ -64,14 +64,21 @@ export const UserCard = ({ userData, isEditable, onEdit }) => {
           {isEditable ? (
             <StyledButton onClick={onEdit}>Редактировать</StyledButton>
           ) : (
-            <Button
-              onClick={handleTelegramClick}
-              type="dashed"
-              icon={<EditTwoTone twoToneColor="#96A467" />}
-              iconPosition="end"
-            >
-              Telegram
-            </Button>
+            <>
+              <Button
+                onClick={handleTelegramClick}
+                type="dashed"
+                icon={<EditTwoTone twoToneColor="#96A467" />}
+                iconPosition="end"
+              >
+                Telegram
+              </Button>
+              <StyledButton
+                onClick={onRate}
+              >
+                Оценить услугу
+              </StyledButton>
+            </>
           )}
         </ButtonContainer>
       </UserInfoWrapper>

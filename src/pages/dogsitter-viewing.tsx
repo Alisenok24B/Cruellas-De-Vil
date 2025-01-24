@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useGetDogsitterByIdQuery } from '../store/api/apiSlice';
+import { useGetDogsitterByIdQuery, useUpdateDogsitterRatingMutation } from '../store/api/apiSlice';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { UserCard } from '../components/user-card';
 import { EditProfileWindow } from '../components/modal-window';
-import Lottie from 'lottie-react'; // Импортируем Lottie
+import { RatingWindow } from '../components/rating-modal-window';
+import Lottie from 'lottie-react';
 
   
 import { RootState } from '../store/store';
@@ -19,6 +20,9 @@ import {
 
 const ProfileViewing = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
+  const [selectedRating, setSelectedRating] = useState(0);
+
 
   const currentUserId = useSelector((state: RootState) => state.user.id);
 
@@ -30,14 +34,15 @@ const ProfileViewing = () => {
     skip: !userIdFromUrl,
   });
 
-  console.log('Query status:', { isLoading, error, userData });
-
   const handleEditClick = () => setIsModalOpen(true);
   const handleModalSave = (updatedUserData) => {
     console.log('Updated user data:', updatedUserData);
     setIsModalOpen(false);
   };
   const handleModalCancel = () => setIsModalOpen(false);
+  const handleRatingClick = () => setIsRatingModalOpen(true);
+  const handleRatingModalClose = () => setIsRatingModalOpen(false);
+
 
   if (isLoading) return <div>Загрузка...</div>;
   if (error || !userData) {
@@ -60,7 +65,8 @@ const ProfileViewing = () => {
         <UserCard 
           userData={userData} 
           isEditable={isCurrentUser} 
-          onEdit={handleEditClick} 
+          onEdit={handleEditClick}
+          onRate={handleRatingClick} 
         />
       </ProfileWrapper>
       {isModalOpen && (
@@ -68,6 +74,13 @@ const ProfileViewing = () => {
           userData={userData}
           onSave={handleModalSave}
           onCancel={handleModalCancel}
+        />
+      )}
+      {isRatingModalOpen && (
+        <RatingWindow
+          isOpen={isRatingModalOpen}
+          onClose={handleRatingModalClose}
+          userId={userData.id}
         />
       )}
       <Footer />
