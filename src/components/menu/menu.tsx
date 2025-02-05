@@ -7,6 +7,7 @@ import { useSearchParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { useTranslation } from 'react-i18next';
+import { LanguageSwitcher } from '../language-switcher'
 
 const svgPropsMap = {
   width: '55px',
@@ -60,6 +61,7 @@ export function Menu({ currentNavElement }) {
           {t('dsf.pages.header.exit')}
         </Link>
       </StyledMenuLi>
+      <LanguageSwitcher />
     </StyledMenu>
   );
 }

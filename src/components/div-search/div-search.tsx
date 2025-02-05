@@ -1,9 +1,9 @@
 import React from "react";
-
 import { StyledSearch, StyledBoxes, StyledReset, LottieWrapper } from "./div-search.styled";
 import { CustomSection } from "../custom-section";
 import { Button } from "../button";
 import Lottie from 'lottie-react';
+import { useTranslation } from 'react-i18next';
 
 export function DivSearch({ formValues, setFormValues, users, setUsers }) {
     const handleWhereFindChange = (e) => {
@@ -38,19 +38,21 @@ export function DivSearch({ formValues, setFormValues, users, setUsers }) {
         window.location.reload();
     };
 
+    const { t } = useTranslation()
+
     return (
         <StyledSearch>
             <StyledBoxes>
                 <CustomSection
                     type="text"
                     value={formValues['where-find']}
-                    onChange={handleWhereFindChange}>Где искать?</CustomSection>
+                    onChange={handleWhereFindChange}>{t('dsf.pages.search.where_look')}</CustomSection>
                 <CustomSection type="select"
                     value={formValues['sort-by']}
-                    onChange={handleSortByChange}>Сортировка</CustomSection>
+                    onChange={handleSortByChange}>{t('dsf.pages.search.sort')}</CustomSection>
             </StyledBoxes>
             <StyledReset>
-                <Button isReset onClick={handleReset}>Сбросить настройки</Button>
+                <Button isReset onClick={handleReset}>{t('dsf.pages.search.reset')}</Button>
             </StyledReset>
             <LottieWrapper>
                 <Lottie animationData={require('src/assets/img/search_background.json')} />

@@ -1,3 +1,19 @@
 {
-    "dsf.pages.header.exit": "Выход"
+    "dsf.pages.header.exit": "Выход",
+    "dsf.pages.footer.signature": "DogSittersFinder — любовь и забота о вашей собаке",
+    "dsf.pages.footer.contact": "Контактная информация",
+
+    "dsf.pages.search.find_dogsitters": "Найти догситера",
+    "dsf.pages.search.where_look": "Где искать?",
+    "dsf.pages.search.where_look.placeholder": "Страна, регион, город",
+    "dsf.pages.search.where_look.validate": "Поле должно содержать только буквы, '-', '.' и ','",
+    "dsf.pages.search.sort": "Сортировка",
+    "dsf.pages.search.sort.placeholder": "Сортировать по:",
+    "dsf.pages.search.sort.asc": "Возрастанию",
+    "dsf.pages.search.sort.desc": "Убыванию",
+    "dsf.pages.search.sort.rating": "Рейтингу",
+    "dsf.pages.search.reset": "Сбросить настройки",
+    "dsf.pages.search.found": "Найдено {{count}} догситера",
+    "dsf.pages.search.profile": "Профиль",
+    "dsf.pages.search.message": "Здравствуйте! Я хочу заказать у Вас услугу догситера, подскажите, пожалуйста, в какое время Вы свободны?"
 }

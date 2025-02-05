@@ -7,7 +7,6 @@ import App from './app';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import i18next from 'i18next';
 import { i18nextReactInitConfig } from '@brojs/cli';
-// import { i18nextReactInitConfig } from './i18next';
 
 i18next.t = i18next.t.bind(i18next)
 const i18nextPromise = i18nextReactInitConfig(i18next)
