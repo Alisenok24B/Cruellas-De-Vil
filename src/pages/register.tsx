@@ -27,8 +27,76 @@ import { AppDispatch } from "../store/store";
 import { userActions } from "../store/user.slice";
 import { useRegisterMutation } from "../store/api/apiSlice"; // Импорт хука RTK Query
 import { getFeatures } from "@brojs/cli";
+import { useForm } from "react-hook-form"; // <-- ДОБАВЛЕННЫЙ ИМПОРТ
 
 const { googleAuth } = getFeatures("dog-sitters-finder");
+
+// Валидация полей (из исходного кода)
+const validateName = (value) => {
+  const nameRegex = /^[a-zA-Zа-яА-ЯёЁ]+$/;
+  if (!nameRegex.test(value)) {
+    return "Поле должно содержать только буквы";
+  }
+  return "";
+};
+
+const validatePhoneNumber = (value) => {
+  const phoneRegex = /^8\d{10}$/;
+  if (!phoneRegex.test(value)) {
+    return "Введите корректный номер телефона";
+  }
+  return "";
+};
+
+const validatePasswordConfirmation = (value, formValues) => {
+  if (value !== formValues["password"]) {
+    return "Пароли должны совпадать";
+  }
+  return "";
+};
+
+const inputFieldsList = [
+  {
+    id: "first-name",
+    title: "Имя",
+    name: "first-name",
+    type: "text",
+    maxLength: 35,
+    validation: validateName,
+  },
+  {
+    id: "second-name",
+    title: "Фамилия",
+    name: "second-name",
+    type: "text",
+    maxLength: 35,
+    validation: validateName,
+  },
+  {
+    id: "number-phone",
+    title: "Номер телефона",
+    name: "number-phone",
+    type: "tel",
+    maxLength: 11,
+    validation: validatePhoneNumber,
+    mask: "89999999999",
+  },
+  {
+    id: "password",
+    title: "Пароль",
+    name: "password",
+    type: "password",
+    maxLength: 24,
+  },
+  {
+    id: "password-confirmation",
+    title: "Подтвердите пароль",
+    name: "password-confirmation",
+    type: "password",
+    maxLength: 24,
+    validation: validatePasswordConfirmation,
+  },
+];
 
 const InputFields = ({
   formValues,
@@ -108,73 +176,8 @@ const InputFields = ({
   ));
 };
 
-const validateName = (value) => {
-  const nameRegex = /^[a-zA-Zа-яА-ЯёЁ]+$/;
-  if (!nameRegex.test(value)) {
-    return "Поле должно содержать только буквы";
-  }
-  return "";
-};
-
-const validatePhoneNumber = (value) => {
-  const phoneRegex = /^8\d{10}$/;
-  if (!phoneRegex.test(value)) {
-    return "Введите корректный номер телефона";
-  }
-  return "";
-};
-
-const validatePasswordConfirmation = (value, formValues) => {
-  if (value !== formValues["password"]) {
-    return "Пароли должны совпадать";
-  }
-  return "";
-};
-
-const inputFieldsList = [
-  {
-    id: "first-name",
-    title: "Имя",
-    name: "first-name",
-    type: "text",
-    maxLength: 35,
-    validation: validateName,
-  },
-  {
-    id: "second-name",
-    title: "Фамилия",
-    name: "second-name",
-    type: "text",
-    maxLength: 35,
-    validation: validateName,
-  },
-  {
-    id: "number-phone",
-    title: "Номер телефона",
-    name: "number-phone",
-    type: "tel",
-    maxLength: 11,
-    validation: validatePhoneNumber,
-    mask: "89999999999",
-  },
-  {
-    id: "password",
-    title: "Пароль",
-    name: "password",
-    type: "password",
-    maxLength: 24,
-  },
-  {
-    id: "password-confirmation",
-    title: "Подтвердите пароль",
-    name: "password-confirmation",
-    type: "password",
-    maxLength: 24,
-    validation: validatePasswordConfirmation,
-  },
-];
-
 const Register = () => {
+  // Локальные стейты и логика - не трогаем
   const [formValues, setFormValues] = useState({
     "number-phone": "",
     password: "",
@@ -196,7 +199,12 @@ const Register = () => {
   const [roleError, setRoleError] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const [register, { isLoading, error }] = useRegisterMutation(); // Использование RTK Query
+
+  // RTK Query (не меняем)
+  const [registerUser, { isLoading, error }] = useRegisterMutation();
+
+  // Подключаем react-hook-form
+  const { handleSubmit: handleSubmitRHF } = useForm();
 
   const handleRoleChange = (e) => {
     const { name, checked } = e.target;
@@ -206,6 +214,7 @@ const Register = () => {
     }
   };
 
+  // Локальная валидация (исходная логика)
   const validateForm = () => {
     const errors = {};
     for (const field of inputFieldsList) {
@@ -216,7 +225,7 @@ const Register = () => {
         if (error) {
           errors[field.name] = error;
         }
-      } else if (field.name == "number-phone") {
+      } else if (field.name === "number-phone") {
         const error = validatePhoneNumber(formValues[field.name]);
         if (error) {
           errors[field.name] = error;
@@ -232,6 +241,7 @@ const Register = () => {
     return Object.keys(errors).length === 0 && (roles.host || roles.dogsitter);
   };
 
+  // Исходный обработчик сабмита (не удаляем и не меняем)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -241,7 +251,7 @@ const Register = () => {
 
     const role = roles.dogsitter ? "dogsitter" : "owner";
     try {
-      const user = await register({
+      const user = await registerUser({
         firstName: formValues["first-name"],
         secondName: formValues["second-name"],
         phoneNumber: formValues["number-phone"],
@@ -263,14 +273,12 @@ const Register = () => {
     }
   };
 
+  // Google Login
   const googleLogin = useGoogleLogin({
     onSuccess: async (response) => {
       console.log("Google Login Success:", response);
-      // localStorage.setItem('isAuthenticated', 'true');
-      // localStorage.setItem('userRole', 'user'); // Хочется нормальную ролевку в перспективе...
       const userId =
         Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER - 4)) + 5;
-      // localStorage.setItem('id', (userId).toString());
       dispatch(
         userActions.addJwt({
           isAuthenticated: true,
@@ -303,14 +311,23 @@ const Register = () => {
               (min-width: 320px) 440px,
               (min-width: 520px) 880px
             "
-          ></Logo>
+          />
           <Title>
             <TitleH1>Создайте свой аккаунт</TitleH1>
           </Title>
         </Header>
       </ErrorBoundary>
+
       <ErrorBoundary>
-        <Form onSubmit={handleSubmit}>
+        {/* 
+          ВАЖНО: вместо onSubmit={handleSubmit} 
+          используем обёртку от react-hook-form
+        */}
+        <Form
+          onSubmit={(e) =>
+            handleSubmitRHF((_, event) => handleSubmit(event))(e)
+          }
+        >
           <InputFields
             formValues={formValues}
             setFormValues={setFormValues}
@@ -341,6 +358,7 @@ const Register = () => {
           </SubmitButton>
         </Form>
       </ErrorBoundary>
+
       <ErrorBoundary>
         {googleAuth && (
           <GoogleAuthButton>
@@ -355,6 +373,7 @@ const Register = () => {
           </GoogleAuthButton>
         )}
       </ErrorBoundary>
+
       <ErrorBoundary>
         <LinkContainer>
           <Link href={URLs.baseUrl}>Уже есть аккаунт? Войти</Link>

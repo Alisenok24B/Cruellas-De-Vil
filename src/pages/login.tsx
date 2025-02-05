@@ -23,6 +23,7 @@ import { AppDispatch } from "../store/store";
 import { userActions } from "../store/user.slice";
 import { useAuthenticateMutation } from "../store/api/apiSlice";
 import { getFeatures } from "@brojs/cli";
+import { useForm } from "react-hook-form";
 
 // Импортируем кусок кода/логики для второго фактора аутентификации
 import { useVerifyTwoFactorAuthMutation } from "../store/api/apiSlice";
@@ -132,6 +133,10 @@ const Login = () => {
   const [authenticate, { isLoading }] = useAuthenticateMutation();
   const [verifyTwoFactorAuth, { isLoading: isVerifyLoading }] =
     useVerifyTwoFactorAuthMutation();
+
+  const { handleSubmit: handleSubmitLoginRHF } = useForm();
+
+  const { handleSubmit: handleSubmitTwoFaRHF } = useForm();
 
   //    Валидация формы
   const validateForm = () => {
@@ -282,7 +287,13 @@ const Login = () => {
 
       <ErrorBoundary>
         {step === 0 && (
-          <Form onSubmit={handleSubmitLogin}>
+          // Передаём handleSubmitLoginRHF вместо обычного onSubmit,
+          // при этом в колбэке передаём наше handleSubmitLogin (куда "прокидываем" e)
+          <Form
+            onSubmit={(e) =>
+              handleSubmitLoginRHF((_, event) => handleSubmitLogin(event))(e)
+            }
+          >
             {/* Шаг 1: форма логина */}
             <InputFields
               formValues={formValues}
@@ -297,7 +308,11 @@ const Login = () => {
         )}
 
         {step === 1 && (
-          <Form onSubmit={handleSubmitTwoFa}>
+          <Form
+            onSubmit={(e) =>
+              handleSubmitTwoFaRHF((_, event) => handleSubmitTwoFa(event))(e)
+            }
+          >
             {/* Шаг 2: ввод кода из Telegram */}
             <InputField
               name="2fa-code"
