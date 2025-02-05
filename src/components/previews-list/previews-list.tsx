@@ -3,11 +3,10 @@ import user_photo from '../../assets/img/user_photo.jpg';
 import {
   StyledPreviewsList, StyledPLLi, StyledPhoto, StyledSelectedLi, StyledRating, StyledFullname, StyledCost, StyledDivCost
 } from "./previews-list.styled";
-
 import { URLs } from "../../__data__/urls";
-
 import { Card, Button, Flex } from "antd";
 import { EditTwoTone, StarTwoTone, EyeTwoTone } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 const imgStyle: React.CSSProperties = {
   display: 'block',
@@ -27,7 +26,9 @@ function Preview({ userId, userPhoto, fullName, cost, rating, fullDesc, selected
     window.location.href = url;
   };
 
-  const message = "Здравствуйте! Я хочу заказать у Вас услугу догситтера, подскажите, пожалуйста, в какое время Вы свободны?"
+  const { t } = useTranslation()
+
+  const message = t('dsf.pages.search.message')
 
   const handleTelegramClick = (event) => {
     event.preventDefault();
@@ -47,7 +48,7 @@ function Preview({ userId, userPhoto, fullName, cost, rating, fullDesc, selected
           style={{ width: 300 }}
           actions={[
             <Button onClick={handleClick} type="dashed" icon={<EyeTwoTone twoToneColor="#96A467" />} iconPosition="end">
-              Профиль
+              {t('dsf.pages.search.profile')}
             </Button>,
             <Button onClick={handleTelegramClick} type="dashed" icon={<EditTwoTone twoToneColor="#96A467" />} iconPosition="end">
               Telegram

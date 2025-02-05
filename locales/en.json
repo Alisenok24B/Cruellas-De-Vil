@@ -1,0 +1,19 @@
+{
+    "dsf.pages.header.exit": "Exit",
+    "dsf.pages.footer.signature": "DogSittersFinder - love and care for your dog",
+    "dsf.pages.footer.contact": "Contact information",
+
+    "dsf.pages.search.find_dogsitters": "Find dogsitter",
+    "dsf.pages.search.where_look": "Where to look?",
+    "dsf.pages.search.where_look.placeholder": "Country, region, city",
+    "dsf.pages.search.where_look.validate": "The field must contain only letters, '-', '.' and ','",
+    "dsf.pages.search.sort": "Sorting",
+    "dsf.pages.search.sort.placeholder": "Sort by:",
+    "dsf.pages.search.sort.asc": "Ascending",
+    "dsf.pages.search.sort.desc": "Descending",
+    "dsf.pages.search.sort.rating": "Rating",
+    "dsf.pages.search.reset": "Reset settings",
+    "dsf.pages.search.found": "Found {{count}} dogsitters",
+    "dsf.pages.search.profile": "Profile",
+    "dsf.pages.search.message": "Hello! I would like to order a dog sitter service from you, please tell me what time you are free?"
+}

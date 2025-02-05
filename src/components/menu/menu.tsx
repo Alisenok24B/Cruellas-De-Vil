@@ -6,6 +6,8 @@ import { Svg } from "../svg-icon";
 import { useSearchParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { useTranslation } from 'react-i18next';
+import { LanguageSwitcher } from '../language-switcher'
 
 const svgPropsMap = {
   width: '55px',
@@ -39,6 +41,7 @@ export function Menu({ currentNavElement }) {
   const userRole = useSelector((s: RootState) => s.user.userRole);
   const [ searchParams ] = useSearchParams();
   const urlUserId = searchParams.get('id'); // Получаем user_id из URL-параметра
+  const { t } = useTranslation()
   return (
     <StyledMenu>
       <StyledMenuLi>
@@ -55,9 +58,10 @@ export function Menu({ currentNavElement }) {
       )}
       <StyledMenuLi>
         <Link exit contrast={currentNavElement === nav.exit.title} href={nav.exit.href}>
-          {nav.exit.title}
+          {t('dsf.pages.header.exit')}
         </Link>
       </StyledMenuLi>
+      <LanguageSwitcher />
     </StyledMenu>
   );
 }

@@ -15,6 +15,7 @@ import { YMaps, Map, Placemark } from 'react-yandex-maps';
 import { getFeatures } from "@brojs/cli";
 import Lottie from 'lottie-react';
 import { FloatButton } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 const Search = () => {
     const [formValues, setFormValues] = useState({ 'where-find': '', 'sort-by': '' });
@@ -88,18 +89,22 @@ const Search = () => {
         fetchData();
     }, [users]);
 
+    const { t } = useTranslation()
+
     return (
         <ErrorBoundary>
             <Header currentNavElement={"Карта"} />
             <StyledMain>
                 <Container>
                     <StyledFind>
-                        <TitleH1>Найти догситера</TitleH1>
+                        <TitleH1>{t('dsf.pages.search.find_dogsitters')}</TitleH1>
                     </StyledFind>
                     <DivSearch formValues={formValues} setFormValues={setFormValues} users={users} setUsers={setUsers} />
                     {users.length > 0 ? (
                         <>
-                            <StyledFinded>Найдено: {users.length} догситтера</StyledFinded>
+                            <StyledFinded>
+                                {t('dsf.pages.search.found', { count: users.length })}
+                            </StyledFinded>
                             <StyledPreviewMap>
                                 {showDogsitters && <PreviewsList users={users} currentPoint={currentPoint} />}
                                 <StyledMap>
