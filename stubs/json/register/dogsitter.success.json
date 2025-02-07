@@ -1,12 +1,3 @@
 {
-    "data": {
-        "id": 5,
-        "phoneNumber": 89555555555,
-        "firstName": "Масяня",
-        "secondName": "Карлова",
-        "role": "dogsitter",
-        "location": "Россия, республика Татарстан, Казань, улица Пушкина, 12",
-        "price": 100,
-        "aboutMe": "Все на свете - собаки"
-    }
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6ImRvZ3NpdHRlciIsImlhdCI6MTUxNjIzOTAyMn0.T9V3-f3rD1deA5a2J-tYNw0cACEpzKHbhMPkc7gh8c0"
 }

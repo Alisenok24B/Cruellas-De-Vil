@@ -1,3 +1,5 @@
 {
-    "error": "Пользователь не найден"
+  "message": "Неверный логин или пароль",
+  "error": "Unauthorized",
+  "statusCode": 401
 }

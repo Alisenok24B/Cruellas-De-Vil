@@ -38,7 +38,7 @@ export function Menu({ currentNavElement }) {
     viewing: { title: "Профиль", svg: <Svg {...svgPropsProfile} />, href: `${URLs.ui.dogsitterViewing}?id=${id}` }, //URLs.ui.dogsitterViewing.getUrl(char.id)
     exit: { title: "Выход", href: URLs.baseUrl }
   };
-  const userRole = useSelector((s: RootState) => s.user.userRole);
+  const userRole = useSelector((s: RootState) => s.user.role);
   const [ searchParams ] = useSearchParams();
   const urlUserId = searchParams.get('id'); // Получаем user_id из URL-параметра
   const { t } = useTranslation()
@@ -49,7 +49,7 @@ export function Menu({ currentNavElement }) {
           {nav.search.svg}
         </Link>
       </StyledMenuLi>
-      {userRole !== 'owner' && (
+      {userRole === 'dogsitter' && (
         <StyledMenuLi>
           <Link contrast={(currentNavElement === nav.viewing.title) && (urlUserId === String(id))} href={nav.viewing.href}>
                 {nav.viewing.svg}

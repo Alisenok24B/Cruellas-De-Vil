@@ -7,7 +7,7 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${URLs.api.main}`, // Базовый URL
   }),
-  tagTypes: ['Dogsitter'],
+  tagTypes: ["Dogsitter"],
   endpoints: (builder) => ({
     authenticate: builder.mutation({
       query: (credentials: { phoneNumber: string; password: string }) => ({
@@ -36,7 +36,7 @@ export const apiSlice = createApi({
       }),
     }),
     verifyTwoFactorAuth: builder.mutation({
-      query: (code: { code: string }) => ({
+      query: (code: { phoneNumber: string; code: string }) => ({
         url: "/auth/2fa",
         method: "POST",
         headers: {
@@ -52,19 +52,19 @@ export const apiSlice = createApi({
       }),
     }),
     getDogsitterById: builder.query({
-        query: (id: number) => `/dogsitter-viewing?id=${id}`,
-        providesTags: (result, error, id) => [{ type: 'Dogsitter', id }],
+      query: (id: number) => `/dogsitter-viewing?id=${id}`,
+      providesTags: (result, error, id) => [{ type: "Dogsitter", id }],
     }),
     updateUserProfile: builder.mutation({
       query: (updateData) => ({
         url: `/users/${updateData.id}`,
-        method: 'PATCH',
+        method: "PATCH",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: updateData.data,
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: 'Dogsitter', id }],
+      invalidatesTags: (result, error, { id }) => [{ type: "Dogsitter", id }],
     }),
     updateDogsitterRating: builder.mutation({
       query: ({ id, rating }) => ({
@@ -76,7 +76,16 @@ export const apiSlice = createApi({
         body: { rating },
       }),
       invalidatesTags: (result, error, { id }) => [{ type: "Dogsitter", id }],
-    }),    
+    }),
+    getUserSession: builder.query({
+      query: ({ jwt }) => ({
+        url: "/auth/session",
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${jwt}`,
+        },
+      }),
+    }),
   }),
 });
 
@@ -87,5 +96,6 @@ export const {
   useFetchUsersQuery,
   useGetDogsitterByIdQuery,
   useUpdateUserProfileMutation,
-  useUpdateDogsitterRatingMutation, 
+  useUpdateDogsitterRatingMutation,
+  useGetUserSessionQuery
 } = apiSlice;

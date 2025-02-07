@@ -4,58 +4,45 @@ import { URLs } from "../__data__/urls";
 
 export const JWT_PERSISTENT_STATE = "userData";
 
-export interface userPersistentState {
-  isAuthenticated: boolean | null;
-  userRole: string | null;
+export interface userPersistantState {
+  jwt: string | null;
+  role: string | null;
   id: number | null;
 }
 
 export interface userState {
-  isAuthenticated: boolean | null;
-  userRole: string | null;
+  jwt: string | null;
+  role: string | null;
   id: number | null;
 }
 
 const initialState: userState = {
-  isAuthenticated:
-    loadState<userPersistentState>(JWT_PERSISTENT_STATE)?.isAuthenticated ??
-    null,
-  userRole:
-    loadState<userPersistentState>(JWT_PERSISTENT_STATE)?.userRole ?? null,
-  id: loadState<userPersistentState>(JWT_PERSISTENT_STATE)?.id ?? null,
+  jwt: loadState<userPersistantState>(JWT_PERSISTENT_STATE)?.jwt ?? null,
+  role: null,
+  id: null
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    addJwt: (
-      state,
-      action: PayloadAction<{
-        isAuthenticated: boolean;
-        userRole: string;
-        id: number;
-      }>
-    ) => {
-      state.isAuthenticated = action.payload.isAuthenticated;
-      state.userRole = action.payload.userRole;
-      state.id = action.payload.id;
-    },
-    updateJwt: (
-      state,
-      action: PayloadAction<{
-        isAuthenticated: boolean;
-      }>
-    ) => {
-      state.isAuthenticated = action.payload.isAuthenticated;
+    addJwt: (state, action: PayloadAction<string>) => {
+      state.jwt = action.payload;
     },
     logout: (state) => {
-      state.isAuthenticated = null;
-      state.userRole = null;
+      state.jwt = null;
+      state.role = null;
       state.id = null;
+    },
+    setSession: (
+      state,
+      action: PayloadAction<{ id: number; role: string }>
+    ) => {
+      state.role = action.payload.role;
+      state.id = action.payload.id;
     },
   },
 });
 
-export default userSlice;
+export default userSlice.reducer;
 export const userActions = userSlice.actions;

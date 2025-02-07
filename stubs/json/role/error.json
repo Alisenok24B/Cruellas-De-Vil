@@ -1,0 +1,5 @@
+{
+  "message": "Неверный jwt token",
+  "error": "Forbidden",
+  "statusCode": 403
+}

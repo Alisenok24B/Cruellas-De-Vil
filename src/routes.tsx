@@ -11,28 +11,28 @@ import { useSelector } from "react-redux";
 import { RootState } from "./store/store";
 
 const ProtectedRoute = ({ children }) => {
-  const isAuthenticated = useSelector((s: RootState) => s.user.isAuthenticated);
-  if (!isAuthenticated) {
+  const jwt = useSelector((s: RootState) => s.user.jwt);
+  if (!jwt) {
     return <Navigate to={URLs.baseUrl} />;
   }
   return children;
 };
 
 const UnprotectedRoute = ({ children }) => {
-  const isAuthenticated = useSelector((s: RootState) => s.user.isAuthenticated);
-  if (isAuthenticated) {
+  const jwt = useSelector((s: RootState) => s.user.jwt);
+  if (jwt) {
     return <Navigate to={URLs.ui.search} />;
   }
   return children;
 };
 
-const RoleProtectedRoute = ({ role, children }) => {
+/*const RoleProtectedRoute = ({ role, children }) => {
   const userRole = useSelector((s: RootState) => s.user.userRole);
   if (userRole === role) {
     return <Navigate to={URLs.ui.search} />;
   }
   return children;
-};
+};*/
 
 const PageRoutes = () => (
   <ErrorBoundary>
