@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; 
 import { 
   StyledUserCard, 
   UserPhotoWrapper, 
@@ -18,15 +18,21 @@ import { EditTwoTone } from '@ant-design/icons';
 import { StarFilled } from '@ant-design/icons';
 import userPhoto from '../../assets/img/user_photo.jpg';
 
-export const UserCard = ({ userData, isEditable, onEdit }) => {
+export const UserCard = ({ userData, isEditable, onEdit, onRate }) => {
   if (!userData) {
     return <div>Нет данных для отображения.</div>;
   }
+
+  const averageRating =
+    userData.ratings && userData.ratings.length > 0
+      ? (userData.ratings.reduce((sum, rating) => sum + rating, 0) / userData.ratings.length).toFixed(2)
+      : '0.00';
 
   const handleTelegramClick = () => {
     const telegramLink = `https://t.me/${userData.tg}`;
     window.open(telegramLink, '_blank');
   };
+  
 
   return (
     <StyledUserCard>
@@ -34,15 +40,12 @@ export const UserCard = ({ userData, isEditable, onEdit }) => {
         <UserPhoto src={userPhoto} alt={`Фото ${userData.first_name} ${userData.second_name}`} />
         <div className="user-name-rating">
           <UserName>{userData.first_name} {userData.second_name}</UserName>
-          {userData.rating && (
-            <UserRating>
-              <StarFilled />
-              <span>{userData.rating.toFixed(1)}</span>
-            </UserRating>
-          )}
+          <UserRating>
+            <StarFilled />
+            <span>{averageRating}</span>
+          </UserRating>
         </div>
       </UserPhotoWrapper>
-
 
       <UserInfoWrapper>
         <UserInfoItem>
@@ -64,14 +67,19 @@ export const UserCard = ({ userData, isEditable, onEdit }) => {
           {isEditable ? (
             <StyledButton onClick={onEdit}>Редактировать</StyledButton>
           ) : (
-            <Button
-              onClick={handleTelegramClick}
-              type="dashed"
-              icon={<EditTwoTone twoToneColor="#96A467" />}
-              iconPosition="end"
-            >
-              Telegram
-            </Button>
+            <>
+              <Button
+                onClick={handleTelegramClick}
+                type="dashed"
+                icon={<EditTwoTone twoToneColor="#96A467" />}
+                iconPosition="end"
+              >
+                Telegram
+              </Button>
+              <StyledButton onClick={onRate} style={{ marginLeft: '10px' }}>
+                Оценить услугу
+              </StyledButton>
+            </>
           )}
         </ButtonContainer>
       </UserInfoWrapper>

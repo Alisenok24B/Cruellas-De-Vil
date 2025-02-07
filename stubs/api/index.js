@@ -30,6 +30,52 @@ const fs = require('fs');
 const path = require('path');
 
 
+router.post('/dogsitter-viewing/rating/:id', (req, res) => {
+    const { id } = req.params;
+    const { rating } = req.body;
+
+    // Проверяем, что рейтинг корректный (1-5)
+    if (!rating || rating < 1 || rating > 5) {
+        return res.status(400).json({ error: 'Некорректная оценка' });
+    }
+
+    const usersFilePath = path.resolve(__dirname, '../json/users/success.json');
+
+    // Загружаем данные
+    delete require.cache[require.resolve(usersFilePath)];
+    const usersFile = require(usersFilePath);
+    const users = usersFile.data;
+
+    // Ищем догситтера по ID
+    const userIndex = users.findIndex(user => user.id === Number(id));
+    if (userIndex === -1) {
+        return res.status(404).json({ error: 'Догситтер не найден' });
+    }
+
+    // Добавляем новый рейтинг
+    if (!users[userIndex].ratings) {
+        users[userIndex].ratings = [];
+    }
+    users[userIndex].ratings.push(rating);
+
+    // Ограничиваем последние 100 оценок
+    if (users[userIndex].ratings.length > 100) {
+        users[userIndex].ratings.shift();
+    }
+
+    // Пересчитываем средний рейтинг (округляем до 2 знаков после запятой)
+    const total = users[userIndex].ratings.reduce((sum, r) => sum + r, 0);
+    users[userIndex].rating = parseFloat((total / users[userIndex].ratings.length).toFixed(2));
+
+    // Записываем обновленные данные обратно в JSON
+    fs.writeFileSync(usersFilePath, JSON.stringify({ data: users }, null, 2), 'utf8');
+
+    console.log(`Обновлен рейтинг догситтера ${id}: ${users[userIndex].rating}`);
+
+    res.json({ rating: users[userIndex].rating, ratings: users[userIndex].ratings });
+});
+
+
 router.patch('/users/:id', (req, res) => {
     const { id } = req.params;
     const updateData = req.body;
@@ -47,10 +93,8 @@ router.patch('/users/:id', (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
   
-    // Обновляем данные пользователя
     users[userIndex] = { ...users[userIndex], ...updateData };
   
-    // Записываем изменения обратно в файл
     fs.writeFileSync(
       usersFilePath,
       JSON.stringify({ data: users }, null, 2),
@@ -59,7 +103,6 @@ router.patch('/users/:id', (req, res) => {
   
     console.log('Обновлённые данные пользователя:', users[userIndex]);
   
-    // Возвращаем обновлённого пользователя
     res.json(users[userIndex]);
   });
 

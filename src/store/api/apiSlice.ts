@@ -65,6 +65,17 @@ export const apiSlice = createApi({
         body: updateData.data,
       }),
       invalidatesTags: (result, error, { id }) => [{ type: 'Dogsitter', id }],
+    }),
+    updateDogsitterRating: builder.mutation({
+      query: ({ id, rating }) => ({
+        url: `/dogsitter-viewing/rating/${id}`,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: { rating },
+      }),
+      invalidatesTags: (result, error, { id }) => [{ type: "Dogsitter", id }],
     }),    
   }),
 });
@@ -76,4 +87,5 @@ export const {
   useFetchUsersQuery,
   useGetDogsitterByIdQuery,
   useUpdateUserProfileMutation,
+  useUpdateDogsitterRatingMutation, 
 } = apiSlice;

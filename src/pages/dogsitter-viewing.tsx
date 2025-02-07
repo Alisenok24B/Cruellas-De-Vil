@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useGetDogsitterByIdQuery } from '../store/api/apiSlice';
+import { useGetDogsitterByIdQuery, useUpdateDogsitterRatingMutation } from '../store/api/apiSlice';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { UserCard } from '../components/user-card';
 import { EditProfileWindow } from '../components/modal-window';
-import Lottie from 'lottie-react'; // Импортируем Lottie
-
-  
+import { RatingWindow } from '../components/rating-modal-window';
+import Lottie from 'lottie-react';
 import { RootState } from '../store/store';
 
 import {
@@ -18,26 +17,39 @@ import {
 } from './profile.styled';
 
 const ProfileViewing = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const currentUserId = useSelector((state: RootState) => state.user.id);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
+  const [selectedRating, setSelectedRating] = useState(0);
 
   const [searchParams] = useSearchParams();
   const userIdFromUrl = searchParams.get('id');
-  console.log('User ID from URL:', userIdFromUrl);
 
-  const { data: userData, isLoading, error } = useGetDogsitterByIdQuery(Number(userIdFromUrl), {
+  const { data: userData, isLoading, error, refetch } = useGetDogsitterByIdQuery(Number(userIdFromUrl), {
     skip: !userIdFromUrl,
   });
 
-  console.log('Query status:', { isLoading, error, userData });
+  const currentUserId = useSelector((state: RootState) => state.user.id);
+  const isCurrentUser = Number(userIdFromUrl) === currentUserId;
 
-  const handleEditClick = () => setIsModalOpen(true);
-  const handleModalSave = (updatedUserData) => {
-    console.log('Updated user data:', updatedUserData);
-    setIsModalOpen(false);
+
+  const [updateDogsitterRating] = useUpdateDogsitterRatingMutation();
+
+  const handleEditClick = () => setIsEditModalOpen(true);
+  const handleModalClose = () => setIsEditModalOpen(false);
+
+  const handleRatingClick = () => setIsRatingModalOpen(true);
+  const handleRatingModalClose = () => setIsRatingModalOpen(false);
+
+  const handleRatingSubmit = async (rating: number) => {
+    try {
+      await updateDogsitterRating({ id: userData.id, rating }).unwrap();
+      console.log(`Оценка ${rating} успешно отправлена`);
+      refetch(); // Перезапрашиваем данные для обновления рейтинга
+    } catch (error) {
+      console.error('Ошибка при отправке оценки:', error);
+    }
   };
-  const handleModalCancel = () => setIsModalOpen(false);
+  
 
   if (isLoading) return <div>Загрузка...</div>;
   if (error || !userData) {
@@ -45,31 +57,47 @@ const ProfileViewing = () => {
     return <div>Ошибка загрузки данных</div>;
   }
 
-  const isCurrentUser = Number(userIdFromUrl) === currentUserId;
-
+  /** ========== [ Рендеринг страницы ] ========== */
   return (
     <>
       <Header currentNavElement="Профиль" />
+
+      {/* Фоновые анимации */}
       <AnimationBackgroundLeft>
-          <Lottie animationData={require('src/assets/img/profile_background.json')} />
+        <Lottie animationData={require('src/assets/img/profile_background.json')} />
       </AnimationBackgroundLeft>
       <AnimationBackgroundRight>
-          <Lottie animationData={require('src/assets/img/profile_background_2.json')} />
+        <Lottie animationData={require('src/assets/img/profile_background_2.json')} />
       </AnimationBackgroundRight>
+
+      {/* Карточка пользователя */}
       <ProfileWrapper>
         <UserCard 
-          userData={userData} 
-          isEditable={isCurrentUser} 
-          onEdit={handleEditClick} 
+          userData={userData}
+          isEditable={isCurrentUser}
+          onEdit={handleEditClick}
+          onRate={handleRatingClick}
         />
       </ProfileWrapper>
-      {isModalOpen && (
+
+      {/* Модальное окно редактирования */}
+      {isEditModalOpen && (
         <EditProfileWindow
           userData={userData}
-          onSave={handleModalSave}
-          onCancel={handleModalCancel}
+          onSave={handleModalClose}
+          onCancel={handleModalClose}
         />
       )}
+
+      {/* Модальное окно рейтинга */}
+      {isRatingModalOpen && (
+        <RatingWindow
+          isOpen={isRatingModalOpen}
+          onClose={handleRatingModalClose}
+          onSubmit={handleRatingSubmit}
+        />
+      )}
+
       <Footer />
     </>
   );
