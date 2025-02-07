@@ -44,7 +44,7 @@ const ProfileViewing = () => {
     try {
       await updateDogsitterRating({ id: userData.id, rating }).unwrap();
       console.log(`Оценка ${rating} успешно отправлена`);
-      refetch(); // Перезапрашиваем данные для обновления рейтинга
+      refetch();
     } catch (error) {
       console.error('Ошибка при отправке оценки:', error);
     }
@@ -57,12 +57,10 @@ const ProfileViewing = () => {
     return <div>Ошибка загрузки данных</div>;
   }
 
-  /** ========== [ Рендеринг страницы ] ========== */
   return (
     <>
       <Header currentNavElement="Профиль" />
 
-      {/* Фоновые анимации */}
       <AnimationBackgroundLeft>
         <Lottie animationData={require('src/assets/img/profile_background.json')} />
       </AnimationBackgroundLeft>
@@ -70,7 +68,6 @@ const ProfileViewing = () => {
         <Lottie animationData={require('src/assets/img/profile_background_2.json')} />
       </AnimationBackgroundRight>
 
-      {/* Карточка пользователя */}
       <ProfileWrapper>
         <UserCard 
           userData={userData}
@@ -80,7 +77,6 @@ const ProfileViewing = () => {
         />
       </ProfileWrapper>
 
-      {/* Модальное окно редактирования */}
       {isEditModalOpen && (
         <EditProfileWindow
           userData={userData}
@@ -89,7 +85,6 @@ const ProfileViewing = () => {
         />
       )}
 
-      {/* Модальное окно рейтинга */}
       {isRatingModalOpen && (
         <RatingWindow
           isOpen={isRatingModalOpen}
