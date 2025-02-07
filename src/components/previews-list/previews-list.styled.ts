@@ -9,35 +9,12 @@ export const StyledPreviewsList = styled.ul`
     padding-left: 0;
 `
 
-export const StyledPLLi = styled.li`
+export const StyledLi = styled.li`
     margin-bottom: 10px;
     list-style-type: none;
 
     color: inherit;
     text-decoration: none;
-`
-
-export const StyledSelected1Li = styled.li`
-    width: 85%;
-    height: 190px;
-
-    display: flex;
-    align-items: center;
-
-    background: #FFFFFF;
-    border-radius: 12px;
-    box-shadow: inset 0 4px 4px 0 rgba(129, 106, 88, 0.85);
-
-    margin-bottom: 10px;
-
-    color: inherit;
-    text-decoration: none;
-`
-
-export const StyledSelectedLi = styled.li`
-    box-shadow: inset 0 4px 4px 0 rgba(129, 106, 88, 0.85);
-    margin-bottom: 10px;
-    list-style-type: none;
 `
 
 export const StyledPhoto = styled.div`

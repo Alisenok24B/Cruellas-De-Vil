@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import user_photo from '../../assets/img/user_photo.jpg';
 import {
-  StyledPreviewsList, StyledPLLi, StyledPhoto, StyledSelectedLi, StyledRating, StyledFullname, StyledCost, StyledDivCost
+  StyledPreviewsList, StyledLi, StyledPhoto, StyledRating, StyledFullname, StyledCost, StyledDivCost
 } from "./previews-list.styled";
 import { URLs } from "../../__data__/urls";
 import { Card, Button, Flex } from "antd";
@@ -15,8 +15,6 @@ const imgStyle: React.CSSProperties = {
 };
 
 function Preview({ userId, userPhoto, fullName, cost, rating, fullDesc, selected, tg }) {
-  const StyledLi = selected ? StyledSelectedLi : StyledPLLi;
-
   let url = "#";
   if (URLs.ui.dogsitterViewing) {
     url = `${URLs.ui.dogsitterViewing}?id=${userId}`;
@@ -37,15 +35,21 @@ function Preview({ userId, userPhoto, fullName, cost, rating, fullDesc, selected
     window.open(telegramUrl, '_blank');
   };
 
+  const cardStyle = {
+    width: 300,
+    border: selected ? '3px solid #96A467' : '1px solid #d9d9d9',
+    transition: 'all 0.3s ease'
+  };
+
   return (
     <StyledLi>
       <Flex>
         <StyledPhoto>
-          <img src={userPhoto} alt="Фото пользователя" style={imgStyle} />
+          <img src={userPhoto} alt={t('dsf.pages.search.photo')} style={imgStyle} />
         </StyledPhoto>
         <Card
           hoverable
-          style={{ width: 300 }}
+          style={cardStyle}
           actions={[
             <Button onClick={handleClick} type="dashed" icon={<EyeTwoTone twoToneColor="#96A467" />} iconPosition="end">
               {t('dsf.pages.search.profile')}
