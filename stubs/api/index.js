@@ -10,6 +10,71 @@ router.get("/users", (request, response) => {
     response.status(/error/i.test(stubs.users) ? 500 : 200).send(require(`../json/users/${stubs.users}.json`))
 })
 
+// Проверка взаимодействия между пользователем и догситтером
+router.get("/interactions/check", (req, res) => {
+    const { owner_id, dogsitter_id } = req.query;
+  
+    const usersFilePath = path.resolve(__dirname, "../json/users/success.json");
+  
+    delete require.cache[require.resolve(usersFilePath)];
+    const usersFile = require(usersFilePath);
+  
+    const interactions = usersFile.interactions || [];
+  
+    const exists = interactions.some(
+      (interaction) =>
+        interaction.owner_id === Number(owner_id) &&
+        interaction.dogsitter_id === Number(dogsitter_id)
+    );
+  
+    res.json({ exists });
+});
+  
+  // Добавление нового взаимодействия
+router.post("/interactions", (req, res) => {
+const { owner_id, dogsitter_id, interaction_type } = req.body;
+
+if (!owner_id || !dogsitter_id || !interaction_type) {
+    return res.status(400).json({ error: "Missing required fields" });
+}
+
+const usersFilePath = path.resolve(__dirname, "../json/users/success.json");
+
+delete require.cache[require.resolve(usersFilePath)];
+const usersFile = require(usersFilePath);
+
+if (!usersFile.interactions) {
+    usersFile.interactions = [];
+}
+
+// Проверяем, существует ли уже такое взаимодействие
+const exists = usersFile.interactions.some(
+    (interaction) =>
+    interaction.owner_id === Number(owner_id) &&
+    interaction.dogsitter_id === Number(dogsitter_id)
+);
+
+if (!exists) {
+    usersFile.interactions.push({
+    owner_id: Number(owner_id),
+    dogsitter_id: Number(dogsitter_id),
+    interaction_type,
+    });
+
+    fs.writeFileSync(
+    usersFilePath,
+    JSON.stringify(usersFile, null, 2),
+    "utf8"
+    );
+
+    console.log(
+    `Добавлено взаимодействие: owner_id=${owner_id}, dogsitter_id=${dogsitter_id}`
+    );
+}
+
+res.json({ success: true });
+});
+
 router.get("/dogsitter-viewing", (req, res) => {
     const { id } = req.query;
     console.log(`Получен запрос для dogsitter с ID: ${id}`);
@@ -34,40 +99,33 @@ router.post('/dogsitter-viewing/rating/:id', (req, res) => {
     const { id } = req.params;
     const { rating } = req.body;
 
-    // Проверяем, что рейтинг корректный (1-5)
     if (!rating || rating < 1 || rating > 5) {
         return res.status(400).json({ error: 'Некорректная оценка' });
     }
 
     const usersFilePath = path.resolve(__dirname, '../json/users/success.json');
 
-    // Загружаем данные
     delete require.cache[require.resolve(usersFilePath)];
     const usersFile = require(usersFilePath);
     const users = usersFile.data;
 
-    // Ищем догситтера по ID
     const userIndex = users.findIndex(user => user.id === Number(id));
     if (userIndex === -1) {
         return res.status(404).json({ error: 'Догситтер не найден' });
     }
 
-    // Добавляем новый рейтинг
     if (!users[userIndex].ratings) {
         users[userIndex].ratings = [];
     }
     users[userIndex].ratings.push(rating);
 
-    // Ограничиваем последние 100 оценок
     if (users[userIndex].ratings.length > 100) {
         users[userIndex].ratings.shift();
     }
 
-    // Пересчитываем средний рейтинг (округляем до 2 знаков после запятой)
     const total = users[userIndex].ratings.reduce((sum, r) => sum + r, 0);
     users[userIndex].rating = parseFloat((total / users[userIndex].ratings.length).toFixed(2));
 
-    // Записываем обновленные данные обратно в JSON
     fs.writeFileSync(usersFilePath, JSON.stringify({ data: users }, null, 2), 'utf8');
 
     console.log(`Обновлен рейтинг догситтера ${id}: ${users[userIndex].rating}`);

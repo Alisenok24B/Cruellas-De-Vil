@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useGetDogsitterByIdQuery, useUpdateDogsitterRatingMutation } from '../store/api/apiSlice';
+import { useCheckInteractionQuery, useAddInteractionMutation } from '../store/api/apiSlice';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { UserCard } from '../components/user-card';
@@ -43,6 +44,11 @@ const ProfileViewing = () => {
   const handleRatingClick = () => setIsRatingModalOpen(true);
   const handleRatingModalClose = () => setIsRatingModalOpen(false);
 
+  const { data: interactionData, isFetching, error: interactionError } = useCheckInteractionQuery(
+    { ownerId: currentUserId, dogsitterId: Number(userIdFromUrl) },
+    { skip: !currentUserId || !userIdFromUrl }
+  );
+  
   const handleRatingSubmit = async (rating: number) => {
     try {
       await updateDogsitterRating({ id: userData.id, rating }).unwrap();
@@ -53,6 +59,7 @@ const ProfileViewing = () => {
     }
   };
   
+  const hasInteracted = Boolean(interactionData?.exists);
 
   if (isLoading) return <div>Загрузка...</div>;
   if (error || !userData) {
@@ -76,6 +83,8 @@ const ProfileViewing = () => {
           isEditable={isCurrentUser}
           onEdit={handleEditClick}
           onRate={handleRatingClick}
+          hasInteracted={hasInteracted}
+          currentUserId={currentUserId}
         />
       </ProfileWrapper>
 

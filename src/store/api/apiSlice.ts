@@ -7,7 +7,7 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${URLs.api.main}`, // Базовый URL
   }),
-  tagTypes: ['Dogsitter'],
+  tagTypes: ['Dogsitter', 'Interaction' ],
   endpoints: (builder) => ({
     authenticate: builder.mutation({
       query: (credentials: { phoneNumber: string; password: string }) => ({
@@ -76,7 +76,23 @@ export const apiSlice = createApi({
         body: { rating },
       }),
       invalidatesTags: (result, error, { id }) => [{ type: "Dogsitter", id }],
-    }),    
+    }),
+    checkInteraction: builder.query({
+      query: ({ ownerId, dogsitterId }) =>
+        `/interactions/check?owner_id=${ownerId}&dogsitter_id=${dogsitterId}`,
+      providesTags: ["Interaction"],
+    }),
+    addInteraction: builder.mutation({
+      query: ({ ownerId, dogsitterId }) => ({
+        url: `/interactions`,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: { owner_id: ownerId, dogsitter_id: dogsitterId, interaction_type: "telegram_click" },
+      }),
+      invalidatesTags: ["Interaction"],
+    }),
   }),
 });
 
@@ -87,5 +103,7 @@ export const {
   useFetchUsersQuery,
   useGetDogsitterByIdQuery,
   useUpdateUserProfileMutation,
-  useUpdateDogsitterRatingMutation, 
+  useUpdateDogsitterRatingMutation,
+  useCheckInteractionQuery,
+  useAddInteractionMutation,
 } = apiSlice;

@@ -25,15 +25,10 @@
       "location": "Россия, республика Татарстан, Казань, улица Абсалямова, 19",
       "price": 2000,
       "about_me": "Я не люблю собак. И вообще я котоман.",
-      "rating": 4.43,
+      "rating": 4,
       "ratings": [
         4,
-        4,
-        5,
-        3,
-        5,
-        5,
-        5
+        4
       ],
       "tg": "vanya006"
     },
@@ -53,15 +48,24 @@
       "location": "Россия, республика Татарстан, Казань, проспект Ямашева, 83",
       "price": 1750,
       "about_me": "Миллион алых роз",
-      "rating": 4.8,
+      "rating": 4.5,
       "ratings": [
         4,
-        5,
-        5,
-        5,
         5
       ],
       "tg": "maks100500"
+    }
+  ],
+  "interactions": [
+    {
+      "owner_id": 3,
+      "dogsitter_id": 4,
+      "interaction_type": "telegram_click"
+    },
+    {
+      "owner_id": 1,
+      "dogsitter_id": 2,
+      "interaction_type": "telegram_click"
     }
   ]
 }

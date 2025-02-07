@@ -18,24 +18,33 @@ import { EditTwoTone } from '@ant-design/icons';
 import { StarFilled } from '@ant-design/icons';
 import userPhoto from '../../assets/img/user_photo.jpg';
 import { useTranslation } from "react-i18next";
+import { useAddInteractionMutation } from '../../store/api/apiSlice';
 
-export const UserCard = ({ userData, isEditable, onEdit, onRate }) => {
+
+export const UserCard = ({ userData, isEditable, onEdit, onRate, hasInteracted, currentUserId }) => {
   if (!userData) {
     return <div>Нет данных для отображения.</div>;
   }
 
   const { t } = useTranslation();
+  const [addInteraction] = useAddInteractionMutation();
 
   const averageRating =
     userData.ratings && userData.ratings.length > 0
       ? (userData.ratings.reduce((sum, rating) => sum + rating, 0) / userData.ratings.length).toFixed(2)
       : '0.00';
 
-  const handleTelegramClick = () => {
+  const handleTelegramClick = async () => {
     const telegramLink = `https://t.me/${userData.tg}`;
     window.open(telegramLink, '_blank');
+
+    try {
+      await addInteraction({ ownerId: currentUserId, dogsitterId: userData.id }).unwrap();
+      console.log("Взаимодействие успешно записано!");
+    } catch (error) {
+      console.error("Ошибка записи взаимодействия:", error);
+    }
   };
-  
 
   return (
     <StyledUserCard>
@@ -79,9 +88,11 @@ export const UserCard = ({ userData, isEditable, onEdit, onRate }) => {
               >
                 Telegram
               </Button>
-              <StyledButton onClick={onRate} style={{ marginLeft: '10px' }}>
-                {t("dsf.pages.profile.rating")}
-              </StyledButton>
+              {hasInteracted && (
+                <StyledButton onClick={onRate} style={{ marginLeft: '10px' }}>
+                  {t("dsf.pages.profile.rating")}
+                </StyledButton>
+              )}
             </>
           )}
         </ButtonContainer>
