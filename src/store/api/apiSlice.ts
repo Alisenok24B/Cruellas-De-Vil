@@ -93,7 +93,16 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Interaction"],
     }),
-  }),
+    getUserSession: builder.query({
+      query: ({ jwt }) => ({
+        url: "/auth/session",
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${jwt}`,
+        }
+      })
+    })
+  })
 });
 
 export const {
@@ -106,4 +115,5 @@ export const {
   useUpdateDogsitterRatingMutation,
   useCheckInteractionQuery,
   useAddInteractionMutation,
+  useGetUserSessionQuery
 } = apiSlice;
