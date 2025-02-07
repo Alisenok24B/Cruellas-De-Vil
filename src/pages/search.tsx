@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useFetchUsersQuery } from '../store/api/apiSlice';
+import { useFetchUsersQuery, useGetUserSessionQuery } from '../store/api/apiSlice';
 import { PreviewsList } from "../components/previews-list";
 import { Container } from '../components/container';
 import { TitleH1 } from '../components/title-h1';
@@ -16,122 +16,186 @@ import { getFeatures } from "@brojs/cli";
 import Lottie from 'lottie-react';
 import { FloatButton } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { userActions } from '../store/user.slice';
+import { RootState } from '../store/store';
 
 const Search = () => {
-    const [formValues, setFormValues] = useState({ 'where-find': '', 'sort-by': '' });
-    const [currenctCoord, setcurrenctCoord] = useState([55.801619, 49.08803]);
-    const [users, setUsers] = useState([]);
-    const [points, setPoints] = useState([]);
-    const [currentPoint, setCurrentPoint] = useState(null);
-    const { showDogsitters } = getFeatures("dog-sitters-finder");
+  const [formValues, setFormValues] = useState({
+    "where-find": "",
+    "sort-by": "",
+  });
+  const [currenctCoord, setcurrenctCoord] = useState([55.801619, 49.08803]);
+  const [users, setUsers] = useState([]);
+  const [points, setPoints] = useState([]);
+  const [currentPoint, setCurrentPoint] = useState(null);
+  const { showDogsitters } = getFeatures("dog-sitters-finder");
 
-    const { data, isLoading: isLoadingUsers } = useFetchUsersQuery(null, {
-        skip: !showDogsitters,
-    });
+  const { data, isLoading: isLoadingUsers } = useFetchUsersQuery(null, {
+    skip: !showDogsitters,
+  });
 
-    const fetchedUsers = data?.data || [];
+  const fetchedUsers = data?.data || [];
 
-    useEffect(() => {
-        if (fetchedUsers.length > 0) {
-            const filteredUsers = fetchedUsers.filter(user => Array.isArray(user.role) ? user.role.includes('dogsitter') : user.role === 'dogsitter');
-            setUsers(filteredUsers);
-        }
-    }, [fetchedUsers]);
+  const dispatch = useDispatch();
+  const jwt = useSelector((s: RootState) => s.user.jwt);
+  const role = useSelector((s: RootState) => s.user.role);
 
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = 'https://api-maps.yandex.ru/2.1/?apikey=35bccd6d-a845-4fcd-a7dc-ef66e5fcadfc&lang=ru_RU';
-        script.async = true;
+  // Если role уже есть => запрос пропустим
+  const skipSession = !!role;
 
-        script.onload = () => {
-            console.log('Yandex Maps API loaded');
-        };
+  // Выполняем запрос данных сессии
+  const {
+    data: session,
+    isLoading: isSessionLoading,
+    error: sessionError,
+  } = useGetUserSessionQuery({ jwt }, { skip: skipSession });
 
-        document.body.appendChild(script);
+  useEffect(() => {
+    if (session) {
+      // Диспатчим данные сессии в Redux
+      dispatch(userActions.setSession({ id: session.id, role: session.role }));
+    }
+  }, [session, dispatch]);
 
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []);
+  useEffect(() => {
+    if (fetchedUsers.length > 0) {
+      const filteredUsers = fetchedUsers.filter((user) =>
+        Array.isArray(user.role)
+          ? user.role.includes("dogsitter")
+          : user.role === "dogsitter"
+      );
+      setUsers(filteredUsers);
+    }
+  }, [fetchedUsers]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch(`https://geocode-maps.yandex.ru/1.x/?format=json&apikey=816d8c8d-fa03-4ba1-85d9-bbb1ebbac0a6&geocode=${encodeURI(formValues['where-find'])}`);
-            const data = await response.json();
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src =
+      "https://api-maps.yandex.ru/2.1/?apikey=35bccd6d-a845-4fcd-a7dc-ef66e5fcadfc&lang=ru_RU";
+    script.async = true;
 
-            if (data.response.GeoObjectCollection.featureMember.length > 0) {
-                const coordinates = data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos.split(' ').reverse();
-                setcurrenctCoord(coordinates);
-            } else {
-                setcurrenctCoord([]);
-            }
-        };
+    script.onload = () => {
+      console.log("Yandex Maps API loaded");
+    };
 
-        fetchData();
-    }, [formValues['where-find']]);
+    document.body.appendChild(script);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const newPoints = await Promise.all(users.map(async user => {
-                const response = await fetch(`https://geocode-maps.yandex.ru/1.x/?format=json&apikey=35bccd6d-a845-4fcd-a7dc-ef66e5fcadfc&geocode=${encodeURI(user.location)}`);
-                const data = await response.json();
-                const coordinates = data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos.split(' ').reverse();
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
-                return {
-                    coordinates: coordinates,
-                    id: user.id
-                };
-            }));
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=816d8c8d-fa03-4ba1-85d9-bbb1ebbac0a6&geocode=${encodeURI(
+          formValues["where-find"]
+        )}`
+      );
+      const data = await response.json();
 
-            setPoints(newPoints);
-        };
+      if (data.response.GeoObjectCollection.featureMember.length > 0) {
+        const coordinates =
+          data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos
+            .split(" ")
+            .reverse();
+        setcurrenctCoord(coordinates);
+      } else {
+        setcurrenctCoord([]);
+      }
+    };
 
-        fetchData();
-    }, [users]);
+    fetchData();
+  }, [formValues["where-find"]]);
 
-    const { t } = useTranslation()
+  useEffect(() => {
+    const fetchData = async () => {
+      const newPoints = await Promise.all(
+        users.map(async (user) => {
+          const response = await fetch(
+            `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=35bccd6d-a845-4fcd-a7dc-ef66e5fcadfc&geocode=${encodeURI(
+              user.location
+            )}`
+          );
+          const data = await response.json();
+          const coordinates =
+            data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos
+              .split(" ")
+              .reverse();
 
-    return (
-        <ErrorBoundary>
-            <Header currentNavElement={"Карта"} />
-            <StyledMain>
-                <Container>
-                    <StyledFind>
-                        <TitleH1>{t('dsf.pages.search.find_dogsitters')}</TitleH1>
-                    </StyledFind>
-                    <DivSearch formValues={formValues} setFormValues={setFormValues} users={users} setUsers={setUsers} />
-                    {users.length > 0 ? (
-                        <>
-                            <StyledFinded>
-                                {t('dsf.pages.search.found', { count: users.length })}
-                            </StyledFinded>
-                            <StyledPreviewMap>
-                                {showDogsitters && <PreviewsList users={users} currentPoint={currentPoint} />}
-                                <StyledMap>
-                                    <YMaps>
-                                        <Map state={{ center: currenctCoord, zoom: 10 }} width="100%" height="100%">
-                                            {points.map((point, index) => (
-                                                <Placemark key={index} geometry={point.coordinates} properties={{ iconContent: `${index + 1}` }} onClick={() => setCurrentPoint(point.id)} />
-                                            ))}
-                                        </Map>
-                                    </YMaps>
-                                </StyledMap>
-                            </StyledPreviewMap>
-                        </>
-                    ) : (
-                        <AnimationContainer style={{ textAlign: 'center' }}>
-                            <LottieWrapper>
-                                <Lottie animationData={require('../assets/img/bad_dog.json')} />
-                            </LottieWrapper>
-                            <StyledText>Догситтеры не найдены...</StyledText>
-                        </AnimationContainer>
-                    )}
-                </Container>
-            </StyledMain>
-            <FloatButton.BackTop />
-            <Footer />
-        </ErrorBoundary>
-    );
+          return {
+            coordinates: coordinates,
+            id: user.id,
+          };
+        })
+      );
+
+      setPoints(newPoints);
+    };
+
+    fetchData();
+  }, [users]);
+
+  const { t } = useTranslation();
+
+  return (
+    <ErrorBoundary>
+      <Header currentNavElement={"Карта"} />
+      <StyledMain>
+        <Container>
+          <StyledFind>
+            <TitleH1>{t("dsf.pages.search.find_dogsitters")}</TitleH1>
+          </StyledFind>
+          <DivSearch
+            formValues={formValues}
+            setFormValues={setFormValues}
+            users={users}
+            setUsers={setUsers}
+          />
+          {users.length > 0 ? (
+            <>
+              <StyledFinded>
+                {t("dsf.pages.search.found", { count: users.length })}
+              </StyledFinded>
+              <StyledPreviewMap>
+                {showDogsitters && (
+                  <PreviewsList users={users} currentPoint={currentPoint} />
+                )}
+                <StyledMap>
+                  <YMaps>
+                    <Map
+                      state={{ center: currenctCoord, zoom: 10 }}
+                      width="100%"
+                      height="100%"
+                    >
+                      {points.map((point, index) => (
+                        <Placemark
+                          key={index}
+                          geometry={point.coordinates}
+                          properties={{ iconContent: `${index + 1}` }}
+                          onClick={() => setCurrentPoint(point.id)}
+                        />
+                      ))}
+                    </Map>
+                  </YMaps>
+                </StyledMap>
+              </StyledPreviewMap>
+            </>
+          ) : (
+            <AnimationContainer style={{ textAlign: "center" }}>
+              <LottieWrapper>
+                <Lottie animationData={require("../assets/img/bad_dog.json")} />
+              </LottieWrapper>
+              <StyledText>Догситтеры не найдены...</StyledText>
+            </AnimationContainer>
+          )}
+        </Container>
+      </StyledMain>
+      <FloatButton.BackTop />
+      <Footer />
+    </ErrorBoundary>
+  );
 };
 
 export default Search;

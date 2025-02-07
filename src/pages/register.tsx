@@ -20,7 +20,7 @@ import {
   LinkContainer,
   RoleErrorMessage,
 } from "./login-register.styled";
-import usersData from "../../stubs/json/users.json";
+//import usersData from "../../stubs/json/users.json";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store/store";
@@ -251,7 +251,7 @@ const Register = () => {
 
     const role = roles.dogsitter ? "dogsitter" : "owner";
     try {
-      const user = await registerUser({
+      const data = await registerUser({
         firstName: formValues["first-name"],
         secondName: formValues["second-name"],
         phoneNumber: formValues["number-phone"],
@@ -260,16 +260,14 @@ const Register = () => {
       }).unwrap();
 
       dispatch(
-        userActions.addJwt({
-          isAuthenticated: true,
-          userRole: user.data.role,
-          id: user.data.id,
-        })
+        userActions.addJwt(
+          data.access_token
+        )
       );
 
       navigate(URLs.ui.search);
     } catch (err) {
-      setRoleError(err.data?.error || "Ошибка регистрации");
+      setRoleError(err.data?.message || "Ошибка регистрации");
     }
   };
 
@@ -280,11 +278,9 @@ const Register = () => {
       const userId =
         Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER - 4)) + 5;
       dispatch(
-        userActions.addJwt({
-          isAuthenticated: true,
-          userRole: "user",
-          id: userId,
-        })
+        userActions.addJwt(
+                  "jwt"
+                )
       );
       navigate(URLs.ui.search);
     },
@@ -319,10 +315,6 @@ const Register = () => {
       </ErrorBoundary>
 
       <ErrorBoundary>
-        {/* 
-          ВАЖНО: вместо onSubmit={handleSubmit} 
-          используем обёртку от react-hook-form
-        */}
         <Form
           onSubmit={(e) =>
             handleSubmitRHF((_, event) => handleSubmit(event))(e)

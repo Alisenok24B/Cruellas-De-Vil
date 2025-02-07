@@ -1,9 +1,3 @@
 {
-    "data": {
-        "id": 6,
-        "phoneNumber": 89888888888,
-        "firstName": "Генадий",
-        "secondName": "Паровозов",
-        "role": "owner"
-    }
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6Im93bmVyIiwiaWF0IjoxNTE2MjM5MDIyfQ.qgOhk9tNcaMRbarRWISTgvGx5Eq_X8fcA5lhdVs2tQI"
 }
