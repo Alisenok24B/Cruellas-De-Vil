@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { Modal, StarIcon, SubmitButton, CloseButton } from './rating-modal-window.styled';
+import { useTranslation } from 'react-i18next';
 
-export const RatingWindow = ({ isOpen, onClose, onSubmit }) => {
+const RatingWindow = ({ isOpen, onClose, onSubmit }) => {
+  const { t } = useTranslation();
   const [selectedRating, setSelectedRating] = useState(0);
 
-  const handleStarClick = (rating: number) => {
+  const handleStarClick = (rating) => {
     setSelectedRating(rating);
   };
 
   const handleSubmit = () => {
     if (selectedRating > 0) {
       onSubmit(selectedRating);
+      setSelectedRating(0);
     }
     onClose();
   };
@@ -19,7 +22,7 @@ export const RatingWindow = ({ isOpen, onClose, onSubmit }) => {
 
   return (
     <Modal>
-      <h2>Оценить догситтера</h2>
+      <h2>{t("dsf.pages.modal-rating.rate_dogsitter")}</h2>
       <div className="stars">
         {Array.from({ length: 5 }, (_, index) => (
           <StarIcon
@@ -30,9 +33,11 @@ export const RatingWindow = ({ isOpen, onClose, onSubmit }) => {
         ))}
       </div>
       {selectedRating > 0 && (
-        <SubmitButton onClick={handleSubmit}>Поставить оценку</SubmitButton>
+        <SubmitButton onClick={handleSubmit}>{t("dsf.pages.modal-rating.rate")}</SubmitButton>
       )}
-      <CloseButton onClick={onClose}>Закрыть</CloseButton>
+      <CloseButton onClick={onClose}>{t("dsf.pages.modal-rating.сlose")}</CloseButton>
     </Modal>
   );
 };
+
+export { RatingWindow };

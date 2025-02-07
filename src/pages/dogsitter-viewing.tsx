@@ -16,7 +16,10 @@ import {
   ProfileWrapper,
 } from './profile.styled';
 
+import { useTranslation } from 'react-i18next';
+
 const ProfileViewing = () => {
+  const { t } = useTranslation();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
   const [selectedRating, setSelectedRating] = useState(0);
@@ -54,13 +57,12 @@ const ProfileViewing = () => {
   if (isLoading) return <div>Загрузка...</div>;
   if (error || !userData) {
     console.error('Ошибка загрузки данных:', error);
-    return <div>Ошибка загрузки данных</div>;
+    return <div>{t("dsf.pages.profile.error_loading")}</div>;
   }
 
   return (
     <>
       <Header currentNavElement="Профиль" />
-
       <AnimationBackgroundLeft>
         <Lottie animationData={require('src/assets/img/profile_background.json')} />
       </AnimationBackgroundLeft>

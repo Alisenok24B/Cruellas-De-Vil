@@ -15,5 +15,31 @@
     "dsf.pages.search.reset": "Reset settings",
     "dsf.pages.search.found": "Found {{count}} dogsitters",
     "dsf.pages.search.profile": "Profile",
-    "dsf.pages.search.message": "Hello! I would like to order a dog sitter service from you, please tell me what time you are free?"
+    "dsf.pages.search.message": "Hello! I would like to order a dog sitter service from you, please tell me what time you are free?",
+
+    "dsf.pages.profile.location": "Location:",
+    "dsf.pages.profile.price": "Price:",
+    "dsf.pages.profile.phone": "Phone number:",
+    "dsf.pages.profile.about_me": "About me",
+    "dsf.pages.profile.rating": "Rate the service",
+    "dsf.pages.profile.edit": "Edit profile",
+    "dsf.pages.profile.loading": "Loading...",
+    "dsf.pages.profile.error_loading": "Loading error",
+    "dsf.pages.profile.no_data": "No data to display",
+    "dsf.pages.profile.message": "Hello! I would like to order a dog sitter service from you, please tell me what time you are free?",
+
+    "dsf.pages.modal-rating.rate_dogsitter": "Rate the dogsitter",
+    "dsf.pages.modal-rating.rate": "Rate",
+    "dsf.pages.modal-rating.сlose": "Close",
+
+    "dsf.pages.modal-edit.title": "Edit Profile",
+    "dsf.pages.modal-edit.first_name": "First Name",
+    "dsf.pages.modal-edit.second_name": "Last Name",
+    "dsf.pages.modal-edit.price": "Price",
+    "dsf.pages.modal-edit.phone_number": "Phone Number",
+    "dsf.pages.modal-edit.location": "Location",
+    "dsf.pages.modal-edit.about_me": "About Me",
+    "dsf.pages.modal-edit.save": "Save",
+    "dsf.pages.modal-edit.cancel": "Cancel",
+    "dsf.pages.modal-edit.phone_error": "Invalid phone number format"
 }

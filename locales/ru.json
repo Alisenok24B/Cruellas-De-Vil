@@ -15,5 +15,31 @@
     "dsf.pages.search.reset": "Сбросить настройки",
     "dsf.pages.search.found": "Найдено {{count}} догситера",
     "dsf.pages.search.profile": "Профиль",
-    "dsf.pages.search.message": "Здравствуйте! Я хочу заказать у Вас услугу догситера, подскажите, пожалуйста, в какое время Вы свободны?"
+    "dsf.pages.search.message": "Здравствуйте! Я хочу заказать у Вас услугу догситера, подскажите, пожалуйста, в какое время Вы свободны?",
+
+    "dsf.pages.profile.location": "Местоположение:",
+    "dsf.pages.profile.price": "Стоимость:",
+    "dsf.pages.profile.phone": "Телефон:",
+    "dsf.pages.profile.about_me": "Обо мне",
+    "dsf.pages.profile.rating": "Оценить услугу",
+    "dsf.pages.profile.edit": "Редактировать",
+    "dsf.pages.profile.loading": "Загрузка...",
+    "dsf.pages.profile.error_loading": "Ошибка загрузки данных",
+    "dsf.pages.profile.no_data": "Нет данных для отображения",
+    "dsf.pages.profile.message": "Здравствуйте! Я хочу заказать у Вас услугу догситера, подскажите, пожалуйста, в какое время Вы свободны?",
+
+    "dsf.pages.modal-rating.rate_dogsitter": "Оценить догситтера",
+    "dsf.pages.modal-rating.rate": "Поставить оценку",
+    "dsf.pages.modal-rating.сlose": "Закрыть",
+
+    "dsf.pages.modal-edit.title": "Редактировать профиль",
+    "dsf.pages.modal-edit.first_name": "Имя",
+    "dsf.pages.modal-edit.second_name": "Фамилия",
+    "dsf.pages.modal-edit.price": "Цена",
+    "dsf.pages.modal-edit.phone_number": "Номер телефона",
+    "dsf.pages.modal-edit.location": "Местоположение",
+    "dsf.pages.modal-edit.about_me": "Обо мне",
+    "dsf.pages.modal-edit.save": "Сохранить",
+    "dsf.pages.modal-edit.cancel": "Отмена",
+    "dsf.pages.modal-edit.phone_error": "Некорректный формат номера телефона"
 }

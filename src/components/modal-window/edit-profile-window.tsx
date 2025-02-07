@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { useUpdateUserProfileMutation } from '../../store/api/apiSlice';
 import { StyledModalWindow, StyledModalContent, StyledModalButtons } from './edit-profile-window.styled';
 import { StyledButton } from '../button/button.styled';
+import { useTranslation } from 'react-i18next';
 
 export const EditProfileWindow = ({ userData, onSave, onCancel }) => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState(userData);
   const [phoneError, setPhoneError] = useState('');
   
@@ -19,7 +21,7 @@ export const EditProfileWindow = ({ userData, onSave, onCancel }) => {
     const cleanedPhoneNumber = phoneNumber.replace(/\D/g, '');
 
     if (!cleanedPhoneNumber.startsWith('8') || cleanedPhoneNumber.length !== 11) {
-      setPhoneError('Некорректный формат номера телефона');
+      setPhoneError(t("dsf.pages.modal-edit.phone_error"));
       return false;
     }
 
@@ -44,28 +46,28 @@ export const EditProfileWindow = ({ userData, onSave, onCancel }) => {
   return (
     <StyledModalWindow>
       <StyledModalContent>
-        <h2>Редактировать профиль</h2>
+        <h2>{t("dsf.pages.modal-edit.title")}</h2>
         <div className="form-grid">
           <input
             type="text"
             name="first_name"
             value={formData.first_name}
             onChange={handleInputChange}
-            placeholder="Имя"
+            placeholder={t("dsf.pages.modal-edit.first_name")}
           />
           <input
             type="text"
             name="second_name"
             value={formData.second_name}
             onChange={handleInputChange}
-            placeholder="Фамилия"
+            placeholder={t("dsf.pages.modal-edit.second_name")}
           />
           <input
             type="number"
             name="price"
             value={formData.price}
             onChange={handleInputChange}
-            placeholder="Цена"
+            placeholder={t("dsf.pages.modal-edit.price")}
           />
           <input
             type="text"
@@ -73,7 +75,7 @@ export const EditProfileWindow = ({ userData, onSave, onCancel }) => {
             value={formData.phone_number}
             onChange={handleInputChange}
             onBlur={(e) => validatePhoneNumber(e.target.value)}
-            placeholder="Номер телефона"
+            placeholder={t("dsf.pages.modal-edit.phone_number")}
           />
         </div>
         <input
@@ -81,20 +83,20 @@ export const EditProfileWindow = ({ userData, onSave, onCancel }) => {
           name="location"
           value={formData.location}
           onChange={handleInputChange}
-          placeholder="Местоположение"
+          placeholder={t("dsf.pages.modal-edit.location")}
         />
         <textarea
           name="about_me"
           value={formData.about_me}
           onChange={handleInputChange}
-          placeholder="Обо мне"
+          placeholder={t("dsf.pages.modal-edit.about_me")}
         />
         <StyledModalButtons>
           <StyledButton onClick={handleSaveClick} disabled={!!phoneError}>
-            Сохранить
+            {t("dsf.pages.modal-edit.save")}
           </StyledButton>
           <StyledButton onClick={onCancel} type="button">
-            Отмена
+            {t("dsf.pages.modal-edit.cancel")}
           </StyledButton>
         </StyledModalButtons>
       </StyledModalContent>

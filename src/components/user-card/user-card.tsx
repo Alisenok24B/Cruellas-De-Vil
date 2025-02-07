@@ -17,11 +17,14 @@ import { Button } from 'antd';
 import { EditTwoTone } from '@ant-design/icons';
 import { StarFilled } from '@ant-design/icons';
 import userPhoto from '../../assets/img/user_photo.jpg';
+import { useTranslation } from "react-i18next";
 
 export const UserCard = ({ userData, isEditable, onEdit, onRate }) => {
   if (!userData) {
     return <div>Нет данных для отображения.</div>;
   }
+
+  const { t } = useTranslation();
 
   const averageRating =
     userData.ratings && userData.ratings.length > 0
@@ -49,23 +52,23 @@ export const UserCard = ({ userData, isEditable, onEdit, onRate }) => {
 
       <UserInfoWrapper>
         <UserInfoItem>
-          <strong>Местоположение:</strong> <span>{userData.location}</span>
+          <strong>{t("dsf.pages.profile.location")}</strong> <span>{userData.location}</span>
         </UserInfoItem>
         <UserInfoItem>
-          <strong>Стоимость:</strong> <span>{userData.price} руб/день</span>
+          <strong>{t("dsf.pages.profile.price")}</strong> <span>{userData.price} руб/день</span>
         </UserInfoItem>
         <UserInfoItem>
-          <strong>Телефон:</strong> <span>{userData.phone_number}</span>
+          <strong>{t("dsf.pages.profile.phone")}</strong> <span>{userData.phone_number}</span>
         </UserInfoItem>
 
         <UserAbout>
-          <UserAboutTitle>Обо мне</UserAboutTitle>
+          <UserAboutTitle>{t("dsf.pages.profile.about_me")}</UserAboutTitle>
           <UserAboutText>{userData.about_me}</UserAboutText>
         </UserAbout>
 
         <ButtonContainer>
           {isEditable ? (
-            <StyledButton onClick={onEdit}>Редактировать</StyledButton>
+            <StyledButton onClick={onEdit}>{t("dsf.pages.profile.edit")}</StyledButton>
           ) : (
             <>
               <Button
@@ -77,11 +80,12 @@ export const UserCard = ({ userData, isEditable, onEdit, onRate }) => {
                 Telegram
               </Button>
               <StyledButton onClick={onRate} style={{ marginLeft: '10px' }}>
-                Оценить услугу
+                {t("dsf.pages.profile.rating")}
               </StyledButton>
             </>
           )}
         </ButtonContainer>
+        
       </UserInfoWrapper>
     </StyledUserCard>
   );
