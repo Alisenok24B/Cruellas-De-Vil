@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useGetDogsitterByIdQuery, useUpdateDogsitterRatingMutation } from '../store/api/apiSlice';
-import { useCheckInteractionQuery, useAddInteractionMutation } from '../store/api/apiSlice';
+import { useCheckInteractionQuery } from '../store/api/apiSlice';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { UserCard } from '../components/user-card';

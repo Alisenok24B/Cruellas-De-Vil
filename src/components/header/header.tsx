@@ -7,8 +7,6 @@ import { logo } from '../../assets/img';
 
 import { StyledHeader } from "./header.styled";
 
-import { useTranslation } from 'react-i18next';
-
 export function Header(props) {
     return (
         <StyledHeader>

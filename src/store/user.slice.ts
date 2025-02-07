@@ -1,6 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { loadState } from "./storage";
-import { URLs } from "../__data__/urls";
 
 export const JWT_PERSISTENT_STATE = "userData";
 

@@ -130,8 +130,8 @@ const Login = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const [authenticate, { isLoading }] = useAuthenticateMutation();
-  const [verifyTwoFactorAuth, { isLoading: isVerifyLoading }] =
+  const [authenticate] = useAuthenticateMutation();
+  const [verifyTwoFactorAuth] =
     useVerifyTwoFactorAuthMutation();
 
   const { handleSubmit: handleSubmitLoginRHF } = useForm();
@@ -234,8 +234,8 @@ const Login = () => {
   const googleLogin = useGoogleLogin({
     onSuccess: async (response) => {
       console.log("Google Login Success:", response);
-      const userId =
-        Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER - 4)) + 5;
+      /*const userId =
+        Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER - 4)) + 5;*/
       dispatch(
         userActions.addJwt(
           "jwt"

@@ -31,7 +31,7 @@ const Search = () => {
   const [currentPoint, setCurrentPoint] = useState(null);
   const { showDogsitters } = getFeatures("dog-sitters-finder");
 
-  const { data, isLoading: isLoadingUsers } = useFetchUsersQuery(null, {
+  const { data } = useFetchUsersQuery(null, {
     skip: !showDogsitters,
   });
 
@@ -46,9 +46,7 @@ const Search = () => {
 
   // Выполняем запрос данных сессии
   const {
-    data: session,
-    isLoading: isSessionLoading,
-    error: sessionError,
+    data: session
   } = useGetUserSessionQuery({ jwt }, { skip: skipSession });
 
   useEffect(() => {
