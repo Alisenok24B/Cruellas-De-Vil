@@ -35,7 +35,7 @@ export function DivSearch({ formValues, setFormValues, users, setUsers }) {
 
     const handleReset = () => {
         setFormValues({ 'where-find': '', 'sort-by': '' });
-        window.location.reload();
+        // window.location.reload();
     };
 
     const { t } = useTranslation()

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useFetchUsersQuery } from '../store/api/apiSlice';
 import { PreviewsList } from "../components/previews-list";
 import { Container } from '../components/container';
@@ -14,8 +14,9 @@ import {
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
 import { getFeatures } from "@brojs/cli";
 import Lottie from 'lottie-react';
-import { FloatButton } from 'antd';
+import { FloatButton, Card } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { debounce } from 'lodash';
 
 const Search = () => {
     const [formValues, setFormValues] = useState({ 'where-find': '', 'sort-by': '' });
@@ -91,6 +92,66 @@ const Search = () => {
 
     const { t } = useTranslation()
 
+    const [mapBounds, setMapBounds] = useState(null); // Добавляем новое состояние
+
+    // Функция проверки видимости точки
+    const isPointVisible = useCallback((coordinates) => {
+        if (!mapBounds || !coordinates) return true;
+
+        const [lat, lon] = coordinates;
+        const [[south, west], [north, east]] = mapBounds;
+
+        return (
+            lat >= south &&
+            lat <= north &&
+            lon >= west &&
+            lon <= east
+        );
+    }, [mapBounds]);
+
+    // Оптимизированное обновление границ
+    const updateBounds = useCallback(debounce((newBounds) => {
+        setMapBounds(newBounds);
+    }, 300), []);
+
+    // Модифицируем компонент Map
+    const mapComponent = (
+        <Map
+            state={{ center: currenctCoord, zoom: 10 }}
+            width="100%"
+            height="100%"
+            instanceRef={(ref: YMap | null) => {
+                if (ref) {
+                    ref.events.add('boundschange', (e) => {
+                        updateBounds(e.get('newBounds'));
+                    });
+                }
+            }}
+        >
+            {points
+                .filter(point => isPointVisible(point.coordinates))
+                .map((point, index) => (
+                    <Placemark
+                        key={point.id}
+                        geometry={point.coordinates}
+                        properties={{ iconContent: `${index + 1}` }}
+                        onClick={() => setCurrentPoint(point.id)}
+                    />
+                ))}
+        </Map>
+    );
+
+    const visibleUsers = useMemo(() => {
+        return users.filter(user =>
+            points.some(p =>
+                p.id === user.id &&
+                isPointVisible(p.coordinates)
+            )
+        );
+    }, [users, points, isPointVisible]);
+
+    const hasVisibleUsers = visibleUsers.length > 0;
+
     return (
         <ErrorBoundary>
             <Header currentNavElement={"Карта"} />
@@ -106,14 +167,23 @@ const Search = () => {
                                 {t('dsf.pages.search.found', { count: users.length })}
                             </StyledFinded>
                             <StyledPreviewMap>
-                                {showDogsitters && <PreviewsList users={users} currentPoint={currentPoint} />}
+                                {showDogsitters && (
+                                    <>
+                                        {hasVisibleUsers ? (
+                                            <PreviewsList
+                                                users={visibleUsers}
+                                                currentPoint={currentPoint}
+                                            />
+                                        ) : (
+                                            <Card hoverable title={t('dsf.pages.search.not_find_title')} bordered={false} style={{ width: 500, height: 200 }}>
+                                                <p>{t('dsf.pages.search.not_find_desc')}</p>
+                                            </Card>
+                                        )}
+                                    </>
+                                )}
                                 <StyledMap>
                                     <YMaps>
-                                        <Map state={{ center: currenctCoord, zoom: 10 }} width="100%" height="100%">
-                                            {points.map((point, index) => (
-                                                <Placemark key={index} geometry={point.coordinates} properties={{ iconContent: `${index + 1}` }} onClick={() => setCurrentPoint(point.id)} />
-                                            ))}
-                                        </Map>
+                                        {mapComponent}
                                     </YMaps>
                                 </StyledMap>
                             </StyledPreviewMap>
@@ -123,7 +193,9 @@ const Search = () => {
                             <LottieWrapper>
                                 <Lottie animationData={require('../assets/img/bad_dog.json')} />
                             </LottieWrapper>
-                            <StyledText>Догситтеры не найдены...</StyledText>
+                            <Card hoverable size="small" title={t('dsf.pages.search.not_find_title')} bordered={false} style={{ width: 500, height: 150 }}>
+                                <p>{t('dsf.pages.search.not_find_desc')}</p>
+                            </Card>
                         </AnimationContainer>
                     )}
                 </Container>

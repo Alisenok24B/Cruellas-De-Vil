@@ -16,6 +16,9 @@
     "dsf.pages.search.found": "Found {{count}} dogsitters",
     "dsf.pages.search.profile": "Profile",
     "dsf.pages.search.message": "Hello! I would like to order a dog sitter service from you, please tell me what time you are free?",
+    "dsf.pages.search.photo": "User photo",
+    "dsf.pages.search.not_find_title": "No dogsitters found 😢",
+    "dsf.pages.search.not_find_desc": "Don't be upset: try changing your search parameters or map scale!",
 
     "dsf.pages.profile.location": "Location:",
     "dsf.pages.profile.price": "Price:",
