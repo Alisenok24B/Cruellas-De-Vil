@@ -36,7 +36,7 @@ const Search = () => {
     skip: !showDogsitters,
   });
 
-  const fetchedUsers = data || [];
+  const fetchedUsers = data?.data || [];
 
   const dispatch = useDispatch();
   const jwt = useSelector((s: RootState) => s.user.jwt);
