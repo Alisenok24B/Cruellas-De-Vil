@@ -1,4 +1,4 @@
-import React, { useEffect, useState, , useCallback, useMemo } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useFetchUsersQuery, useGetUserSessionQuery } from '../store/api/apiSlice';
 import { PreviewsList } from "../components/previews-list";
 import { Container } from '../components/container';
@@ -9,7 +9,7 @@ import { DivSearch } from '../components/div-search';
 import { ErrorBoundary } from '../components/error-boundary';
 import {
     StyledFind, StyledFinded, StyledMain, StyledMap, StyledPreviewMap, AnimationContainer,
-    LottieWrapper, StyledText
+    LottieWrapper
 } from './search.styled';
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
 import { getFeatures } from "@brojs/cli";
