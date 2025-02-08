@@ -7,6 +7,8 @@ import { URLs } from "../../__data__/urls";
 import { Card, Button, Flex } from "antd";
 import { EditTwoTone, StarTwoTone, EyeTwoTone } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from "react-router-dom";
+
 
 const imgStyle: React.CSSProperties = {
   display: 'block',
@@ -15,13 +17,14 @@ const imgStyle: React.CSSProperties = {
 };
 
 function Preview({ userId, userPhoto, fullName, cost, rating, fullDesc, selected, tg }) {
+  const navigate = useNavigate();
   let url = "#";
   if (URLs.ui.dogsitterViewing) {
     url = `${URLs.ui.dogsitterViewing}?id=${userId}`;
   }
 
   const handleClick = () => {
-    window.location.href = url;
+    navigate(url);
   };
 
   const { t } = useTranslation()
