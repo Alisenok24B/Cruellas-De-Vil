@@ -14,12 +14,7 @@ export const store = configureStore({
 
 // Сохранение пользовательских данных в localStorage
 store.subscribe(() => {
-  saveState(
-    {
-      isAuthenticated: store.getState().user.isAuthenticated,
-      userRole: store.getState().user.userRole,
-      id: store.getState().user.id,
-    },
+  saveState({ jwt: store.getState().user.jwt },
     JWT_PERSISTENT_STATE
   );
 });

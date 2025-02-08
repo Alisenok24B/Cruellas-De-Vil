@@ -111,7 +111,7 @@ const InputFields = ({
 };
 
 const Login = () => {
-  //    Локальное состояние
+  // Локальное состояние
   const [formValues, setFormValues] = useState({
     "number-phone": "",
     password: "",
@@ -130,15 +130,14 @@ const Login = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const [authenticate, { isLoading }] = useAuthenticateMutation();
-  const [verifyTwoFactorAuth, { isLoading: isVerifyLoading }] =
+  const [authenticate] = useAuthenticateMutation();
+  const [verifyTwoFactorAuth] =
     useVerifyTwoFactorAuthMutation();
 
   const { handleSubmit: handleSubmitLoginRHF } = useForm();
-
   const { handleSubmit: handleSubmitTwoFaRHF } = useForm();
 
-  //    Валидация формы
+  // Валидация формы
   const validateForm = () => {
     const errors: Record<string, string> = {};
     for (const field of inputFieldsList) {
@@ -155,7 +154,7 @@ const Login = () => {
     return Object.keys(errors).length === 0;
   };
 
-  //    Обработчик отправки логина (Step 1)
+  // Обработчик отправки логина (Step 1)
   const handleSubmitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -164,31 +163,22 @@ const Login = () => {
     }
 
     try {
-      const user = await authenticate({
+      await authenticate({
         phoneNumber: formValues["number-phone"],
         password: formValues["password"],
       }).unwrap();
-
-      // В Redux складываем часть данных
-      dispatch(
-        userActions.addJwt({
-          isAuthenticated: false,
-          userRole: user.data.role,
-          id: user.data.id,
-        })
-      );
 
       // --- Поведение для stepper ---
       setStep(1);
     } catch (error: any) {
       setFormErrors({
         ...formErrors,
-        "number-phone": error.data?.error || "Произошла ошибка",
+        "number-phone": error.data?.message || "Произошла ошибка",
       });
     }
   };
 
-  //    Обработчик ввода кода (Step 2)
+  // Обработчик ввода кода (Step 2)
   const handleBlurCode = () => {
     if (!twoFaCode.trim()) {
       setTwoFaError("Поле не может быть пустым");
@@ -209,6 +199,7 @@ const Login = () => {
     setTwoFaCode(filteredValue);
   };
 
+  // Обработчик отправки кода (Step 2)
   const handleSubmitTwoFa = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -221,12 +212,16 @@ const Login = () => {
     }
 
     try {
-      await verifyTwoFactorAuth({ code: twoFaCode }).unwrap();
+      // Передаём на бек номер телефона из первого шага вместе с кодом
+      const data = await verifyTwoFactorAuth({
+        phoneNumber: formValues["number-phone"],
+        code: twoFaCode,
+      }).unwrap();
       // Обновляем Redux: пользователь прошёл 2FA
       dispatch(
-        userActions.updateJwt({
-          isAuthenticated: true,
-        })
+        userActions.addJwt(
+          data.access_token
+        )
       );
 
       navigate(URLs.ui.search); // Перенаправление на защищенную страницу
@@ -235,18 +230,16 @@ const Login = () => {
     }
   };
 
-  //    Google Login
+  // Google Login
   const googleLogin = useGoogleLogin({
     onSuccess: async (response) => {
       console.log("Google Login Success:", response);
-      const userId =
-        Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER - 4)) + 5;
+      /*const userId =
+        Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER - 4)) + 5;*/
       dispatch(
-        userActions.addJwt({
-          isAuthenticated: true,
-          userRole: "user",
-          id: userId,
-        })
+        userActions.addJwt(
+          "jwt"
+        )
       );
       navigate(URLs.ui.search);
     },

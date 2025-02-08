@@ -2,7 +2,7 @@
   "data": [
     {
       "id": 1,
-      "phone_number": "89283244141",
+      "phone_number": "89999999999",
       "first_name": "Вася",
       "second_name": "Пупкин",
       "role": "dogsitter",
@@ -34,7 +34,7 @@
     },
     {
       "id": 3,
-      "phone_number": 89872855893,
+      "phone_number": 89559999999,
       "first_name": "Гадий",
       "second_name": "Петрович",
       "role": "owner"
