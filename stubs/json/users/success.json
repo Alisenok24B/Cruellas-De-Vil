@@ -59,13 +59,11 @@
   "interactions": [
     {
       "owner_id": 3,
-      "dogsitter_id": 4,
-      "interaction_type": "telegram_click"
+      "dogsitter_id": 4
     },
     {
       "owner_id": 1,
-      "dogsitter_id": 2,
-      "interaction_type": "telegram_click"
+      "dogsitter_id": 2
     }
   ]
 }

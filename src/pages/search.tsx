@@ -8,8 +8,7 @@ import { Footer } from '../components/footer';
 import { DivSearch } from '../components/div-search';
 import { ErrorBoundary } from '../components/error-boundary';
 import {
-    StyledFind, StyledFinded, StyledMain, StyledMap, StyledPreviewMap, AnimationContainer,
-    LottieWrapper, StyledText
+    StyledFind, StyledFinded, StyledMain, StyledMap, StyledPreviewMap, AnimationContainer, LottieWrapper
 } from './search.styled';
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
 import { getFeatures } from "@brojs/cli";
