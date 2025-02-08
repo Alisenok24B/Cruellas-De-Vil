@@ -38,7 +38,7 @@ function Preview({ userId, userPhoto, fullName, cost, rating, fullDesc, selected
   const cardStyle = {
     width: 300,
     border: selected ? '3px solid #96A467' : '1px solid #d9d9d9',
-    transition: 'all 0.3s ease'
+    transition: 'all 0.1s ease'
   };
 
   return (
